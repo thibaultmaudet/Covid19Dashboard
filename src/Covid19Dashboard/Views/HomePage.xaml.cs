@@ -1,7 +1,15 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using Covid19Dashboard.Core.Helpers;
+using Covid19Dashboard.Core.Models;
+using Covid19Dashboard.Helpers;
 using Covid19Dashboard.ViewModels;
-
+using Newtonsoft.Json;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
 
 namespace Covid19Dashboard.Views
@@ -13,6 +21,11 @@ namespace Covid19Dashboard.Views
         public HomePage()
         {
             InitializeComponent();
+        }
+
+        private void NewCasesHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(NewCasesPage), ViewModel.EpidemicIndicators);
         }
     }
 }
