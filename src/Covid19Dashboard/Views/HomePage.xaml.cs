@@ -6,6 +6,7 @@ using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Helpers;
 using Covid19Dashboard.ViewModels;
+using Covid19Dashboard.Views.Charts;
 using Newtonsoft.Json;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
@@ -26,6 +27,11 @@ namespace Covid19Dashboard.Views
         private void NewCasesHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(NewCasesPage), ViewModel.EpidemicIndicators);
+        }
+
+        private void IncidenceRateHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(IncidenceRatePage), ViewModel.EpidemicIndicators);
         }
     }
 }

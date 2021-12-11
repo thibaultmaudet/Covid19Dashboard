@@ -11,6 +11,8 @@ namespace Covid19Dashboard.Core.Models
 
         private int? dailyConfirmedNewCases;
 
+        private float? incidenceRate;
+
         [JsonProperty("date")]
         public DateTime Date
         {
@@ -23,6 +25,22 @@ namespace Covid19Dashboard.Core.Models
         {
             get { return dailyConfirmedNewCases; }
             set { SetProperty(ref dailyConfirmedNewCases, value); }
+        }
+
+        [JsonProperty("tx_incid")]
+        public float? IncidenceRate
+        {
+            get { return incidenceRate; }
+            set 
+            {
+                if (!string.IsNullOrEmpty(value.ToString()))
+                {
+                    float.TryParse(value.ToString().Replace('.', ','), out float result);
+                    SetProperty(ref incidenceRate, result);
+                }
+                else
+                    SetProperty(ref incidenceRate, null);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

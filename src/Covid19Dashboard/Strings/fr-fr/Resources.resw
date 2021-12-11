@@ -165,4 +165,16 @@
     <value>Personalization</value>
     <comment>Personalization text for Settings</comment>
   </data>
+  <data name="Home_IncidenceRate.Text" xml:space="preserve">
+    <value>Taux d'incidence</value>
+  </data>
+  <data name="Home_IncidenceRateDescription.Text" xml:space="preserve">
+    <value>nombre de cas par semaine pour 100 000 habitants.</value>
+  </data>
+  <data name="Home_LastUpdate.Text" xml:space="preserve">
+    <value>Dernière mise à jour :</value>
+  </data>
+  <data name="Home_SeeMoreDetails.Content" xml:space="preserve">
+    <value>Voir plus de détails</value>
+  </data>
 </root>

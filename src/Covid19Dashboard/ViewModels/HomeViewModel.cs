@@ -17,6 +17,8 @@ namespace Covid19Dashboard.ViewModels
 
         private string dailyConfirmedNewCase;
         private string dailyConfirmedNewCaseLastUpdate;
+        private string incidenceRate;
+        private string incidenceRateLastUpdate;
 
         public List<EpidemicIndicator> EpidemicIndicators
         {
@@ -36,6 +38,18 @@ namespace Covid19Dashboard.ViewModels
             set { SetProperty(ref dailyConfirmedNewCaseLastUpdate, value); }
         }
 
+        public string IncidenceRate
+        {
+            get { return incidenceRate; }
+            set { SetProperty(ref incidenceRate, value); }
+        }
+
+        public string IncidenceRateLastUpdate
+        {
+            get { return incidenceRateLastUpdate; }
+            set { SetProperty(ref incidenceRateLastUpdate, value); }
+        }
+
         public HomeViewModel()
         {
             EpidemicIndicators = new List<EpidemicIndicator>();
@@ -48,6 +62,8 @@ namespace Covid19Dashboard.ViewModels
                 {
                     DailyConfirmedNewCase = GetDailyConfirmedNewCasesValue();
                     DailyConfirmedNewCaseLastUpdate = GetDailyConfirmedNewCasesLastUpdate();
+                    IncidenceRate = GetIncidenceRate();
+                    IncidenceRateLastUpdate = GetIncidenceRateLastUpdate();
                 }
             });
         }
@@ -82,6 +98,22 @@ namespace Covid19Dashboard.ViewModels
         {
             if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
                 return EpidemicIndicators.First(x => x.DailyConfirmedNewCases.HasValue).Date.ToShortDateString();
+
+            return "";
+        }
+
+        private string GetIncidenceRate()
+        {
+            if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
+                return EpidemicIndicators.FirstOrDefault(x => x.IncidenceRate.HasValue).IncidenceRate.Value.ToString("0.00");
+
+            return "";
+        }
+
+        private string GetIncidenceRateLastUpdate()
+        {
+            if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
+                return EpidemicIndicators.First(x => x.IncidenceRate.HasValue).Date.ToShortDateString();
 
             return "";
         }
