@@ -19,6 +19,8 @@ namespace Covid19Dashboard.ViewModels
         private string dailyConfirmedNewCaseLastUpdate;
         private string incidenceRate;
         private string incidenceRateLastUpdate;
+        private string newHospitalization;
+        private string newHospitalizationLastUpdate;
 
         public List<EpidemicIndicator> EpidemicIndicators
         {
@@ -50,6 +52,18 @@ namespace Covid19Dashboard.ViewModels
             set { SetProperty(ref incidenceRateLastUpdate, value); }
         }
 
+        public string NewHospitalization
+        {
+            get { return newHospitalization; }
+            set { SetProperty(ref newHospitalization, value); }
+        }
+
+        public string NewHospitalizationLastUpdate
+        {
+            get { return newHospitalizationLastUpdate; }
+            set { SetProperty (ref newHospitalizationLastUpdate, value); }
+        }
+
         public HomeViewModel()
         {
             EpidemicIndicators = new List<EpidemicIndicator>();
@@ -64,6 +78,8 @@ namespace Covid19Dashboard.ViewModels
                     DailyConfirmedNewCaseLastUpdate = GetDailyConfirmedNewCasesLastUpdate();
                     IncidenceRate = GetIncidenceRate();
                     IncidenceRateLastUpdate = GetIncidenceRateLastUpdate();
+                    NewHospitalization = GetNewHospitalization();
+                    NewHospitalizationLastUpdate = GetNewHospitalizationLastUpdate();
                 }
             });
         }
@@ -114,6 +130,22 @@ namespace Covid19Dashboard.ViewModels
         {
             if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
                 return EpidemicIndicators.First(x => x.IncidenceRate.HasValue).Date.ToShortDateString();
+
+            return "";
+        }
+
+        private string GetNewHospitalization()
+        {
+            if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
+                return EpidemicIndicators.FirstOrDefault(x => x.NewHospitalization.HasValue).NewHospitalization.Value.ToString();
+
+            return "";
+        }
+
+        private string GetNewHospitalizationLastUpdate()
+        {
+            if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
+                return EpidemicIndicators.First(x => x.NewHospitalization.HasValue).Date.ToShortDateString();
 
             return "";
         }

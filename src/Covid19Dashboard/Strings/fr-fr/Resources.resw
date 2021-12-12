@@ -177,4 +177,10 @@
   <data name="Home_SeeMoreDetails.Content" xml:space="preserve">
     <value>Voir plus de détails</value>
   </data>
+  <data name="Home_Hospitalization.Text" xml:space="preserve">
+    <value>Hopitalisation</value>
+  </data>
+  <data name="Home_HospitalizationDescription.Text" xml:space="preserve">
+    <value>nouvelles personnes hospitalisées.</value>
+  </data>
 </root>

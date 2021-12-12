@@ -10,6 +10,7 @@ namespace Covid19Dashboard.Core.Models
         private DateTime date;
 
         private int? dailyConfirmedNewCases;
+        private int? newHospitalization;
 
         private float? incidenceRate;
 
@@ -25,6 +26,13 @@ namespace Covid19Dashboard.Core.Models
         {
             get { return dailyConfirmedNewCases; }
             set { SetProperty(ref dailyConfirmedNewCases, value); }
+        }
+
+        [JsonProperty("incid_hosp")]
+        public int? NewHospitalization
+        {
+            get { return newHospitalization; }
+            set { SetProperty(ref newHospitalization, value); }
         }
 
         [JsonProperty("tx_incid")]

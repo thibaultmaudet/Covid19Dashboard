@@ -33,5 +33,10 @@ namespace Covid19Dashboard.Views
         {
             Frame.Navigate(typeof(IncidenceRatePage), ViewModel.EpidemicIndicators);
         }
+
+        private void NewHospitalizationHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(NewHospitalizationPage), ViewModel.EpidemicIndicators);
+        }
     }
 }
