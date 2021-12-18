@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.ViewModels;
@@ -7,13 +6,13 @@ using Covid19Dashboard.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Covid19Dashboard.Views
+namespace Covid19Dashboard.Views.Charts
 {
-    public sealed partial class NewHospitalizationPage : Page
+    public sealed partial class NewCasesPage : Page
     {
-        public NewHospitalizationViewModel ViewModel { get; } = new NewHospitalizationViewModel();
+        public NewCasesViewModel ViewModel { get; } = new NewCasesViewModel();
 
-        public NewHospitalizationPage()
+        public NewCasesPage()
         {
             InitializeComponent();
         }

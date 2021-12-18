@@ -122,6 +122,9 @@
     <PackageReference Include="Microsoft.Toolkit.Mvvm">
       <Version>7.0.2</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>7.1.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.7.0</Version>
     </PackageReference>
@@ -138,8 +141,12 @@
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
     <Compile Include="Behaviors\NavigationViewHeaderMode.cs" />
+    <Compile Include="Controls\ChartPageControl.xaml.cs">
+      <DependentUpon>ChartPageControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\CsvHelper.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\EnumToVisibilityConverter.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Services\ActivationService.cs" />
@@ -158,10 +165,10 @@
     <Compile Include="Views\Charts\IncidenceRatePage.xaml.cs">
       <DependentUpon>IncidenceRatePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewCasesPage.xaml.cs">
+    <Compile Include="Views\Charts\NewCasesPage.xaml.cs">
       <DependentUpon>NewCasesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewHospitalizationPage.xaml.cs">
+    <Compile Include="Views\Charts\NewHospitalizationPage.xaml.cs">
       <DependentUpon>NewHospitalizationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
@@ -178,6 +185,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ChartPageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Page.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -206,11 +217,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\NewCasesPage.xaml">
+    <Page Include="Views\Charts\NewCasesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\NewHospitalizationPage.xaml">
+    <Page Include="Views\Charts\NewHospitalizationPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

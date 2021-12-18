@@ -1,0 +1,63 @@
+﻿<UserControl
+    x:Class="Covid19Dashboard.Controls.ChartPageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Covid19Dashboard.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tc="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:helper="using:Covid19Dashboard.Helpers"
+    xmlns:core="using:Covid19Dashboard.Core"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <UserControl.Resources>
+        <helper:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" EnumType="core:ChartType" />
+    </UserControl.Resources>
+    <Grid>
+        <tc:RadCartesianChart Visibility="{x:Bind ChartType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Area}">
+            <tc:RadCartesianChart.VerticalAxis>
+                <tc:LinearAxis/>
+            </tc:RadCartesianChart.VerticalAxis>
+            <tc:RadCartesianChart.HorizontalAxis>
+                <tc:DateTimeContinuousAxis LabelFormat="{}{0:dd/MM}" LabelFitMode="MultiLine" />
+            </tc:RadCartesianChart.HorizontalAxis>
+            <tc:RadCartesianChart.Grid>
+                <tc:CartesianChartGrid MajorLinesVisibility="Y" />
+            </tc:RadCartesianChart.Grid>
+            <tc:AreaSeries ItemsSource="{x:Bind ChartIndicators, Mode=OneWay}" Transitions="{x:Null}">
+                <tc:AreaSeries.ValueBinding>
+                    <tc:PropertyNameDataPointBinding PropertyName="Value" />
+                </tc:AreaSeries.ValueBinding>
+                <tc:AreaSeries.CategoryBinding>
+                    <tc:PropertyNameDataPointBinding PropertyName="Date" />
+                </tc:AreaSeries.CategoryBinding>
+            </tc:AreaSeries>
+            <tc:RadCartesianChart.Behaviors>
+                <tc:ChartTooltipBehavior />
+            </tc:RadCartesianChart.Behaviors>
+        </tc:RadCartesianChart>
+        <tc:RadCartesianChart Visibility="{x:Bind ChartType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Bar}">
+            <tc:RadCartesianChart.VerticalAxis>
+                <tc:LinearAxis/>
+            </tc:RadCartesianChart.VerticalAxis>
+            <tc:RadCartesianChart.HorizontalAxis>
+                <tc:DateTimeContinuousAxis LabelFormat="{}{0:dd/MM}" LabelFitMode="MultiLine" />
+            </tc:RadCartesianChart.HorizontalAxis>
+            <tc:RadCartesianChart.Grid>
+                <tc:CartesianChartGrid MajorLinesVisibility="Y" />
+            </tc:RadCartesianChart.Grid>
+            <tc:BarSeries ItemsSource="{x:Bind ChartIndicators, Mode=OneWay}" Transitions="{x:Null}">
+                <tc:BarSeries.ValueBinding>
+                    <tc:PropertyNameDataPointBinding PropertyName="Value" />
+                </tc:BarSeries.ValueBinding>
+                <tc:BarSeries.CategoryBinding>
+                    <tc:PropertyNameDataPointBinding PropertyName="Date" />
+                </tc:BarSeries.CategoryBinding>
+            </tc:BarSeries>
+            <tc:RadCartesianChart.Behaviors>
+                <tc:ChartTooltipBehavior />
+            </tc:RadCartesianChart.Behaviors>
+        </tc:RadCartesianChart>
+    </Grid>
+</UserControl>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -10,18 +11,20 @@ namespace Covid19Dashboard.ViewModels
 {
     public class IncidenceRateViewModel : ObservableObject
     {
-        public ObservableCollection<EpidemicIndicator> Source { get; set; }
+        public ObservableCollection<ChartIndicator> Source { get; set; }
 
         public IncidenceRateViewModel()
         {
-            Source = new ObservableCollection<EpidemicIndicator>();
+            Source = new ObservableCollection<ChartIndicator>();
         }
 
         public void LoadData(List<EpidemicIndicator> epidemicIndicators)
         {
             IEnumerable<EpidemicIndicator> indicators = epidemicIndicators.Where(x => x.Date != null && x.IncidenceRate.HasValue);
+            indicators = indicators.Skip(indicators.Count() - 70);
 
-            Source = new ObservableCollection<EpidemicIndicator>(indicators.Skip(indicators.Count() - 70));
+            foreach (EpidemicIndicator epidemicIndicator in indicators)
+                Source.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = Math.Round((decimal)epidemicIndicator.IncidenceRate, 2) });
         }
     }
 }
