@@ -45,6 +45,22 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Style="{StaticResource CaptionTextBlockStyle}">
                             <Run x:Uid="Home_LastUpdate" />
+                            <Run Text="{x:Bind ViewModel.ReproductionRateLastUpdate, Mode=OneWay}" />
+                        </TextBlock>
+                        <TextBlock x:Uid="Home_ReproductionRate" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        <TextBlock Margin="0,10,0,0" TextWrapping="Wrap">
+                            <Run Text="{x:Bind ViewModel.ReproductionRate, Mode=OneWay}" />
+                            <Run x:Uid="Home_ReproductionRateDescription" />
+                        </TextBlock>
+                        <HyperlinkButton x:Uid="Home_SeeMoreDetails" VerticalContentAlignment="Bottom" Margin="0,65,0,0" Click="ReproductionRateHyperlinkButton_Click"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Width="310" Height="230">
+                <Button.Content>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}">
+                            <Run x:Uid="Home_LastUpdate" />
                             <Run Text="{x:Bind ViewModel.NewHospitalizationLastUpdate, Mode=OneWay}" />
                         </TextBlock>
                         <TextBlock x:Uid="Home_Hospitalization" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Center" />

@@ -21,6 +21,8 @@ namespace Covid19Dashboard.ViewModels
         private string incidenceRateLastUpdate;
         private string newHospitalization;
         private string newHospitalizationLastUpdate;
+        private string reproductionRate;
+        private string reproductionRateLastUpdate;
 
         public List<EpidemicIndicator> EpidemicIndicators
         {
@@ -64,6 +66,18 @@ namespace Covid19Dashboard.ViewModels
             set { SetProperty (ref newHospitalizationLastUpdate, value); }
         }
 
+        public string ReproductionRate
+        {
+            get { return reproductionRate; }
+            set { SetProperty(ref reproductionRate, value); }
+        }
+
+        public string ReproductionRateLastUpdate
+        {
+            get { return reproductionRateLastUpdate; }
+            set { SetProperty(ref reproductionRateLastUpdate, value); }
+        }
+
         public HomeViewModel()
         {
             EpidemicIndicators = new List<EpidemicIndicator>();
@@ -80,6 +94,8 @@ namespace Covid19Dashboard.ViewModels
                     IncidenceRateLastUpdate = GetIncidenceRateLastUpdate();
                     NewHospitalization = GetNewHospitalization();
                     NewHospitalizationLastUpdate = GetNewHospitalizationLastUpdate();
+                    ReproductionRate = GetReproductionRate();
+                    ReproductionRateLastUpdate = GetReproductionRateLastUpdate();
                 }
             });
         }
@@ -146,6 +162,22 @@ namespace Covid19Dashboard.ViewModels
         {
             if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
                 return EpidemicIndicators.First(x => x.NewHospitalization.HasValue).Date.ToShortDateString();
+
+            return "";
+        }
+
+        private string GetReproductionRate()
+        {
+            if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
+                return EpidemicIndicators.FirstOrDefault(x => x.ReproductionRate.HasValue).ReproductionRate.Value.ToString("0.00");
+
+            return "";
+        }
+
+        private string GetReproductionRateLastUpdate()
+        {
+            if (EpidemicIndicators != null && EpidemicIndicators.Count > 0)
+                return EpidemicIndicators.First(x => x.ReproductionRate.HasValue).Date.ToShortDateString();
 
             return "";
         }

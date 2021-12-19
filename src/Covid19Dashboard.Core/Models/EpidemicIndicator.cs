@@ -13,6 +13,7 @@ namespace Covid19Dashboard.Core.Models
         private int? newHospitalization;
 
         private float? incidenceRate;
+        private float? reproductionRate;
 
         [JsonProperty("date")]
         public DateTime Date
@@ -48,6 +49,22 @@ namespace Covid19Dashboard.Core.Models
                 }
                 else
                     SetProperty(ref incidenceRate, null);
+            }
+        }
+
+        [JsonProperty("R")]
+        public float? ReproductionRate
+        {
+            get { return reproductionRate; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value.ToString()))
+                {
+                    float.TryParse(value.ToString().Replace('.', ','), out float result);
+                    SetProperty(ref reproductionRate, result);
+                }
+                else
+                    SetProperty(ref reproductionRate, null);
             }
         }
 

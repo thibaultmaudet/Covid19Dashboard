@@ -183,4 +183,10 @@
   <data name="Home_HospitalizationDescription.Text" xml:space="preserve">
     <value>nouvelles personnes hospitalisées.</value>
   </data>
+  <data name="Home_ReproductionRate.Text" xml:space="preserve">
+    <value>Taux de reproduction effectif</value>
+  </data>
+  <data name="Home_ReproductionRateDescription.Text" xml:space="preserve">
+    <value>personnes contaminées par un malade.</value>
+  </data>
 </root>
