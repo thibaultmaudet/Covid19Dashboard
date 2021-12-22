@@ -165,10 +165,10 @@
     <value>Personalization</value>
     <comment>Personalization text for Settings</comment>
   </data>
-  <data name="Home_IncidenceRate.Text" xml:space="preserve">
+  <data name="Home_IncidenceRateTitle" xml:space="preserve">
     <value>Taux d'incidence</value>
   </data>
-  <data name="Home_IncidenceRateDescription.Text" xml:space="preserve">
+  <data name="Home_IncidenceRateDescription" xml:space="preserve">
     <value>nombre de cas par semaine pour 100 000 habitants.</value>
   </data>
   <data name="Home_LastUpdate.Text" xml:space="preserve">
@@ -177,16 +177,28 @@
   <data name="Home_SeeMoreDetails.Content" xml:space="preserve">
     <value>Voir plus de détails</value>
   </data>
-  <data name="Home_Hospitalization.Text" xml:space="preserve">
+  <data name="Home_NewHospitalizationTitle" xml:space="preserve">
     <value>Hopitalisation</value>
   </data>
-  <data name="Home_HospitalizationDescription.Text" xml:space="preserve">
+  <data name="Home_NewHospitalizationDescription" xml:space="preserve">
     <value>nouvelles personnes hospitalisées.</value>
   </data>
-  <data name="Home_ReproductionRate.Text" xml:space="preserve">
+  <data name="Home_ReproductionRateTitle" xml:space="preserve">
     <value>Taux de reproduction effectif</value>
   </data>
-  <data name="Home_ReproductionRateDescription.Text" xml:space="preserve">
+  <data name="Home_ReproductionRateDescription" xml:space="preserve">
     <value>personnes contaminées par un malade.</value>
+  </data>
+  <data name="Home_EpidemiologyDataTitle.Text" xml:space="preserve">
+    <value>Données épidémiologiques</value>
+  </data>
+  <data name="Home_HospitalDataTitle.Text" xml:space="preserve">
+    <value>Données hospitalières</value>
+  </data>
+  <data name="Home_NewCaseDescription" xml:space="preserve">
+    <value>nouveaux cas quotidien</value>
+  </data>
+  <data name="Home_NewCaseTitle" xml:space="preserve">
+    <value>Nombre de nouveaux cas déclarés</value>
   </data>
 </root>

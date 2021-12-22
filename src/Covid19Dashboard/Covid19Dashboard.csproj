@@ -153,27 +153,15 @@
     <Compile Include="Activation\DefaultActivationHandler.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
+    <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\ReproductionRateViewModel.cs" />
-    <Compile Include="ViewModels\IncidenceRateViewModel.cs" />
-    <Compile Include="ViewModels\NewCasesViewModel.cs" />
-    <Compile Include="ViewModels\NewHospitalizationViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\Charts\ReproductionRatePage.xaml.cs">
-      <DependentUpon>ReproductionRatePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Charts\IncidenceRatePage.xaml.cs">
-      <DependentUpon>IncidenceRatePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Charts\NewCasesPage.xaml.cs">
-      <DependentUpon>NewCasesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Charts\NewHospitalizationPage.xaml.cs">
-      <DependentUpon>NewHospitalizationPage.xaml</DependentUpon>
+    <Compile Include="Views\ChartPage.xaml.cs">
+      <DependentUpon>ChartPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -213,23 +201,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Charts\ReproductionRatePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Charts\IncidenceRatePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Charts\NewCasesPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Charts\NewHospitalizationPage.xaml">
+    <Page Include="Views\ChartPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

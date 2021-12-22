@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using Covid19Dashboard.Core.Helpers;
+﻿using Covid19Dashboard.Core;
 using Covid19Dashboard.Core.Models;
-using Covid19Dashboard.Helpers;
 using Covid19Dashboard.ViewModels;
-using Covid19Dashboard.Views.Charts;
-using Newtonsoft.Json;
-using Windows.Networking.BackgroundTransfer;
-using Windows.Storage;
-using Windows.Storage.Pickers;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Windows.UI.Xaml.Controls;
 
 namespace Covid19Dashboard.Views
@@ -24,24 +17,37 @@ namespace Covid19Dashboard.Views
             InitializeComponent();
         }
 
-        private void NewCasesHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void MoreDetailsHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(NewCasesPage), ViewModel.EpidemicIndicators);
-        }
+            ObservableCollection<ChartIndicator> chartIndicators = new ObservableCollection<ChartIndicator>();
 
-        private void IncidenceRateHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(IncidenceRatePage), ViewModel.EpidemicIndicators);
-        }
+            switch ((sender as HyperlinkButton).CommandParameter as string)
+            {
+                case "IncidenceRate":
+                    foreach (EpidemicIndicator epidemicIndicator in ViewModel.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.IncidenceRate.HasValue).TakeLast(70))
+                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = Math.Round((decimal)epidemicIndicator.IncidenceRate, 2) });
 
-        private void ReproductionRateHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(ReproductionRatePage), ViewModel.EpidemicIndicators);
-        }
+                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Area, ChartIndicators = chartIndicators });
+                    break;
+                case "NewCase":
+                    foreach (EpidemicIndicator epidemicIndicator in ViewModel.EpidemicIndicators.OrderBy(x => x.Date).TakeLast(70))
+                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = epidemicIndicator.DailyConfirmedNewCases });
 
-        private void NewHospitalizationHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(NewHospitalizationPage), ViewModel.EpidemicIndicators);
+                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators =  chartIndicators });
+                    break;
+                case "NewHospitalization":
+                    foreach (EpidemicIndicator epidemicIndicator in ViewModel.EpidemicIndicators.OrderBy(x => x.Date).TakeLast(70))
+                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = epidemicIndicator.NewHospitalization });
+
+                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators = chartIndicators });
+                    break;
+                case "ReproductionRate":
+                    foreach (EpidemicIndicator epidemicIndicator in ViewModel.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.ReproductionRate.HasValue).TakeLast(70))
+                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = Math.Round((decimal)epidemicIndicator.ReproductionRate, 2) });
+
+                    Frame.Navigate(typeof(ChartPage),  new ChartParameter() { ChartType = ChartType.Area, ChartIndicators =  chartIndicators });
+                    break;
+            }
         }
     }
 }

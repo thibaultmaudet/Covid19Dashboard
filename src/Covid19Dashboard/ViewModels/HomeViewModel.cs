@@ -13,16 +13,22 @@ namespace Covid19Dashboard.ViewModels
 {
     public class HomeViewModel : ObservableObject
     {
+        private List<DataTile> epidemiologyDataTiles;
+        private List<DataTile> hospitalDataTiles;
+
         private List<EpidemicIndicator> epidemicIndicators;
 
-        private string dailyConfirmedNewCase;
-        private string dailyConfirmedNewCaseLastUpdate;
-        private string incidenceRate;
-        private string incidenceRateLastUpdate;
-        private string newHospitalization;
-        private string newHospitalizationLastUpdate;
-        private string reproductionRate;
-        private string reproductionRateLastUpdate;
+        public List<DataTile> EpidemiologyDataTiles
+        {
+            get { return epidemiologyDataTiles; }
+            set { SetProperty(ref epidemiologyDataTiles, value); }
+        }
+
+        public List<DataTile> HospitalDataTiles
+        {
+            get { return hospitalDataTiles; }
+            set { SetProperty(ref hospitalDataTiles, value); }
+        }
 
         public List<EpidemicIndicator> EpidemicIndicators
         {
@@ -30,56 +36,10 @@ namespace Covid19Dashboard.ViewModels
             set { SetProperty(ref epidemicIndicators, value); }
         }
 
-        public string DailyConfirmedNewCase
-        {
-            get { return dailyConfirmedNewCase; }
-            set { SetProperty(ref dailyConfirmedNewCase, value); }
-        }
-
-        public string DailyConfirmedNewCaseLastUpdate
-        {
-            get { return dailyConfirmedNewCaseLastUpdate; }
-            set { SetProperty(ref dailyConfirmedNewCaseLastUpdate, value); }
-        }
-
-        public string IncidenceRate
-        {
-            get { return incidenceRate; }
-            set { SetProperty(ref incidenceRate, value); }
-        }
-
-        public string IncidenceRateLastUpdate
-        {
-            get { return incidenceRateLastUpdate; }
-            set { SetProperty(ref incidenceRateLastUpdate, value); }
-        }
-
-        public string NewHospitalization
-        {
-            get { return newHospitalization; }
-            set { SetProperty(ref newHospitalization, value); }
-        }
-
-        public string NewHospitalizationLastUpdate
-        {
-            get { return newHospitalizationLastUpdate; }
-            set { SetProperty (ref newHospitalizationLastUpdate, value); }
-        }
-
-        public string ReproductionRate
-        {
-            get { return reproductionRate; }
-            set { SetProperty(ref reproductionRate, value); }
-        }
-
-        public string ReproductionRateLastUpdate
-        {
-            get { return reproductionRateLastUpdate; }
-            set { SetProperty(ref reproductionRateLastUpdate, value); }
-        }
-
         public HomeViewModel()
         {
+            EpidemiologyDataTiles = new List<DataTile>();
+
             EpidemicIndicators = new List<EpidemicIndicator>();
 
             _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
@@ -88,14 +48,17 @@ namespace Covid19Dashboard.ViewModels
 
                 if (EpidemicIndicators.Count > 0)
                 {
-                    DailyConfirmedNewCase = GetDailyConfirmedNewCasesValue();
-                    DailyConfirmedNewCaseLastUpdate = GetDailyConfirmedNewCasesLastUpdate();
-                    IncidenceRate = GetIncidenceRate();
-                    IncidenceRateLastUpdate = GetIncidenceRateLastUpdate();
-                    NewHospitalization = GetNewHospitalization();
-                    NewHospitalizationLastUpdate = GetNewHospitalizationLastUpdate();
-                    ReproductionRate = GetReproductionRate();
-                    ReproductionRateLastUpdate = GetReproductionRateLastUpdate();
+                    EpidemiologyDataTiles = new List<DataTile>
+                    {
+                        new DataTile() { Data = GetDailyConfirmedNewCasesValue(), Description = "Home_NewCaseDescription".GetLocalized(), LastUpdate = GetDailyConfirmedNewCasesLastUpdate(), Tag = "NewCase", Title = "Home_NewCaseTitle".GetLocalized() },
+                        new DataTile() { Data = GetIncidenceRate(), Description = "Home_IncidenceRateDescription".GetLocalized(), LastUpdate = GetIncidenceRateLastUpdate(), Tag = "IncidenceRate", Title = "Home_IncidenceRateTitle".GetLocalized() },
+                        new DataTile() { Data = GetReproductionRate(), Description = "Home_ReproductionRateDescription".GetLocalized(), LastUpdate = GetReproductionRateLastUpdate(), Tag = "ReproductionRate", Title = "Home_ReproductionRateTitle".GetLocalized() },
+                    };
+
+                    HospitalDataTiles = new List<DataTile>
+                    {
+                        new DataTile() { Data = GetNewHospitalization(), Description = "Home_NewHospitalizationDescription".GetLocalized(), LastUpdate = GetNewHospitalizationLastUpdate(), Tag = "NewHospitalization", Title = "Home_NewHospitalizationTitle".GetLocalized() }
+                    };
                 }
             });
         }
