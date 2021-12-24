@@ -17,35 +17,35 @@ namespace Covid19Dashboard.Views
             InitializeComponent();
         }
 
-        private void MoreDetailsHyperlinkButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void TileControl_SeeMoreDetailsClick(object sender, EventArgs e)
         {
             ObservableCollection<ChartIndicator> chartIndicators = new ObservableCollection<ChartIndicator>();
 
-            switch ((sender as HyperlinkButton).CommandParameter as string)
+            switch ((sender as HyperlinkButton).Tag as string)
             {
                 case "IncidenceRate":
-                    foreach (EpidemicIndicator epidemicIndicator in ViewModel.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.IncidenceRate.HasValue).TakeLast(70))
+                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.IncidenceRate.HasValue).TakeLast(70))
                         chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = Math.Round((decimal)epidemicIndicator.IncidenceRate, 2) });
 
                     Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Area, ChartIndicators = chartIndicators });
                     break;
                 case "NewCase":
-                    foreach (EpidemicIndicator epidemicIndicator in ViewModel.EpidemicIndicators.OrderBy(x => x.Date).TakeLast(70))
+                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).TakeLast(70))
                         chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = epidemicIndicator.DailyConfirmedNewCases });
 
-                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators =  chartIndicators });
+                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators = chartIndicators });
                     break;
                 case "NewHospitalization":
-                    foreach (EpidemicIndicator epidemicIndicator in ViewModel.EpidemicIndicators.OrderBy(x => x.Date).TakeLast(70))
+                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).TakeLast(70))
                         chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = epidemicIndicator.NewHospitalization });
 
                     Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators = chartIndicators });
                     break;
                 case "ReproductionRate":
-                    foreach (EpidemicIndicator epidemicIndicator in ViewModel.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.ReproductionRate.HasValue).TakeLast(70))
+                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.ReproductionRate.HasValue).TakeLast(70))
                         chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = Math.Round((decimal)epidemicIndicator.ReproductionRate, 2) });
 
-                    Frame.Navigate(typeof(ChartPage),  new ChartParameter() { ChartType = ChartType.Area, ChartIndicators =  chartIndicators });
+                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Area, ChartIndicators = chartIndicators });
                     break;
             }
         }

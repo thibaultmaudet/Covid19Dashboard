@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Services;
 
 using Windows.ApplicationModel.Activation;
@@ -10,6 +11,8 @@ namespace Covid19Dashboard
     public sealed partial class App : Application
     {
         private Lazy<ActivationService> _activationService;
+
+        public static List<EpidemicIndicator> EpidemicIndicators { get; set; }
 
         private ActivationService ActivationService
         {

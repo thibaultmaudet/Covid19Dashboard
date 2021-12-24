@@ -144,7 +144,9 @@
     <Compile Include="Controls\ChartPageControl.xaml.cs">
       <DependentUpon>ChartPageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CsvHelper.cs" />
+    <Compile Include="Controls\TileControl.xaml.cs">
+      <DependentUpon>TileControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\EnumToVisibilityConverter.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
@@ -178,6 +180,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\ChartPageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TileControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
