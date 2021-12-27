@@ -11,8 +11,10 @@ namespace Covid19Dashboard.Core.Models
 
         private int? dailyConfirmedNewCases;
         private int? newHospitalization;
+        private int? positiveCases;
 
         private float? incidenceRate;
+        private float? positivityRate;
         private float? reproductionRate;
 
         [JsonProperty("date")]
@@ -36,6 +38,13 @@ namespace Covid19Dashboard.Core.Models
             set { SetProperty(ref newHospitalization, value); }
         }
 
+        [JsonProperty("pos")]
+        public int? PositiveCases
+        {
+            get { return positiveCases; }
+            set { SetProperty(ref positiveCases, value); }
+        }
+
         [JsonProperty("tx_incid")]
         public float? IncidenceRate
         {
@@ -49,6 +58,22 @@ namespace Covid19Dashboard.Core.Models
                 }
                 else
                     SetProperty(ref incidenceRate, null);
+            }
+        }
+
+        [JsonProperty("tx_pos")]
+        public float? PositivityRate
+        {
+            get { return positivityRate; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value.ToString()))
+                {
+                    float.TryParse(value.ToString().Replace('.', ','), out float result);
+                    SetProperty(ref positivityRate, result);
+                }
+                else
+                    SetProperty(ref positivityRate, null);
             }
         }
 

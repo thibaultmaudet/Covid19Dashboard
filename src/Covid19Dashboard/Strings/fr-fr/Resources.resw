@@ -199,6 +199,27 @@
     <value>nouveaux cas quotidien</value>
   </data>
   <data name="NewCaseTitle" xml:space="preserve">
-    <value>Nombre de nouveaux cas déclarés</value>
+    <value>Nombre de nouveaux cas confirmés</value>
+  </data>
+  <data name="Shell_EpidemiologicalStatus.Content" xml:space="preserve">
+    <value>Situation épidémiologique</value>
+  </data>
+  <data name="PositiveCasesDescription" xml:space="preserve">
+    <value>cas positifs prélevés</value>
+  </data>
+  <data name="PositiveCasesTitle" xml:space="preserve">
+    <value>Nombre de personnes déclarées positives</value>
+  </data>
+  <data name="PositiveCasesWeeklyAverageDescription" xml:space="preserve">
+    <value>cas déclarés positif en moyenne sur les sept derniers jours</value>
+  </data>
+  <data name="PositiveCasesWeeklyAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de nouveaux cas confirmés quotidiens</value>
+  </data>
+  <data name="PositivityRateDescription" xml:space="preserve">
+    <value>% de tests positifs sur l'ensemble des tests effectués</value>
+  </data>
+  <data name="PositivityRateTitle" xml:space="preserve">
+    <value>Taux de positivité</value>
   </data>
 </root>

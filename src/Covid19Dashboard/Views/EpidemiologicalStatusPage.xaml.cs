@@ -1,18 +1,20 @@
-﻿using Covid19Dashboard.Core;
-using Covid19Dashboard.Core.Models;
-using Covid19Dashboard.ViewModels;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Covid19Dashboard.Core;
+using Covid19Dashboard.Core.Helpers;
+using Covid19Dashboard.Core.Models;
+using Covid19Dashboard.ViewModels;
+
 using Windows.UI.Xaml.Controls;
 
 namespace Covid19Dashboard.Views
 {
-    public sealed partial class HomePage : Page
+    public sealed partial class EpidemiologicalStatusPage : Page
     {
-        public HomeViewModel ViewModel { get; } = new HomeViewModel();
+        public EpidemiologicalStatusViewModel ViewModel { get; } = new EpidemiologicalStatusViewModel();
 
-        public HomePage()
+        public EpidemiologicalStatusPage()
         {
             InitializeComponent();
         }
@@ -40,6 +42,18 @@ namespace Covid19Dashboard.Views
                         chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = epidemicIndicator.NewHospitalization });
 
                     Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators = chartIndicators });
+                    break;
+                case "PositiveCases":
+                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.PositiveCases.HasValue).TakeLast(70))
+                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = epidemicIndicator.PositiveCases });
+
+                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators = chartIndicators });
+                    break;
+                case "PositiveCasesWeeklyAverage":
+                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.PositiveCases.HasValue).TakeLast(70))
+                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = EpidemicDataHelper.GetPositiveConfirmedNewCasesWeeklyAverage(App.EpidemicIndicators, epidemicIndicator.Date) });
+
+                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Area, ChartIndicators = chartIndicators });
                     break;
                 case "PositivityRate":
                     foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.PositivityRate.HasValue).TakeLast(70))

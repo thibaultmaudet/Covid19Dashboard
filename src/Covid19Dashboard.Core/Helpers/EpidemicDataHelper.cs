@@ -60,6 +60,58 @@ namespace Covid19Dashboard.Core.Helpers
             return "";
         }
 
+        public static string GetPositiveCases(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+            {
+                int? positiveCases = epidemicIndicators.FirstOrDefault(x => x.PositiveCases.HasValue)?.PositiveCases;
+
+                return positiveCases.HasValue ? positiveCases.ToString() : "";
+            }
+
+            return "";
+        }
+
+        public static string GetPositiveCasesLastUpdate(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+                return epidemicIndicators.First(x => x.PositiveCases.HasValue).Date.ToShortDateString();
+
+            return "";
+        }
+
+        public static string GetPositiveConfirmedNewCasesWeeklyAverage(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+                return Math.Round(epidemicIndicators.Where(x => x.PositiveCases.HasValue).Take(7).Average(x => x.PositiveCases.Value), 0).ToString();
+
+            return "";
+        }
+
+        public static int? GetPositiveConfirmedNewCasesWeeklyAverage(List<EpidemicIndicator> epidemicIndicators, DateTime date)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0 && date != null)
+                return (int?)Math.Round(epidemicIndicators.Where(x => x.Date.CompareTo(date) < 0 && x.PositiveCases.HasValue).Take(7).Average(x => x.PositiveCases.Value), 0);
+
+            return default;
+        }
+
+        public static string GetPositivityRate(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+                return epidemicIndicators.FirstOrDefault(x => x.PositivityRate.HasValue).PositivityRate.Value.ToString("0.00");
+
+            return "";
+        }
+
+        public static string GetPositivityRateLastUpdate(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+                return epidemicIndicators.First(x => x.PositivityRate.HasValue).Date.ToShortDateString();
+
+            return "";
+        }
+
         public static string GetReproductionRate(List<EpidemicIndicator> epidemicIndicators)
         {
             if (epidemicIndicators != null && epidemicIndicators.Count > 0)
