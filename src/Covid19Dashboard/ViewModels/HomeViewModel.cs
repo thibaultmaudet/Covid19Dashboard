@@ -52,16 +52,15 @@ namespace Covid19Dashboard.ViewModels
         {
             EpidemiologyDataTiles = new List<DataTile>
             {
-                new DataTile() { Data = EpidemicDataHelper.GetDailyConfirmedNewCasesValue(App.EpidemicIndicators), Description = "NewCaseDescription".GetLocalized(), LastUpdate = EpidemicDataHelper.GetDailyConfirmedNewCasesLastUpdate(App.EpidemicIndicators), Tag = "NewCase", Title = "NewCaseTitle".GetLocalized() },
-                new DataTile() { Data = EpidemicDataHelper.GetIncidenceRate(App.EpidemicIndicators), Description = "IncidenceRateDescription".GetLocalized(), LastUpdate = EpidemicDataHelper.GetIncidenceRateLastUpdate(App.EpidemicIndicators), Tag = "IncidenceRate", Title = "IncidenceRateTitle".GetLocalized() },
-                new DataTile() { Data = EpidemicDataHelper.GetPositivityRate(App.EpidemicIndicators), Description = "PositivityRateDescription".GetLocalized(), LastUpdate
-                 = EpidemicDataHelper.GetPositiveCasesLastUpdate(App.EpidemicIndicators), Tag = "PositivityRate", Title = "PositivityRateTitle".GetLocalized() },
-                new DataTile() { Data = EpidemicDataHelper.GetReproductionRate(App.EpidemicIndicators), Description = "ReproductionRateDescription".GetLocalized(), LastUpdate = EpidemicDataHelper.GetReproductionRateLastUpdate(App.EpidemicIndicators), Tag = "ReproductionRate", Title = "ReproductionRateTitle".GetLocalized() },
+                new DataTile() { Data = EpidemicDataHelper.GetDailyConfirmedNewCasesValue(App.EpidemicIndicators), Description = "NewCaseDescription".GetLocalized(), DisplayEvolution = false, LastUpdate = EpidemicDataHelper.GetDailyConfirmedNewCasesLastUpdate(App.EpidemicIndicators), Tag = "NewCase", Title = "NewCaseTitle".GetLocalized() },
+                new DataTile() { Data = EpidemicDataHelper.GetIncidenceRate(App.EpidemicIndicators), Description = "IncidenceRateDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetIncidenceRateEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetIncidenceRateLastUpdate(App.EpidemicIndicators), Tag = "IncidenceRate", Title = "IncidenceRateTitle".GetLocalized() },
+                new DataTile() { Data = EpidemicDataHelper.GetPositivityRate(App.EpidemicIndicators), Description = "PositivityRateDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetPositivityRateEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetPositiveCasesLastUpdate(App.EpidemicIndicators), Tag = "PositivityRate", Title = "PositivityRateTitle".GetLocalized() },
+                new DataTile() { Data = EpidemicDataHelper.GetReproductionRate(App.EpidemicIndicators), Description = "ReproductionRateDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetReproductionRateEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetReproductionRateLastUpdate(App.EpidemicIndicators), Tag = "ReproductionRate", Title = "ReproductionRateTitle".GetLocalized() },
             };
 
             HospitalDataTiles = new List<DataTile>
             {
-                new DataTile() { Data = EpidemicDataHelper.GetNewHospitalization(App.EpidemicIndicators), Description = "NewHospitalizationDescription".GetLocalized(), LastUpdate = EpidemicDataHelper.GetNewHospitalizationLastUpdate(App.EpidemicIndicators), Tag = "NewHospitalization", Title = "NewHospitalizationTitle".GetLocalized() }
+                new DataTile() { Data = EpidemicDataHelper.GetNewHospitalization(App.EpidemicIndicators), Description = "NewHospitalizationDescription".GetLocalized(), DisplayEvolution = false, LastUpdate = EpidemicDataHelper.GetNewHospitalizationLastUpdate(App.EpidemicIndicators), Tag = "NewHospitalization", Title = "NewHospitalizationTitle".GetLocalized() }
             };
         }
     }

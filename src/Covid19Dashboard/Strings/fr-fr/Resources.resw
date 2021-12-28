@@ -222,4 +222,7 @@
   <data name="PositivityRateTitle" xml:space="preserve">
     <value>Taux de positivité</value>
   </data>
+  <data name="Tile_EvolutionPeriod.Text" xml:space="preserve">
+    <value>% en 7 jours</value>
+  </data>
 </root>

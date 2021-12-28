@@ -36,6 +36,18 @@ namespace Covid19Dashboard.Core.Helpers
             return "";
         }
 
+        public static double GetIncidenceRateEvolution(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+            {
+                EpidemicIndicator firstValue = epidemicIndicators.FirstOrDefault(x => x.IncidenceRate.HasValue);
+
+                return Math.Round(CalculateEvolution(epidemicIndicators.FirstOrDefault(x => x.Date == firstValue?.Date.AddDays(-7))?.IncidenceRate, firstValue.IncidenceRate), 2);
+            }
+
+            return default;
+        }
+
         public static string GetIncidenceRateLastUpdate(List<EpidemicIndicator> epidemicIndicators)
         {
             if (epidemicIndicators != null && epidemicIndicators.Count > 0)
@@ -96,12 +108,38 @@ namespace Covid19Dashboard.Core.Helpers
             return default;
         }
 
+        public static double GetPositiveConfirmedNewCasesWeeklyAverageEvolution(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+            {
+                EpidemicIndicator firstValue = epidemicIndicators.FirstOrDefault(x => x.PositiveCases.HasValue);
+
+                string firstAverage = GetPositiveConfirmedNewCasesWeeklyAverage(epidemicIndicators);
+
+                return string.IsNullOrEmpty(firstAverage) ? 0 : Math.Round(CalculateEvolution(GetPositiveConfirmedNewCasesWeeklyAverage(epidemicIndicators, firstValue.Date), int.Parse(GetPositiveConfirmedNewCasesWeeklyAverage(epidemicIndicators))), 2);
+            }
+
+            return default;
+        }
+
         public static string GetPositivityRate(List<EpidemicIndicator> epidemicIndicators)
         {
             if (epidemicIndicators != null && epidemicIndicators.Count > 0)
                 return epidemicIndicators.FirstOrDefault(x => x.PositivityRate.HasValue).PositivityRate.Value.ToString("0.00");
 
             return "";
+        }
+
+        public static double GetPositivityRateEvolution(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+            {
+                EpidemicIndicator firstValue = epidemicIndicators.FirstOrDefault(x => x.PositivityRate.HasValue);
+
+                return Math.Round(CalculateEvolution(epidemicIndicators.FirstOrDefault(x => x.Date == firstValue?.Date.AddDays(-7))?.PositivityRate, firstValue.PositivityRate), 2);
+            }
+
+            return default;
         }
 
         public static string GetPositivityRateLastUpdate(List<EpidemicIndicator> epidemicIndicators)
@@ -126,6 +164,34 @@ namespace Covid19Dashboard.Core.Helpers
                 return epidemicIndicators.First(x => x.ReproductionRate.HasValue).Date.ToShortDateString();
 
             return "";
+        }
+
+        public static double GetReproductionRateEvolution(List<EpidemicIndicator> epidemicIndicators)
+        {
+            if (epidemicIndicators != null && epidemicIndicators.Count > 0)
+            {
+                EpidemicIndicator firstValue = epidemicIndicators.FirstOrDefault(x => x.ReproductionRate.HasValue);
+
+                return Math.Round(CalculateEvolution(epidemicIndicators.FirstOrDefault(x => x.Date == firstValue?.Date.AddDays(-7))?.ReproductionRate, firstValue.ReproductionRate), 2);
+            }
+
+            return default;
+        }
+
+        private static float CalculateEvolution(int? firstValue, int? secondValue)
+        {
+            if (firstValue == null || secondValue == null || !firstValue.HasValue || !secondValue.HasValue)
+                return 0;
+
+            return (float)(secondValue.Value - firstValue.Value) / firstValue.Value * 100;
+        }
+
+        private static float CalculateEvolution(float? firstValue, float? secondValue)
+        {
+            if (firstValue == null || secondValue == null || !firstValue.HasValue || !secondValue.HasValue)
+                return 0;
+
+            return (secondValue.Value - firstValue.Value) / firstValue.Value * 100;
         }
     }
 }

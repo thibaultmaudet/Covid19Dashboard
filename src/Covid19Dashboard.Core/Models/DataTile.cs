@@ -2,6 +2,10 @@
 {
     public class DataTile
     {
+        public bool DisplayEvolution { get; set; }
+
+        public double Evolution { get; set; }
+
         public string Data { get; set; }
 
         public string Description { get; set; }
