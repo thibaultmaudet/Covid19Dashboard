@@ -103,7 +103,7 @@ namespace Covid19Dashboard.Core.Helpers
         public static int? GetPositiveConfirmedNewCasesWeeklyAverage(List<EpidemicIndicator> epidemicIndicators, DateTime date)
         {
             if (epidemicIndicators != null && epidemicIndicators.Count > 0 && date != null)
-                return (int?)Math.Round(epidemicIndicators.Where(x => x.Date.CompareTo(date) < 0 && x.PositiveCases.HasValue).Take(7).Average(x => x.PositiveCases.Value), 0);
+                return (int?)Math.Round(epidemicIndicators.Where(x => x.Date.CompareTo(date.AddDays(1)) < 0 && x.PositiveCases.HasValue).Take(7).Average(x => x.PositiveCases.Value), 0);
 
             return default;
         }
@@ -116,7 +116,7 @@ namespace Covid19Dashboard.Core.Helpers
 
                 string firstAverage = GetPositiveConfirmedNewCasesWeeklyAverage(epidemicIndicators);
 
-                return string.IsNullOrEmpty(firstAverage) ? 0 : Math.Round(CalculateEvolution(GetPositiveConfirmedNewCasesWeeklyAverage(epidemicIndicators, firstValue.Date), int.Parse(GetPositiveConfirmedNewCasesWeeklyAverage(epidemicIndicators))), 2);
+                return string.IsNullOrEmpty(firstAverage) ? 0 : Math.Round(CalculateEvolution(GetPositiveConfirmedNewCasesWeeklyAverage(epidemicIndicators, firstValue.Date.AddDays(-7)), int.Parse(GetPositiveConfirmedNewCasesWeeklyAverage(epidemicIndicators))), 2);
             }
 
             return default;

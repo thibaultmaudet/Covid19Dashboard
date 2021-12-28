@@ -9,21 +9,23 @@
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-        <VariableSizedWrapGrid Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0">
-            <GridView ItemsSource="{x:Bind ViewModel.DataTiles, Mode=OneWay}">
-                <GridView.ItemContainerStyle>
-                    <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                        <Style.Setters>
-                            <Setter Property="Margin" Value="5" />
-                        </Style.Setters>
-                    </Style>
-                </GridView.ItemContainerStyle>
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:DataTile">
-                        <controls:TileControl DataTile="{x:Bind}" SeeMoreDetailsClick="TileControl_SeeMoreDetailsClick" />
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
-        </VariableSizedWrapGrid>
+        <ScrollViewer HorizontalScrollMode="Auto">
+            <VariableSizedWrapGrid Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0">
+                <GridView ItemsSource="{x:Bind ViewModel.DataTiles, Mode=OneWay}">
+                    <GridView.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+                            <Style.Setters>
+                                <Setter Property="Margin" Value="5" />
+                            </Style.Setters>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:DataTile">
+                            <controls:TileControl DataTile="{x:Bind}" SeeMoreDetailsClick="TileControl_SeeMoreDetailsClick" />
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </VariableSizedWrapGrid>
+        </ScrollViewer>
     </Grid>
 </Page>
