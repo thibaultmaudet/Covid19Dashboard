@@ -15,6 +15,15 @@ namespace Covid19Dashboard.Core.Models
         [JsonProperty("conf_j1")]
         public int? DailyConfirmedNewCases { get; set; }
 
+        [JsonProperty("dc_tot")]
+        public int? DeceasedPersons { get; set; }
+
+        [JsonProperty("hosp")]
+        public int? HospitalizedPatients { get; set; }
+
+        [JsonProperty("rea")]
+        public int? IntensiveCarePatients { get; set; }
+
         [JsonProperty("incid_hosp")]
         public int? NewHospitalization { get; set; } 
 

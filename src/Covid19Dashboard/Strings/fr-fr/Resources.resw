@@ -178,7 +178,7 @@
     <value>Voir plus de détails</value>
   </data>
   <data name="NewHospitalizationTitle" xml:space="preserve">
-    <value>Hopitalisation</value>
+    <value>Nouvelles hopitalisations</value>
   </data>
   <data name="NewHospitalizationDescription" xml:space="preserve">
     <value>nouvelles personnes hospitalisées</value>
@@ -224,5 +224,26 @@
   </data>
   <data name="Tile_EvolutionPeriod.Text" xml:space="preserve">
     <value>% en 7 jours</value>
+  </data>
+  <data name="Shell_HospitalStatus.Content" xml:space="preserve">
+    <value>Situation hospitalière</value>
+  </data>
+  <data name="DeceasedPersonsDescription" xml:space="preserve">
+    <value>personnes décédés du Covid-19</value>
+  </data>
+  <data name="DeceasedPersonsTotal" xml:space="preserve">
+    <value>Décès</value>
+  </data>
+  <data name="HospitalizedPatientsDescription" xml:space="preserve">
+    <value>personnes hospitalisées pour Covid-19</value>
+  </data>
+  <data name="HospitalizedPatientsTitle" xml:space="preserve">
+    <value>Nombre de patients hospitalisés</value>
+  </data>
+  <data name="IntensiveCarePatientsDescription" xml:space="preserve">
+    <value>personnes admises en soins intensifs pour Covid-19</value>
+  </data>
+  <data name="IntensiveCarePatientsTitle" xml:space="preserve">
+    <value>Patients en réanimation</value>
   </data>
 </root>

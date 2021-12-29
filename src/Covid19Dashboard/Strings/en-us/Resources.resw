@@ -169,4 +169,8 @@
     <value>Epidemiological status</value>
     <comment>Navigation view item name for EpidemiologicalStatus</comment>
   </data>
+  <data name="Shell_HospitalStatus.Content" xml:space="preserve">
+    <value>Hospital status</value>
+    <comment>Navigation view item name for HospitalStatus</comment>
+  </data>
 </root>

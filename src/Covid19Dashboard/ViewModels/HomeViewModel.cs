@@ -55,7 +55,8 @@ namespace Covid19Dashboard.ViewModels
 
             HospitalDataTiles = new List<DataTile>
             {
-                new DataTile() { ChartType = ChartType.Bar, Data = EpidemicDataHelper.GetValue("NewHospitalization"), Description = "NewHospitalizationDescription".GetLocalized(), LastUpdate = EpidemicDataHelper.GetLastUpdate("NewHospitalization"), Property = "NewHospitalization", Title = "NewHospitalizationTitle".GetLocalized() }
+                new DataTile() { Data = EpidemicDataHelper.GetHospitalizedPatients(App.EpidemicIndicators), Description = "HospitalizedPatientsDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetHospitalizedPatientsEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetHospitalizedPatientsLastUpdate(App.EpidemicIndicators), Tag = "HospitalizedPatients", Title = "HospitalizedPatientsTitle".GetLocalized() },
+                new DataTile() { Data = EpidemicDataHelper.GetIntensiveCarePatients(App.EpidemicIndicators), Description = "IntensiveCarePatientsDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetIntensiveCarePatientsEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetIntensiveCarePatientsLastUpdate(App.EpidemicIndicators), Tag = "IntensiveCarePatients", Title = "IntensiveCarePatientsTitle".GetLocalized() },
             };
         }
     }
