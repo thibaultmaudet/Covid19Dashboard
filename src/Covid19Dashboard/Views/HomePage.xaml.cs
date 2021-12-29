@@ -1,4 +1,5 @@
 ﻿using Covid19Dashboard.Core;
+using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.ViewModels;
 using System;
@@ -19,41 +20,8 @@ namespace Covid19Dashboard.Views
 
         private void TileControl_SeeMoreDetailsClick(object sender, EventArgs e)
         {
-            ObservableCollection<ChartIndicator> chartIndicators = new ObservableCollection<ChartIndicator>();
-
-            switch ((sender as HyperlinkButton).Tag as string)
-            {
-                case "IncidenceRate":
-                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.IncidenceRate.HasValue).TakeLast(70))
-                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = Math.Round((decimal)epidemicIndicator.IncidenceRate, 2) });
-
-                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Area, ChartIndicators = chartIndicators });
-                    break;
-                case "NewCase":
-                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).TakeLast(70))
-                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = epidemicIndicator.DailyConfirmedNewCases });
-
-                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators = chartIndicators });
-                    break;
-                case "NewHospitalization":
-                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).TakeLast(70))
-                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = epidemicIndicator.NewHospitalization });
-
-                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Bar, ChartIndicators = chartIndicators });
-                    break;
-                case "PositivityRate":
-                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.PositivityRate.HasValue).TakeLast(70))
-                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = Math.Round((decimal)epidemicIndicator.PositivityRate, 2) });
-
-                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Area, ChartIndicators = chartIndicators });
-                    break;
-                case "ReproductionRate":
-                    foreach (EpidemicIndicator epidemicIndicator in App.EpidemicIndicators.OrderBy(x => x.Date).Where(x => x.ReproductionRate.HasValue).TakeLast(70))
-                        chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = Math.Round((decimal)epidemicIndicator.ReproductionRate, 2) });
-
-                    Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = ChartType.Area, ChartIndicators = chartIndicators });
-                    break;
-            }
+            if ((sender as HyperlinkButton).Tag is DataTile dataTile)
+                Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = dataTile.ChartType, ChartIndicators = EpidemicDataHelper.GetValuesForChart(dataTile.Property, dataTile.IsAverage, dataTile.Digits) });
         }
     }
 }

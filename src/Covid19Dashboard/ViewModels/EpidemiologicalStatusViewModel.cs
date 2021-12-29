@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Covid19Dashboard.Core;
 using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Core.Services;
@@ -22,11 +22,11 @@ namespace Covid19Dashboard.ViewModels
 
         public EpidemiologicalStatusViewModel()
         {
-            if (App.EpidemicIndicators == null)
+            if (EpidemicDataHelper.EpidemicIndicators == null)
             {
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
-                    App.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicators(ApplicationData.Current.TemporaryFolder.Path);
+                    EpidemicDataHelper.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicators(ApplicationData.Current.TemporaryFolder.Path);
 
                     SetDataTiles();
                 });
@@ -40,12 +40,12 @@ namespace Covid19Dashboard.ViewModels
         {
             DataTiles = new List<DataTile>
             {
-                new DataTile() { Data = EpidemicDataHelper.GetDailyConfirmedNewCasesValue(App.EpidemicIndicators), Description = "NewCaseDescription".GetLocalized(), DisplayEvolution = false, LastUpdate = EpidemicDataHelper.GetDailyConfirmedNewCasesLastUpdate(App.EpidemicIndicators), Tag = "NewCase", Title = "NewCaseTitle".GetLocalized() },
-                new DataTile() { Data = EpidemicDataHelper.GetPositiveCases(App.EpidemicIndicators), Description = "PositiveCasesDescription".GetLocalized(), LastUpdate = EpidemicDataHelper.GetPositiveCasesLastUpdate(App.EpidemicIndicators), Tag = "PositiveCases", Title = "PositiveCasesTitle".GetLocalized() },
-                new DataTile() { Data = EpidemicDataHelper.GetPositiveConfirmedNewCasesWeeklyAverage(App.EpidemicIndicators), Description = "PositiveCasesWeeklyAverageDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetPositiveConfirmedNewCasesWeeklyAverageEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetPositiveCasesLastUpdate(App.EpidemicIndicators), Tag = "PositiveCasesWeeklyAverage", Title = "PositiveCasesWeeklyAverageTitle".GetLocalized() },
-                 new DataTile() { Data = EpidemicDataHelper.GetIncidenceRate(App.EpidemicIndicators), Description = "IncidenceRateDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetIncidenceRateEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetIncidenceRateLastUpdate(App.EpidemicIndicators), Tag = "IncidenceRate", Title = "IncidenceRateTitle".GetLocalized() },
-                new DataTile() { Data = EpidemicDataHelper.GetPositivityRate(App.EpidemicIndicators), Description = "PositivityRateDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetPositivityRateEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetPositiveCasesLastUpdate(App.EpidemicIndicators), Tag = "PositivityRate", Title = "PositivityRateTitle".GetLocalized() },
-                new DataTile() { Data = EpidemicDataHelper.GetReproductionRate(App.EpidemicIndicators), Description = "ReproductionRateDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetReproductionRateEvolution(App.EpidemicIndicators), LastUpdate = EpidemicDataHelper.GetReproductionRateLastUpdate(App.EpidemicIndicators), Tag = "ReproductionRate", Title = "ReproductionRateTitle".GetLocalized() }
+                new DataTile() { ChartType = ChartType.Bar, Data = EpidemicDataHelper.GetValue("DailyConfirmedNewCases"), Description = "NewCaseDescription".GetLocalized(), LastUpdate = EpidemicDataHelper.GetLastUpdate("DailyConfirmedNewCases"), Property = "DailyConfirmedNewCases", Title = "NewCaseTitle".GetLocalized() },
+                new DataTile() { ChartType = ChartType.Bar, Data = EpidemicDataHelper.GetValue("PositiveCases"), Description = "PositiveCasesDescription".GetLocalized(), LastUpdate = EpidemicDataHelper.GetLastUpdate("PositiveCases"), Property = "PositiveCases", Title = "PositiveCasesTitle".GetLocalized() },
+                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue<string>("PositiveCases", true, 0), Description = "PositiveCasesWeeklyAverageDescription".GetLocalized(), DisplayEvolution = true, Evolution = EpidemicDataHelper.GetEvolution("PositiveCases", true), IsAverage = true, LastUpdate = EpidemicDataHelper.GetLastUpdate("PositiveCases"), Property = "PositiveCases", Title = "PositiveCasesWeeklyAverageTitle".GetLocalized() },
+                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("IncidenceRate", 2), Description = "IncidenceRateDescription".GetLocalized(), Digits = 2, DisplayEvolution = true, Evolution = EpidemicDataHelper.GetEvolution("IncidenceRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("IncidenceRate"), Property = "IncidenceRate", Title = "IncidenceRateTitle".GetLocalized() },
+                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("PositivityRate", 2), Description = "PositivityRateDescription".GetLocalized(), Digits = 2, DisplayEvolution = true, Evolution = EpidemicDataHelper.GetEvolution("PositivityRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("PositivityRate"), Property = "PositivityRate", Title = "PositivityRateTitle".GetLocalized() },
+                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("ReproductionRate", 2), Description = "ReproductionRateDescription".GetLocalized(), Digits = 2, DisplayEvolution = true, Evolution = EpidemicDataHelper.GetEvolution("ReproductionRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("ReproductionRate"), Property = "ReproductionRate", Title = "ReproductionRateTitle".GetLocalized() }
             };
         }
     }

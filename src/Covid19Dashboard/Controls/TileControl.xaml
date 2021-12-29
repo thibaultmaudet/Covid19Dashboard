@@ -42,7 +42,7 @@
                             <Run x:Uid="Tile_EvolutionPeriod" />
                         </TextBlock>
                     </Border>
-                    <HyperlinkButton x:Uid="Tile_SeeMoreDetails" VerticalContentAlignment="Bottom" Tag="{x:Bind DataTile.Tag, Mode=OneWay}" Click="SeeMoreDetailsHyperLinkButton_Click" VerticalAlignment="Bottom" Grid.Row="4" Grid.Column="1" />
+                    <HyperlinkButton x:Uid="Tile_SeeMoreDetails" VerticalContentAlignment="Bottom" Tag="{x:Bind DataTile, Mode=OneWay}" Click="SeeMoreDetailsHyperLinkButton_Click" VerticalAlignment="Bottom" Grid.Row="4" Grid.Column="1" />
                 </Grid>
             </Button.Content>
         </Button>

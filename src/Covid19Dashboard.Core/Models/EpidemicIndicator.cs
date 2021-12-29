@@ -1,49 +1,25 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace Covid19Dashboard.Core.Models
 {
-    public class EpidemicIndicator : INotifyPropertyChanged
+    public class EpidemicIndicator
     {
-        private DateTime date;
-
-        private int? dailyConfirmedNewCases;
-        private int? newHospitalization;
-        private int? positiveCases;
-
         private float? incidenceRate;
         private float? positivityRate;
         private float? reproductionRate;
 
         [JsonProperty("date")]
-        public DateTime Date
-        {
-            get { return date; }
-            set { SetProperty(ref date, value); }
-        }
+        public DateTime Date { get; set; }
 
         [JsonProperty("conf_j1")]
-        public int? DailyConfirmedNewCases
-        {
-            get { return dailyConfirmedNewCases; }
-            set { SetProperty(ref dailyConfirmedNewCases, value); }
-        }
+        public int? DailyConfirmedNewCases { get; set; }
 
         [JsonProperty("incid_hosp")]
-        public int? NewHospitalization
-        {
-            get { return newHospitalization; }
-            set { SetProperty(ref newHospitalization, value); }
-        }
+        public int? NewHospitalization { get; set; } 
 
         [JsonProperty("pos")]
-        public int? PositiveCases
-        {
-            get { return positiveCases; }
-            set { SetProperty(ref positiveCases, value); }
-        }
+        public int? PositiveCases { get; set; }
 
         [JsonProperty("tx_incid")]
         public float? IncidenceRate
@@ -54,10 +30,10 @@ namespace Covid19Dashboard.Core.Models
                 if (!string.IsNullOrEmpty(value.ToString()))
                 {
                     float.TryParse(value.ToString().Replace('.', ','), out float result);
-                    SetProperty(ref incidenceRate, result);
+                    incidenceRate = result;
                 }
                 else
-                    SetProperty(ref incidenceRate, null);
+                    incidenceRate = null;
             }
         }
 
@@ -70,10 +46,10 @@ namespace Covid19Dashboard.Core.Models
                 if (!string.IsNullOrEmpty(value.ToString()))
                 {
                     float.TryParse(value.ToString().Replace('.', ','), out float result);
-                    SetProperty(ref positivityRate, result);
+                    positivityRate = result;
                 }
                 else
-                    SetProperty(ref positivityRate, null);
+                    positivityRate = null;
             }
         }
 
@@ -86,24 +62,11 @@ namespace Covid19Dashboard.Core.Models
                 if (!string.IsNullOrEmpty(value.ToString()))
                 {
                     float.TryParse(value.ToString().Replace('.', ','), out float result);
-                    SetProperty(ref reproductionRate, result);
+                    reproductionRate = result;
                 }
                 else
-                    SetProperty(ref reproductionRate, null);
+                    reproductionRate = null;
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        private void SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (Equals(storage, value))
-                return;
-
-            storage = value;
-            OnPropertyChanged(propertyName);
         }
     }
 }

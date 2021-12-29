@@ -12,8 +12,6 @@ namespace Covid19Dashboard
     {
         private Lazy<ActivationService> _activationService;
 
-        public static List<EpidemicIndicator> EpidemicIndicators { get; set; }
-
         private ActivationService ActivationService
         {
             get { return _activationService.Value; }
