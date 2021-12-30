@@ -1,10 +1,8 @@
-﻿using Covid19Dashboard.Core;
-using Covid19Dashboard.Core.Helpers;
+﻿using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
+using Covid19Dashboard.Models;
 using Covid19Dashboard.ViewModels;
 using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using Windows.UI.Xaml.Controls;
 
 namespace Covid19Dashboard.Views

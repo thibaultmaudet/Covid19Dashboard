@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Covid19Dashboard.Controls"
-    xmlns:models="using:Covid19Dashboard.Core.Models"
+    xmlns:models="using:Covid19Dashboard.Models"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <ScrollViewer HorizontalScrollMode="Auto">

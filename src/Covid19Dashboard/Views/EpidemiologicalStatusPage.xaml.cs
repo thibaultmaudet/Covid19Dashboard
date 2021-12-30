@@ -1,6 +1,7 @@
 ﻿using System;
 using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
+using Covid19Dashboard.Models;
 using Covid19Dashboard.ViewModels;
 
 using Windows.UI.Xaml.Controls;

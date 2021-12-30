@@ -1,4 +1,4 @@
-﻿using Covid19Dashboard.Core.Models;
+﻿using Covid19Dashboard.Models;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

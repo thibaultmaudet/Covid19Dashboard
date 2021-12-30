@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Covid19Dashboard.Core;
+using Covid19Dashboard.Helpers;
 
-namespace Covid19Dashboard.Core.Models
+namespace Covid19Dashboard.Models
 {
     public class DataTile
     {
-        public bool DisplayEvolution { get; set; }
+        public bool DisplayEvolution { get { return !(Evolution == default); } }
 
         public bool IsAverage { get; set; }
 
@@ -16,7 +17,7 @@ namespace Covid19Dashboard.Core.Models
 
         public string Data { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get { return (Property + (IsAverage ? "Average" : "") + "Description").GetLocalized(); } }
 
         public string FullDescription { get { return Data + " " + Description; } }
 
@@ -24,6 +25,6 @@ namespace Covid19Dashboard.Core.Models
 
         public string Property { get; set; }
 
-        public string Title { get; set; }
+        public string Title { get { return (Property + (IsAverage ? "Average" : "") + "Title").GetLocalized(); } }
     }
 }

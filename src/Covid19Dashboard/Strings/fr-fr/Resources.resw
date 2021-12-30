@@ -195,10 +195,10 @@
   <data name="Home_HospitalDataTitle.Text" xml:space="preserve">
     <value>Données hospitalières</value>
   </data>
-  <data name="NewCaseDescription" xml:space="preserve">
+  <data name="DailyConfirmedNewCasesDescription" xml:space="preserve">
     <value>nouveaux cas quotidien</value>
   </data>
-  <data name="NewCaseTitle" xml:space="preserve">
+  <data name="DailyConfirmedNewCasesTitle" xml:space="preserve">
     <value>Nombre de nouveaux cas confirmés</value>
   </data>
   <data name="Shell_EpidemiologicalStatus.Content" xml:space="preserve">
@@ -210,10 +210,10 @@
   <data name="PositiveCasesTitle" xml:space="preserve">
     <value>Nombre de personnes déclarées positives</value>
   </data>
-  <data name="PositiveCasesWeeklyAverageDescription" xml:space="preserve">
+  <data name="PositiveCasesAverageDescription" xml:space="preserve">
     <value>cas déclarés positif en moyenne sur les sept derniers jours</value>
   </data>
-  <data name="PositiveCasesWeeklyAverageTitle" xml:space="preserve">
+  <data name="PositiveCasesAverageTitle" xml:space="preserve">
     <value>Nombre moyen de nouveaux cas confirmés quotidiens</value>
   </data>
   <data name="PositivityRateDescription" xml:space="preserve">
