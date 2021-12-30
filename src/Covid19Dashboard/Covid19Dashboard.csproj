@@ -163,6 +163,7 @@
     <Compile Include="ViewModels\HospitalStatusViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\VaccinationTrackingViewModel.cs" />
     <Compile Include="Views\EpidemiologicalStatusPage.xaml.cs">
       <DependentUpon>EpidemiologicalStatusPage.xaml</DependentUpon>
     </Compile>
@@ -180,6 +181,9 @@
     </Compile>
     <Compile Include="Views\ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VaccinationTrackingPage.xaml.cs">
+      <DependentUpon>VaccinationTrackingPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +242,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ShellPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\VaccinationTrackingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

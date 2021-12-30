@@ -173,4 +173,8 @@
     <value>Hospital status</value>
     <comment>Navigation view item name for HospitalStatus</comment>
   </data>
+  <data name="Shell_VaccinationTracking.Content" xml:space="preserve">
+    <value>Vaccination tracking</value>
+    <comment>Navigation view item name for VaccinationTracking</comment>
+  </data>
 </root>

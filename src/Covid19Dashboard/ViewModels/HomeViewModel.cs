@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Covid19Dashboard.Core;
 using Covid19Dashboard.Core.Helpers;
+using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Core.Services;
 using Covid19Dashboard.Helpers;
 using Covid19Dashboard.Models;
@@ -14,6 +15,7 @@ namespace Covid19Dashboard.ViewModels
     {
         private List<DataTile> epidemiologyDataTiles;
         private List<DataTile> hospitalDataTiles;
+        private List<DataTile> vaccinationDataTiles;
 
         public List<DataTile> EpidemiologyDataTiles
         {
@@ -27,13 +29,21 @@ namespace Covid19Dashboard.ViewModels
             set { SetProperty(ref hospitalDataTiles, value); }
         }
 
+        public List<DataTile> VaccinationDataTiles
+        {
+            get { return vaccinationDataTiles; }
+            set { SetProperty(ref vaccinationDataTiles, value); }
+        }
+
         public HomeViewModel()
         {
-            if (EpidemicDataHelper.EpidemicIndicators == null)
+            if (EpidemicDataHelper.EpidemicIndicators == null || EpidemicDataHelper.VaccinationIndicators == null)
             {
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
                     EpidemicDataHelper.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicators(ApplicationData.Current.TemporaryFolder.Path);
+
+                    EpidemicDataHelper.VaccinationIndicators = await EpidemicDataService.GetVaccinationIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path);
 
                     SetDataTiles();
                 });
@@ -45,6 +55,8 @@ namespace Covid19Dashboard.ViewModels
 
         private void SetDataTiles()
         {
+            EpidemicDataHelper.IndicatorType = typeof(EpidemicIndicator);
+
             EpidemiologyDataTiles = new List<DataTile>
             {
                 new DataTile() { ChartType = ChartType.Bar, Data = EpidemicDataHelper.GetValue("DailyConfirmedNewCases"), LastUpdate = EpidemicDataHelper.GetLastUpdate("DailyConfirmedNewCases"), Property = "DailyConfirmedNewCases" },
@@ -61,6 +73,15 @@ namespace Covid19Dashboard.ViewModels
                 new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue<string>("NewHospitalization", true, 0), Evolution = EpidemicDataHelper.GetEvolution("NewHospitalization", true), IsAverage = true, LastUpdate = EpidemicDataHelper.GetLastUpdate("NewHospitalization"), Property = "NewHospitalization" },
                 new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue<string>("NewIntensiveCarePatients", true, 0), Evolution = EpidemicDataHelper.GetEvolution("NewIntensiveCarePatients", true), IsAverage = true, LastUpdate = EpidemicDataHelper.GetLastUpdate("NewIntensiveCarePatients"), Property = "NewIntensiveCarePatients" },
                 new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue<string>("NewDeceasedPersons", true, 0), Evolution = EpidemicDataHelper.GetEvolution("NewDeceasedPersons", true), IsAverage = true, LastUpdate = EpidemicDataHelper.GetLastUpdate("NewDeceasedPersons"), Property = "NewDeceasedPersons" },
+            };
+
+            EpidemicDataHelper.IndicatorType = typeof(VaccinationIndicator);
+
+            VaccinationDataTiles = new List<DataTile>
+            {
+                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("FirstDosesCoverage", 2), Digits = 2, LastUpdate = EpidemicDataHelper.GetLastUpdate("FirstDosesCoverage"), Property = "FirstDosesCoverage" },
+                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("CompleteVaccinationsCoverage", 2), Digits = 2, LastUpdate = EpidemicDataHelper.GetLastUpdate("CompleteVaccinationsCoverage"), Property = "CompleteVaccinationsCoverage" },
+                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("FirstBoosterDosesCoverage", 2), Digits = 2, LastUpdate = EpidemicDataHelper.GetLastUpdate("FirstBoosterDosesCoverage"), Property = "FirstBoosterDosesCoverage" }
             };
         }
     }

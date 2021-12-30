@@ -20,7 +20,18 @@ namespace Covid19Dashboard.Core.Services
             WebClient webClient = new WebClient();
             webClient.DownloadFile("https://www.data.gouv.fr/fr/datasets/r/f335f9ea-86e3-4ffa-9684-93c009d5e617", filePath);
 
-            return (await CsvHelper.ToObject<List<EpidemicIndicator>>(filePath)).OrderByDescending(x => x.Date).ToList();
+            return (await CsvHelper.ToObject<List<EpidemicIndicator>>(filePath, ',')).OrderByDescending(x => x.Date).ToList();
+        }
+
+        public static async Task<List<VaccinationIndicator>> GetVaccinationIndicatorsAsync(string filePath)
+        {
+            filePath = Path.Combine(filePath, Guid.NewGuid() + ".csv");
+
+            // Download the summary of indicators for monitoring the COVID-19 vaccination csv file (national).
+            WebClient webClient = new WebClient();
+            webClient.DownloadFile("https://www.data.gouv.fr/fr/datasets/r/fa4ad329-14ec-4394-85a4-c5df33769dff", filePath);
+
+            return (await CsvHelper.ToObject<List<VaccinationIndicator>>(filePath, ';')).OrderByDescending(x => x.Date).ToList();
         }
     }
 }

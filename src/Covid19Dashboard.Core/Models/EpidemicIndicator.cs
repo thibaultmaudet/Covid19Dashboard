@@ -3,15 +3,19 @@ using System;
 
 namespace Covid19Dashboard.Core.Models
 {
-    public class EpidemicIndicator
+    public class EpidemicIndicator : Indicator
     {
         private float? incidenceRate;
         private float? occupationRate;
         private float? positivityRate;
         private float? reproductionRate;
-
+        
         [JsonProperty("date")]
-        public DateTime Date { get; set; }
+        public new DateTime Date 
+        {
+            get { return base.Date; }
+            set { base.Date = value; }
+        }
 
         [JsonProperty("conf_j1")]
         public int? DailyConfirmedNewCases { get; set; }

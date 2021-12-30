@@ -11,6 +11,10 @@ namespace Covid19Dashboard.Core.Helpers
     {
         public static List<EpidemicIndicator> EpidemicIndicators { get; set; }
 
+        public static List<VaccinationIndicator> VaccinationIndicators { get; set; }
+
+        public static Type IndicatorType { get; set; }
+
         public static double GetEvolution(string property)
         {
             return GetEvolution(property, false);
@@ -18,27 +22,37 @@ namespace Covid19Dashboard.Core.Helpers
 
         public static double GetEvolution(string property, bool isAverage)
         {
-            if (EpidemicIndicators == null || EpidemicIndicators.Count == 0)
+            if (!IsInitilizedList())
                 return default;
 
-            ParameterExpression parameterExpression = Expression.Parameter(typeof(EpidemicIndicator));
+            ParameterExpression parameterExpression = Expression.Parameter(IndicatorType);
 
-            EpidemicIndicator firstEpidemicIndicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+            Indicator firstIndicator = new Indicator();
+            
+            if (IndicatorType == typeof(EpidemicIndicator))
+                firstIndicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+            else
+                firstIndicator = VaccinationIndicators.FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
 
-            return Math.Round(CalculateEvolution(GetValue<float>(property, isAverage, 2, firstEpidemicIndicator.Date.AddDays(-7)), GetValue<float>(property, isAverage, 2)), 2);
+            return Math.Round(CalculateEvolution(GetValue<float>(property, isAverage, 2, firstIndicator.Date.AddDays(-7)), GetValue<float>(property, isAverage, 2)), 2);
         }
 
         public static string GetLastUpdate(string property)
         {
-            if (EpidemicIndicators == null || EpidemicIndicators.Count == 0)
+            if (!IsInitilizedList())
                 return default;
 
-            ParameterExpression parameterExpression = Expression.Parameter(typeof(EpidemicIndicator));
+            ParameterExpression parameterExpression = Expression.Parameter(IndicatorType);
 
-            EpidemicIndicator epidemicIndicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+            Indicator indicator = new Indicator();
 
-            if (epidemicIndicator != null)
-                return epidemicIndicator.Date.ToShortDateString();
+            if (IndicatorType == typeof(EpidemicIndicator))
+                indicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+            else
+                indicator = VaccinationIndicators.FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+
+            if (indicator != null)
+                return indicator.Date.ToShortDateString();
 
             return default;
         }
@@ -65,45 +79,44 @@ namespace Covid19Dashboard.Core.Helpers
 
         public static T GetValue<T>(string property, bool isAverage, int digits, DateTime? date)
         {
-            if (EpidemicIndicators == null || EpidemicIndicators.Count == 0)
+            if (!IsInitilizedList())
                 return (T)Convert.ChangeType(default, typeof(T));
 
-            ParameterExpression parameterExpression = Expression.Parameter(typeof(EpidemicIndicator));
+            ParameterExpression parameterExpression = Expression.Parameter(IndicatorType);
 
             Expression propertyHasValueExpression = Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?)));
             Expression specificDateExpression = Expression.LessThanOrEqual(Expression.Property(parameterExpression, "Date"), Expression.Constant(date ?? default, typeof(DateTime)));
 
             if (isAverage)
             {
-                IEnumerable<EpidemicIndicator> epidemicIndicators = null;
+                IEnumerable<Indicator> indicators = null;
 
-                if (date.HasValue)
-                    epidemicIndicators = EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.And(propertyHasValueExpression, specificDateExpression), parameterExpression).Compile());
-                else
-                    epidemicIndicators = EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(propertyHasValueExpression, parameterExpression).Compile());
+                if (IndicatorType == typeof(EpidemicIndicator))
+                    indicators = EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());            
+                else if (IndicatorType == typeof(VaccinationIndicator))
+                    indicators = VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
 
+                if (indicators == null)
+                    return (T)Convert.ChangeType(default, typeof(T));
+                
                 List<decimal> values = new List<decimal>();
 
-                if (epidemicIndicators == null)
-                    return (T)Convert.ChangeType(default, typeof(T));
-
-                foreach (EpidemicIndicator epidemicIndicator in epidemicIndicators.Take(7))
-                    values.Add(decimal.Parse(epidemicIndicator.GetType().GetProperty(property).GetValue(epidemicIndicator, null).ToString()));
+                foreach (var indicator in indicators.Take(7))
+                    values.Add(decimal.Parse(indicator.GetType().GetProperty(property).GetValue(indicator, null).ToString()));
 
                 return (T)Convert.ChangeType(Math.Round(values.Average(), digits), typeof(T));
             }
             else
             {
-                EpidemicIndicator epidemicIndicator = null;
-                if (date.HasValue)
-                    epidemicIndicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.And(propertyHasValueExpression, specificDateExpression), parameterExpression).Compile());
-                else
-                    epidemicIndicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(propertyHasValueExpression, parameterExpression).Compile());
-                
-                EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+                Indicator indicator = new Indicator();
 
-                if (epidemicIndicator != null)
-                    return (T)Convert.ChangeType(Math.Round(decimal.Parse(epidemicIndicator.GetType().GetProperty(property).GetValue(epidemicIndicator, null).ToString()), digits), typeof(T));
+                if (IndicatorType == typeof(EpidemicIndicator))
+                    indicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
+                else if (IndicatorType == typeof(VaccinationIndicator))
+                    indicator = VaccinationIndicators.FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
+
+                if (indicator != null)
+                    return (T)Convert.ChangeType(Math.Round(decimal.Parse(indicator.GetType().GetProperty(property).GetValue(indicator, null).ToString()), digits), typeof(T));
             }
 
             return (T)Convert.ChangeType(default, typeof(T));
@@ -111,19 +124,29 @@ namespace Covid19Dashboard.Core.Helpers
 
         public static ObservableCollection<ChartIndicator> GetValuesForChart(string property, bool isAverage, int digits)
         {
-            if (EpidemicIndicators == null || EpidemicIndicators.Count == 0)
+            if (!IsInitilizedList())
                 return default;
 
             ObservableCollection<ChartIndicator> chartIndicators = new ObservableCollection<ChartIndicator>();
 
-            ParameterExpression parameterExpression = Expression.Parameter(typeof(EpidemicIndicator));
+            ParameterExpression parameterExpression = Expression.Parameter(IndicatorType);
 
-            IEnumerable<EpidemicIndicator> epidemicIndicators = EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+            IEnumerable<Indicator> indicators = null;
 
-            foreach (EpidemicIndicator epidemicIndicator in epidemicIndicators.Take(70).Reverse())
+            if (IndicatorType == typeof(EpidemicIndicator))
+                indicators = EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+            else
+                indicators = VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+
+            foreach (Indicator epidemicIndicator in indicators.Take(70).Reverse())
                 chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = GetValue<float>(property, isAverage, digits, epidemicIndicator.Date) });
 
             return chartIndicators;
+        }
+
+        private static bool IsInitilizedList()
+        {
+            return !(IndicatorType == typeof(EpidemicIndicator) && (EpidemicIndicators == null || EpidemicIndicators.Count == 0)) || (IndicatorType == typeof(VaccinationIndicator) && (VaccinationIndicators == null || VaccinationIndicators.Count == 0));
         }
 
         private static float CalculateEvolution(float? firstValue, float? secondValue)

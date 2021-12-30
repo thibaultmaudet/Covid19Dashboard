@@ -8,16 +8,16 @@ namespace Covid19Dashboard.Helpers
 {
     public static class CsvHelper
     {
-        public static async Task<T> ToObject<T>(string filePath)
+        public static async Task<T> ToObject<T>(string filePath, char separator)
         {
             List<string[]> csv = new List<string[]>();
 
             string[] lines = File.ReadAllLines(filePath);
 
             foreach (string line in lines)
-                csv.Add(line.Split(','));
+                csv.Add(line.Split(separator));
 
-            string[] properties = lines[0].Split(',');
+            string[] properties = lines[0].Split(separator);
 
             List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
 

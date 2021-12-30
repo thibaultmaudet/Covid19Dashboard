@@ -297,4 +297,88 @@
   <data name="Shell_VaccinationStatus.Content" xml:space="preserve">
     <value>Suvi de la vacinnation</value>
   </data>
+  <data name="Home_VaccinationTrackingTitle.Text" xml:space="preserve">
+    <value>Suivi de la vaccination</value>
+  </data>
+  <data name="NewCompleteVaccinationsAverageDescription" xml:space="preserve">
+    <value>nouvelles personnes complètement vaccinées en moyenne sur les sept dernier jours</value>
+  </data>
+  <data name="NewCompleteVaccinationsAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de nouvelles personnes complètement vaccinées</value>
+  </data>
+  <data name="NewCompleteVaccinationsDescription" xml:space="preserve">
+    <value>nouvelles personnes complètement vaccinées au cours des dernières 24 heures</value>
+  </data>
+  <data name="NewCompleteVaccinationsTitle" xml:space="preserve">
+    <value>Nouvelles personnes complètement vaccinées</value>
+  </data>
+  <data name="NewFirstDosesAverageDescription" xml:space="preserve">
+    <value>nouvelles premières doses injectées en moyenne sur les sept derniers jours</value>
+  </data>
+  <data name="NewFirstDosesAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de premières doses injectées quotidiennement</value>
+  </data>
+  <data name="NewFirstDosesDescription" xml:space="preserve">
+    <value>nouvelles premières doses injectées au cours des dernières 24 heures</value>
+  </data>
+  <data name="NewFirstDosesTitle" xml:space="preserve">
+    <value>Nouvelles premières doses injectées</value>
+  </data>
+  <data name="Shell_VaccinationTracking.Content" xml:space="preserve">
+    <value>Suivi de la vaccination</value>
+  </data>
+  <data name="CompleteVaccinationsCoverageDescription" xml:space="preserve">
+    <value>% de la population complètement vaccinée</value>
+  </data>
+  <data name="CompleteVaccinationsCoverageTitle" xml:space="preserve">
+    <value>Part de la population complétement vaccinée</value>
+  </data>
+  <data name="FirstBoosterDosesCoverageDescription" xml:space="preserve">
+    <value>% de la population ayant reçu une dose de rappel</value>
+  </data>
+  <data name="FirstBoosterDosesCoverageTitle" xml:space="preserve">
+    <value>Part de la population ayant reçu une dose de rappel</value>
+  </data>
+  <data name="FirstDosesCoverageDescription" xml:space="preserve">
+    <value>% de la population ayant reçu au moins une dose de vacin</value>
+  </data>
+  <data name="FirstDosesCoverageTitle" xml:space="preserve">
+    <value>Part de la population partiellement vaccinée</value>
+  </data>
+  <data name="Home_VaccinationTracking_Information.Message" xml:space="preserve">
+    <value>Les indicateurs sur le suivi de la vaccination porte sur la population agée de 12 ans et plus.</value>
+  </data>
+  <data name="NewFirstBoosterDosesAverageDescription" xml:space="preserve">
+    <value>nouvelles doses de rappel injectées en moyenne sur les sept derniers jours</value>
+  </data>
+  <data name="NewFirstBoosterDosesAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de doses de rappel injectées quotidiennement</value>
+  </data>
+  <data name="NewFirstBoosterDosesDescription" xml:space="preserve">
+    <value>nouvelles doses de rappel injectées au cours des dernières 24 heures</value>
+  </data>
+  <data name="NewFirstBoosterDosesTitle" xml:space="preserve">
+    <value>Nouvelles doses de rappel injectées</value>
+  </data>
+  <data name="TotalCompleteVaccinationsDescription" xml:space="preserve">
+    <value>personnes complétement vaccinées</value>
+  </data>
+  <data name="TotalCompleteVaccinationsTitle" xml:space="preserve">
+    <value>Nombre de personnes complétement vaccinées</value>
+  </data>
+  <data name="TotalFirstBoosterDosesDescription" xml:space="preserve">
+    <value>personnes ayant reçu une dose de rappel</value>
+  </data>
+  <data name="TotalFirstBoosterDosesTitle" xml:space="preserve">
+    <value>Nombre de personnes ayant reçu une dose de rappel</value>
+  </data>
+  <data name="TotalFirstDosesTitle" xml:space="preserve">
+    <value>Nombre de personne partiellement vaccinées</value>
+  </data>
+  <data name="TotalFirstInjectionsDescription" xml:space="preserve">
+    <value>personnes partiellement vaccinées</value>
+  </data>
+  <data name="VaccinationTracking_Information.Message" xml:space="preserve">
+    <value>Les indicateurs suivant portent sur la population des 12 ans et plus.</value>
+  </data>
 </root>

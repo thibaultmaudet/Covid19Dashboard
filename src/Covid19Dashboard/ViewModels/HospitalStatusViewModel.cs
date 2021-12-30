@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Covid19Dashboard.Core;
 using Covid19Dashboard.Core.Helpers;
+using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Core.Services;
 using Covid19Dashboard.Models;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
@@ -37,6 +38,8 @@ namespace Covid19Dashboard.ViewModels
 
         private void SetDataTiles()
         {
+            EpidemicDataHelper.IndicatorType = typeof(EpidemicIndicator);
+
             DataTiles = new List<DataTile>
             {
                 new DataTile() { ChartType = ChartType.Bar, Data = EpidemicDataHelper.GetValue("NewHospitalization"), LastUpdate = EpidemicDataHelper.GetLastUpdate("NewHospitalization"), Property = "NewHospitalization" },
