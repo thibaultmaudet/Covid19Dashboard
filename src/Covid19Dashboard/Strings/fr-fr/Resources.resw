@@ -181,7 +181,7 @@
     <value>Nouvelles hopitalisations</value>
   </data>
   <data name="NewHospitalizationDescription" xml:space="preserve">
-    <value>nouvelles personnes hospitalisées</value>
+    <value>nouvelles personnes hospitalisées au cours des dernières 24 heures</value>
   </data>
   <data name="ReproductionRateTitle" xml:space="preserve">
     <value>Taux de reproduction effectif</value>
@@ -229,9 +229,9 @@
     <value>Situation hospitalière</value>
   </data>
   <data name="DeceasedPersonsDescription" xml:space="preserve">
-    <value>personnes décédés du Covid-19</value>
+    <value>personnes décédés du Covid-19 depuis le début de l'épidémie</value>
   </data>
-  <data name="DeceasedPersonsTotal" xml:space="preserve">
+  <data name="DeceasedPersonsTitle" xml:space="preserve">
     <value>Décès</value>
   </data>
   <data name="HospitalizedPatientsDescription" xml:space="preserve">
@@ -245,5 +245,56 @@
   </data>
   <data name="IntensiveCarePatientsTitle" xml:space="preserve">
     <value>Patients en réanimation</value>
+  </data>
+  <data name="NewDeceasedPersonsAverageDescription" xml:space="preserve">
+    <value>nouveaux patients décédés sur les sept derniers jours</value>
+  </data>
+  <data name="NewDeceasedPersonsAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de nouveux décès quotidien</value>
+  </data>
+  <data name="NewDeceasedPersonsDescription" xml:space="preserve">
+    <value>nouveaux patients décédés au cours des dernières 24 heures</value>
+  </data>
+  <data name="NewDeceasedPersonsTitle" xml:space="preserve">
+    <value>Nouveaux décès</value>
+  </data>
+  <data name="NewHospitalizationAverageDescription" xml:space="preserve">
+    <value>nouvelles personnes hospitalisées en moyenne sur les sept derniers jours</value>
+  </data>
+  <data name="NewHospitalizationAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de nouvelles hospitalisations quotidiennes</value>
+  </data>
+  <data name="NewIntensiveCarePatientsAverageDescription" xml:space="preserve">
+    <value>nouvelles entrées en réanimation sur les sept derniers jours</value>
+  </data>
+  <data name="NewIntensiveCarePatientsAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de nouvelles entrées quotidienne</value>
+  </data>
+  <data name="NewIntensiveCarePatientsDescription" xml:space="preserve">
+    <value>nouvelles personnes hospitalisées au cours des dernières 24 heures</value>
+  </data>
+  <data name="NewIntensiveCarePatientsTitle" xml:space="preserve">
+    <value>Nouvelles adminissions en réanimation</value>
+  </data>
+  <data name="NewReturnHomeAverageDescription" xml:space="preserve">
+    <value>nouveaux retours à domicile en moyenne sur les sept derniers jours</value>
+  </data>
+  <data name="NewReturnHomeAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de retours à domicile quotidien</value>
+  </data>
+  <data name="NewReturnHomeDescription" xml:space="preserve">
+    <value>nouveaux retours à domicile au cours des dernières 24 heures</value>
+  </data>
+  <data name="NewReturnHomeTitle" xml:space="preserve">
+    <value>Retours à domicile</value>
+  </data>
+  <data name="OccupationRateDescription" xml:space="preserve">
+    <value>% des lits de soins critiques occupés par les patients Covid19 par rapport au nombre de lits fin 2018</value>
+  </data>
+  <data name="OccupationRateTitle" xml:space="preserve">
+    <value>Taux d'occupation</value>
+  </data>
+  <data name="Shell_VaccinationStatus.Content" xml:space="preserve">
+    <value>Suvi de la vacinnation</value>
   </data>
 </root>

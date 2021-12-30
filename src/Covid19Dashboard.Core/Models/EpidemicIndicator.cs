@@ -6,6 +6,7 @@ namespace Covid19Dashboard.Core.Models
     public class EpidemicIndicator
     {
         private float? incidenceRate;
+        private float? occupationRate;
         private float? positivityRate;
         private float? reproductionRate;
 
@@ -24,8 +25,17 @@ namespace Covid19Dashboard.Core.Models
         [JsonProperty("rea")]
         public int? IntensiveCarePatients { get; set; }
 
+        [JsonProperty("incid_dchosp")]
+        public int? NewDeceasedPersons { get; set; }
+
         [JsonProperty("incid_hosp")]
         public int? NewHospitalization { get; set; } 
+
+        [JsonProperty("incid_rea")]
+        public int? NewIntensiveCarePatients { get; set; } 
+
+        [JsonProperty("incid_rad")]
+        public int? NewReturnHome{ get; set; } 
 
         [JsonProperty("pos")]
         public int? PositiveCases { get; set; }
@@ -43,6 +53,22 @@ namespace Covid19Dashboard.Core.Models
                 }
                 else
                     incidenceRate = null;
+            }
+        }
+
+        [JsonProperty("TO")]
+        public float? OccupationRate
+        {
+            get { return occupationRate; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value.ToString()))
+                {
+                    float.TryParse(value.ToString().Replace('.', ','), out float result);
+                    occupationRate = result * 100;
+                }
+                else
+                    occupationRate = null;
             }
         }
 
