@@ -144,6 +144,9 @@
     <Compile Include="Controls\ChartPageControl.xaml.cs">
       <DependentUpon>ChartPageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FilterControl.xaml.cs">
+      <DependentUpon>FilterControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TileControl.xaml.cs">
       <DependentUpon>TileControl.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,7 @@
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\NumberToColorConverter.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
+    <Compile Include="Helpers\TileHelper.cs" />
     <Compile Include="Models\DataTile.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultActivationHandler.cs" />
@@ -194,6 +198,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\ChartPageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

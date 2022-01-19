@@ -375,10 +375,19 @@
   <data name="TotalFirstDosesTitle" xml:space="preserve">
     <value>Nombre de personne partiellement vaccinées</value>
   </data>
-  <data name="TotalFirstInjectionsDescription" xml:space="preserve">
+  <data name="TotalFirstDosesDescription" xml:space="preserve">
     <value>personnes partiellement vaccinées</value>
   </data>
   <data name="VaccinationTracking_Information.Message" xml:space="preserve">
     <value>Les indicateurs suivant portent sur la population des 12 ans et plus.</value>
+  </data>
+  <data name="Filter_Departments.Header" xml:space="preserve">
+    <value>Filter par département :</value>
+  </data>
+  <data name="Filter_RefineIndicators.Text" xml:space="preserve">
+    <value>Affiner les indicateurs</value>
+  </data>
+  <data name="Filter_Reset.Content" xml:space="preserve">
+    <value>Réinitialiser</value>
   </data>
 </root>

@@ -3,6 +3,7 @@ using Covid19Dashboard.Core;
 using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Core.Services;
+using Covid19Dashboard.Helpers;
 using Covid19Dashboard.Models;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Windows.Storage;
@@ -12,6 +13,8 @@ namespace Covid19Dashboard.ViewModels
 {
     public class EpidemiologicalStatusViewModel : ObservableObject
     {
+        private static Data Data => Data.Instance;
+
         private List<DataTile> dataTiles;
 
         public List<DataTile> DataTiles
@@ -22,32 +25,32 @@ namespace Covid19Dashboard.ViewModels
 
         public EpidemiologicalStatusViewModel()
         {
-            if (EpidemicDataHelper.EpidemicIndicators == null)
+            if (Data.EpidemicIndicators == null)
             {
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
-                    EpidemicDataHelper.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicators(ApplicationData.Current.TemporaryFolder.Path);
+                    Data.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.National);
 
-                    SetDataTiles();
+                    UpdateDataTiles();
                 });
             }
             else
-                SetDataTiles();
+                UpdateDataTiles();
 
         }
 
-        private void SetDataTiles()
+        public void UpdateDataTiles()
         {
             EpidemicDataHelper.IndicatorType = typeof(EpidemicIndicator);
 
             DataTiles = new List<DataTile>
             {
-                new DataTile() { ChartType = ChartType.Bar, Data = EpidemicDataHelper.GetValue("DailyConfirmedNewCases"), LastUpdate = EpidemicDataHelper.GetLastUpdate("DailyConfirmedNewCases"), Property = "DailyConfirmedNewCases" },
-                new DataTile() { ChartType = ChartType.Bar, Data = EpidemicDataHelper.GetValue("PositiveCases"), LastUpdate = EpidemicDataHelper.GetLastUpdate("PositiveCases"), Property = "PositiveCases" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue<string>("PositiveCases", true, 0), Evolution = EpidemicDataHelper.GetEvolution("PositiveCases", true), IsAverage = true, LastUpdate = EpidemicDataHelper.GetLastUpdate("PositiveCases"), Property = "PositiveCases" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("IncidenceRate", 2), Digits = 2, Evolution = EpidemicDataHelper.GetEvolution("IncidenceRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("IncidenceRate"), Property = "IncidenceRate" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("PositivityRate", 2), Digits = 2, Evolution = EpidemicDataHelper.GetEvolution("PositivityRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("PositivityRate"), Property = "PositivityRate" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("ReproductionRate", 2), Digits = 2, Evolution = EpidemicDataHelper.GetEvolution("ReproductionRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("ReproductionRate"), Property = "ReproductionRate" }
+                TileHelper.SetDataTile("DailyConfirmedNewCases", ChartType.Bar, false, true, true, 0),
+                TileHelper.SetDataTile("PositiveCases", ChartType.Bar, false, false, true, 0),
+                TileHelper.SetDataTile("PositiveCases", ChartType.Area, true, false, true, 0),
+                TileHelper.SetDataTile("IncidenceRate", ChartType.Area, false, false, true, 2),
+                TileHelper.SetDataTile("PositivityRate", ChartType.Area, false, false, true, 2),
+                TileHelper.SetDataTile("ReproductionRate", ChartType.Area, false, false, true, 2)
             };
         }
     }

@@ -13,6 +13,8 @@ namespace Covid19Dashboard.ViewModels
 {
     public class HomeViewModel : ObservableObject
     {
+        private static Data Data => Data.Instance;
+
         private List<DataTile> epidemiologyDataTiles;
         private List<DataTile> hospitalDataTiles;
         private List<DataTile> vaccinationDataTiles;
@@ -37,51 +39,54 @@ namespace Covid19Dashboard.ViewModels
 
         public HomeViewModel()
         {
-            if (EpidemicDataHelper.EpidemicIndicators == null || EpidemicDataHelper.VaccinationIndicators == null)
+            if (Data.EpidemicIndicators == null || Data.VaccinationIndicators == null)
             {
                 _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
-                    EpidemicDataHelper.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicators(ApplicationData.Current.TemporaryFolder.Path);
+                    Data.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.National);
+                    Data.EpidemicIndicators.AddRange(await EpidemicDataService.GetEpedimicIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.Department));
 
-                    EpidemicDataHelper.VaccinationIndicators = await EpidemicDataService.GetVaccinationIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path);
+                    Data.Departments = EpidemicDataHelper.GetDepartments();
 
-                    SetDataTiles();
+                    Data.VaccinationIndicators = await EpidemicDataService.GetVaccinationIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.National);
+                    Data.VaccinationIndicators.AddRange(await EpidemicDataService.GetVaccinationIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.Department));
+
+                    UpdateDataTiles();
                 });
             }
             else
-                SetDataTiles();
-            
+                UpdateDataTiles();
         }
 
-        private void SetDataTiles()
+        public void UpdateDataTiles()
         {
             EpidemicDataHelper.IndicatorType = typeof(EpidemicIndicator);
 
             EpidemiologyDataTiles = new List<DataTile>
             {
-                new DataTile() { ChartType = ChartType.Bar, Data = EpidemicDataHelper.GetValue("DailyConfirmedNewCases"), LastUpdate = EpidemicDataHelper.GetLastUpdate("DailyConfirmedNewCases"), Property = "DailyConfirmedNewCases" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("IncidenceRate", 2), Digits = 2, Evolution = EpidemicDataHelper.GetEvolution("IncidenceRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("IncidenceRate"), Property = "IncidenceRate" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("PositivityRate", 2), Digits = 2, Evolution = EpidemicDataHelper.GetEvolution("PositivityRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("PositivityRate"), Property = "PositivityRate" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("ReproductionRate", 2), Digits = 2, Evolution = EpidemicDataHelper.GetEvolution("ReproductionRate"), LastUpdate = EpidemicDataHelper.GetLastUpdate("ReproductionRate"), Property = "ReproductionRate" }
+                TileHelper.SetDataTile("DailyConfirmedNewCases", ChartType.Bar, false, true, true, 0),
+                TileHelper.SetDataTile("IncidenceRate", ChartType.Area, false, false, true, 2),
+                TileHelper.SetDataTile("PositivityRate", ChartType.Area, false, false, true, 2),
+                TileHelper.SetDataTile("ReproductionRate", ChartType.Area, false, false, true, 2)
             };
 
             HospitalDataTiles = new List<DataTile>
             {
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("HospitalizedPatients"),Evolution = EpidemicDataHelper.GetEvolution("HospitalizedPatients"), LastUpdate = EpidemicDataHelper.GetLastUpdate("HospitalizedPatients"), Property = "HospitalizedPatients" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("IntensiveCarePatients"), Evolution = EpidemicDataHelper.GetEvolution("IntensiveCarePatients"), LastUpdate = EpidemicDataHelper.GetLastUpdate("IntensiveCarePatients"), Property = "IntensiveCarePatients" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("DeceasedPersons"),LastUpdate = EpidemicDataHelper.GetLastUpdate("DeceasedPersons"), Property = "DeceasedPersons" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue<string>("NewHospitalization", true, 0), Evolution = EpidemicDataHelper.GetEvolution("NewHospitalization", true), IsAverage = true, LastUpdate = EpidemicDataHelper.GetLastUpdate("NewHospitalization"), Property = "NewHospitalization" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue<string>("NewIntensiveCarePatients", true, 0), Evolution = EpidemicDataHelper.GetEvolution("NewIntensiveCarePatients", true), IsAverage = true, LastUpdate = EpidemicDataHelper.GetLastUpdate("NewIntensiveCarePatients"), Property = "NewIntensiveCarePatients" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue<string>("NewDeceasedPersons", true, 0), Evolution = EpidemicDataHelper.GetEvolution("NewDeceasedPersons", true), IsAverage = true, LastUpdate = EpidemicDataHelper.GetLastUpdate("NewDeceasedPersons"), Property = "NewDeceasedPersons" },
+                TileHelper.SetDataTile("HospitalizedPatients", ChartType.Bar, false, true, false, 0),
+                TileHelper.SetDataTile("IntensiveCarePatients", ChartType.Bar, false, false, false, 0),
+                TileHelper.SetDataTile("DeceasedPersons", ChartType.Bar, false, true, false, 0),
+                TileHelper.SetDataTile("NewHospitalization", ChartType.Area, true, false, true, 0),
+                TileHelper.SetDataTile("NewIntensiveCarePatients", ChartType.Area, true, false, true, 0),
+                TileHelper.SetDataTile("NewDeceasedPersons", ChartType.Area, true, false, true, 0)
             };
 
             EpidemicDataHelper.IndicatorType = typeof(VaccinationIndicator);
 
             VaccinationDataTiles = new List<DataTile>
             {
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("FirstDosesCoverage", 2), Digits = 2, LastUpdate = EpidemicDataHelper.GetLastUpdate("FirstDosesCoverage"), Property = "FirstDosesCoverage" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("CompleteVaccinationsCoverage", 2), Digits = 2, LastUpdate = EpidemicDataHelper.GetLastUpdate("CompleteVaccinationsCoverage"), Property = "CompleteVaccinationsCoverage" },
-                new DataTile() { ChartType = ChartType.Area, Data = EpidemicDataHelper.GetValue("FirstBoosterDosesCoverage", 2), Digits = 2, LastUpdate = EpidemicDataHelper.GetLastUpdate("FirstBoosterDosesCoverage"), Property = "FirstBoosterDosesCoverage" }
+                TileHelper.SetDataTile("FirstDosesCoverage", ChartType.Area, false, false, true, 2),
+                TileHelper.SetDataTile("CompleteVaccinationsCoverage", ChartType.Area, false, false, true, 2),
+                TileHelper.SetDataTile("FirstBoosterDosesCoverage", ChartType.Area, false, false, true, 2)
             };
         }
     }

@@ -9,47 +9,44 @@ namespace Covid19Dashboard.Core.Helpers
 {
     public class EpidemicDataHelper
     {
-        public static List<EpidemicIndicator> EpidemicIndicators { get; set; }
-
-        public static List<VaccinationIndicator> VaccinationIndicators { get; set; }
+        private static Data Data => Data.Instance;
 
         public static Type IndicatorType { get; set; }
 
-        public static double GetEvolution(string property)
+        public static double GetEvolution(string property, bool isAverage, bool isNationalIndicator)
         {
-            return GetEvolution(property, false);
-        }
-
-        public static double GetEvolution(string property, bool isAverage)
-        {
-            if (!IsInitilizedList())
+            if (!IsInitializedList())
                 return default;
 
             ParameterExpression parameterExpression = Expression.Parameter(IndicatorType);
+
+            Expression departmentExpression = Expression.Equal(Expression.Property(parameterExpression, "Department"), Expression.Constant(isNationalIndicator || string.IsNullOrEmpty(Data.SelectedDepartment) ? default : Data.SelectedDepartment, typeof(string)));
 
             Indicator firstIndicator = new Indicator();
             
             if (IndicatorType == typeof(EpidemicIndicator))
-                firstIndicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+                firstIndicator = Data.EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(departmentExpression, parameterExpression).Compile()).FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
             else
-                firstIndicator = VaccinationIndicators.FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+                firstIndicator = Data.VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(departmentExpression, parameterExpression).Compile()).FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
 
-            return Math.Round(CalculateEvolution(GetValue<float>(property, isAverage, 2, firstIndicator.Date.AddDays(-7)), GetValue<float>(property, isAverage, 2)), 2);
+            return Math.Round(CalculateEvolution(GetValue<float>(property, isAverage, isNationalIndicator, 2, firstIndicator.Date.AddDays(-7)), GetValue<float>(property, isAverage, isNationalIndicator, 2)), 2);
         }
 
-        public static string GetLastUpdate(string property)
+        public static string GetLastUpdate(string property, bool isNationalIndicator)
         {
-            if (!IsInitilizedList())
+            if (!IsInitializedList())
                 return default;
 
             ParameterExpression parameterExpression = Expression.Parameter(IndicatorType);
+            
+            Expression departmentExpression = Expression.Equal(Expression.Property(parameterExpression, "Department"), Expression.Constant(isNationalIndicator || string.IsNullOrEmpty(Data.SelectedDepartment) ? default : Data.SelectedDepartment, typeof(string)));
 
             Indicator indicator = new Indicator();
 
             if (IndicatorType == typeof(EpidemicIndicator))
-                indicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+                indicator = Data.EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(departmentExpression, parameterExpression).Compile()).FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
             else
-                indicator = VaccinationIndicators.FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+                indicator = Data.VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(departmentExpression, parameterExpression).Compile()).FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
 
             if (indicator != null)
                 return indicator.Date.ToShortDateString();
@@ -57,46 +54,37 @@ namespace Covid19Dashboard.Core.Helpers
             return default;
         }
 
-        public static string GetValue(string property)
+        public static T GetValue<T>(string property, bool isAverage, bool isNationalIndicator, int digits)
         {
-            return GetValue<string>(property, false, 0, null);
+            return GetValue<T>(property, isAverage, isNationalIndicator, digits, null);
+        }
+        
+        public static string GetValue(string property, bool isAverage, bool isNationalIndicator, int digits)
+        {
+            return GetValue<string>(property, isAverage, isNationalIndicator, digits, null);
         }
 
-        public static string GetValue(string property, bool isAverage)
+        public static T GetValue<T>(string property, bool isAverage, bool isNationalIndicator, int digits, DateTime? date)
         {
-            return GetValue<string>(property, isAverage, 2, null);
-        }
-
-        public static string GetValue(string property, int digits)
-        {
-            return GetValue<string>(property, false, digits, null);
-        }
-
-        public static T GetValue<T>(string property, bool isAverage, int digits)
-        {
-            return GetValue<T>(property, isAverage, digits, null);
-        }
-
-        public static T GetValue<T>(string property, bool isAverage, int digits, DateTime? date)
-        {
-            if (!IsInitilizedList())
+            if (!IsInitializedList())
                 return (T)Convert.ChangeType(default, typeof(T));
 
             ParameterExpression parameterExpression = Expression.Parameter(IndicatorType);
 
             Expression propertyHasValueExpression = Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?)));
             Expression specificDateExpression = Expression.LessThanOrEqual(Expression.Property(parameterExpression, "Date"), Expression.Constant(date ?? default, typeof(DateTime)));
+            Expression departmentExpression = Expression.Equal(Expression.Property(parameterExpression, "Department"), Expression.Constant(isNationalIndicator || string.IsNullOrEmpty(Data.SelectedDepartment) ? default : Data.SelectedDepartment, typeof(string)));
 
             if (isAverage)
             {
                 IEnumerable<Indicator> indicators = null;
 
                 if (IndicatorType == typeof(EpidemicIndicator))
-                    indicators = EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());            
+                    indicators = Data.EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(departmentExpression, parameterExpression).Compile()).Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
                 else if (IndicatorType == typeof(VaccinationIndicator))
-                    indicators = VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
+                    indicators = Data.VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(departmentExpression, parameterExpression).Compile()).Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
 
-                if (indicators == null)
+                if (indicators == null || indicators.Count() == 0)
                     return (T)Convert.ChangeType(default, typeof(T));
                 
                 List<decimal> values = new List<decimal>();
@@ -111,9 +99,9 @@ namespace Covid19Dashboard.Core.Helpers
                 Indicator indicator = new Indicator();
 
                 if (IndicatorType == typeof(EpidemicIndicator))
-                    indicator = EpidemicIndicators.FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
+                    indicator = Data.EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(departmentExpression, parameterExpression).Compile()).DefaultIfEmpty(new EpidemicIndicator()).FirstOrDefault(Expression.Lambda<Func<EpidemicIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
                 else if (IndicatorType == typeof(VaccinationIndicator))
-                    indicator = VaccinationIndicators.FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
+                    indicator = Data.VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(departmentExpression, parameterExpression).Compile()).DefaultIfEmpty(new VaccinationIndicator()).FirstOrDefault(Expression.Lambda<Func<VaccinationIndicator, bool>>(date.HasValue ? Expression.And(propertyHasValueExpression, specificDateExpression) : propertyHasValueExpression, parameterExpression).Compile());
 
                 if (indicator != null)
                     return (T)Convert.ChangeType(Math.Round(decimal.Parse(indicator.GetType().GetProperty(property).GetValue(indicator, null).ToString()), digits), typeof(T));
@@ -122,31 +110,45 @@ namespace Covid19Dashboard.Core.Helpers
             return (T)Convert.ChangeType(default, typeof(T));
         }
 
-        public static ObservableCollection<ChartIndicator> GetValuesForChart(string property, bool isAverage, int digits)
+        public static ObservableCollection<ChartIndicator> GetValuesForChart(string property, bool isAverage, bool isNationalIndicator, int digits)
         {
-            if (!IsInitilizedList())
+            if (!IsInitializedList())
                 return default;
 
             ObservableCollection<ChartIndicator> chartIndicators = new ObservableCollection<ChartIndicator>();
 
             ParameterExpression parameterExpression = Expression.Parameter(IndicatorType);
 
+            Expression departmentExpression = Expression.Equal(Expression.Property(parameterExpression, "Department"), Expression.Constant(isNationalIndicator || string.IsNullOrEmpty(Data.SelectedDepartment) ? default : Data.SelectedDepartment, typeof(string)));
+
             IEnumerable<Indicator> indicators = null;
 
             if (IndicatorType == typeof(EpidemicIndicator))
-                indicators = EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+                indicators = Data.EpidemicIndicators.Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(departmentExpression, parameterExpression).Compile()).Where(Expression.Lambda<Func<EpidemicIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
             else
-                indicators = VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
+                indicators = Data.VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(departmentExpression, parameterExpression).Compile()).Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(departmentExpression, parameterExpression).Compile()).Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
 
             foreach (Indicator epidemicIndicator in indicators.Take(70).Reverse())
-                chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = GetValue<float>(property, isAverage, digits, epidemicIndicator.Date) });
+                chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = GetValue<float>(property, isAverage, isNationalIndicator, digits, epidemicIndicator.Date) });
 
             return chartIndicators;
         }
 
-        private static bool IsInitilizedList()
+        public static ObservableCollection<KeyValuePair<string, string>> GetDepartments()
         {
-            return !(IndicatorType == typeof(EpidemicIndicator) && (EpidemicIndicators == null || EpidemicIndicators.Count == 0)) || (IndicatorType == typeof(VaccinationIndicator) && (VaccinationIndicators == null || VaccinationIndicators.Count == 0));
+            if (!IsInitializedList())
+                return default;
+
+            ObservableCollection<KeyValuePair<string, string>> departments = new ObservableCollection<KeyValuePair<string, string>>();
+
+            Data.EpidemicIndicators.Where(x => x.Date == Data.EpidemicIndicators.First().Date && x.Department != null).ToList().ForEach(x => departments.Add(new KeyValuePair<string, string>(x.Department,x.DepartmentLabel)));
+
+            return departments;
+        }
+
+        private static bool IsInitializedList()
+        {
+            return !(IndicatorType == typeof(EpidemicIndicator) && (Data.EpidemicIndicators == null || Data.EpidemicIndicators.Count == 0)) || (IndicatorType == typeof(VaccinationIndicator) && (Data.VaccinationIndicators == null || Data.VaccinationIndicators.Count == 0));
         }
 
         private static float CalculateEvolution(float? firstValue, float? secondValue)

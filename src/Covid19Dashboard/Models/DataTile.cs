@@ -9,6 +9,8 @@ namespace Covid19Dashboard.Models
 
         public bool IsAverage { get; set; }
 
+        public bool IsNationalIndicator { get; set; }
+
         public ChartType ChartType { get; set; }
 
         public double Evolution { get; set; }

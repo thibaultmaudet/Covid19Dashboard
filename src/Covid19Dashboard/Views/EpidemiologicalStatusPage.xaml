@@ -9,7 +9,12 @@
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-        <ScrollViewer HorizontalScrollMode="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <controls:FilterControl Grid.RowSpan="2" FilterChanged="FilterControl_FilterChanged" />
+        <ScrollViewer HorizontalScrollMode="Auto" Grid.Column="1">
             <VariableSizedWrapGrid Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0">
                 <GridView ItemsSource="{x:Bind ViewModel.DataTiles, Mode=OneWay}">
                     <GridView.ItemContainerStyle>

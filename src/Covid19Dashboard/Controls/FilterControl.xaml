@@ -1,0 +1,18 @@
+﻿<UserControl
+    x:Class="Covid19Dashboard.Controls.FilterControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Covid19Dashboard.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="250">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="10,10,0,0" Orientation="Vertical" Spacing="10">
+            <TextBlock x:Uid="Filter_RefineIndicators" Style="{StaticResource BodyTextStyle}" FontWeight="Bold" TextAlignment="Center" />
+            <ComboBox x:Uid="Filter_Departments" IsEditable="True" Width="230" Header="Filtrer par département : " ItemsSource="{x:Bind Data.Departments, Mode=OneWay}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{x:Bind Data.SelectedDepartment, Mode=TwoWay}" SelectionChanged="FiltersComboBox_SelectionChanged" />
+            <Button x:Uid="Filter_Reset" Content="Réinitialiser" VerticalAlignment="Bottom" Width="230" Click="ResetFiltersButton_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>
