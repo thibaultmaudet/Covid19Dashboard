@@ -1,6 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+
 using Covid19Dashboard.Core;
-using Covid19Dashboard.Core.Models;
+
+using LiveChartsCore;
+using LiveChartsCore.Kernel.Sketches;
+using LiveChartsCore.SkiaSharpView;
+
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace Covid19Dashboard.ViewModels
@@ -9,7 +15,7 @@ namespace Covid19Dashboard.ViewModels
     {
         private ChartType chartType;
 
-        private ObservableCollection<ChartIndicator> source;
+        private ISeries[] series;
 
         public ChartType ChartType
         {
@@ -17,15 +23,17 @@ namespace Covid19Dashboard.ViewModels
             set { SetProperty(ref chartType, value); }
         }
 
-        public ObservableCollection<ChartIndicator> Source
+        public ISeries[] Series
         {
-            get { return source; }
-            set { SetProperty(ref source, value); }
+            get { return series; }
+            set { SetProperty(ref series, value); }
         }
+
+        public IEnumerable<ICartesianAxis> XAxes { get; set; } 
 
         public ChartViewModel()
         {
-
+            XAxes = new Axis[] { new Axis { Labeler = value => new DateTime((long)value).ToShortDateString(), UnitWidth = TimeSpan.FromDays(1).Ticks, MinStep = TimeSpan.FromDays(7).Ticks } }; 
         }
     }
 }

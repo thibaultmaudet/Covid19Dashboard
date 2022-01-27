@@ -1,7 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Services;
+
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
 
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -32,6 +35,13 @@ namespace Covid19Dashboard
             {
                 await ActivationService.ActivateAsync(args);
             }
+
+            LiveCharts.Configure(config => config.AddSkiaSharp().AddDefaultMappers().AddLightTheme().HasMap<ChartIndicator>((chartIndicator, point) =>
+            {
+                double.TryParse(chartIndicator.Value.ToString(), out double result);
+                point.PrimaryValue = result;
+                point.SecondaryValue = chartIndicator.Date.Ticks;
+            }));
         }
 
         protected override async void OnActivated(IActivatedEventArgs args)

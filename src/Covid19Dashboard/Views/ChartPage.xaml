@@ -5,10 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
-    xmlns:controls="using:Covid19Dashboard.Controls"
+    xmlns:chart="using:LiveChartsCore.SkiaSharpView.UWP"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-        <controls:ChartPageControl ChartIndicators="{x:Bind ViewModel.Source, Mode=OneWay}" ChartType="{x:Bind ViewModel.ChartType, Mode=OneWay}" />
+        <chart:CartesianChart Series="{x:Bind ViewModel.Series, Mode=OneWay}" XAxes="{x:Bind ViewModel.XAxes}"/>
     </Grid>
 </Page>
