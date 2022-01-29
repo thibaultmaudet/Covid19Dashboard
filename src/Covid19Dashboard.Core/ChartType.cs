@@ -3,6 +3,7 @@
     public enum ChartType
     {
         Area,
-        Bar
+        Bar,
+        BarAndLine
     }
 }

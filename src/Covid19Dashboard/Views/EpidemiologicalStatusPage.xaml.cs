@@ -20,12 +20,12 @@ namespace Covid19Dashboard.Views
         private void TileControl_SeeMoreDetailsClick(object sender, EventArgs e)
         {
             if ((sender as HyperlinkButton).Tag is DataTile dataTile)
-                Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = dataTile.ChartType, ChartIndicators = EpidemicDataHelper.GetValuesForChart(dataTile.Property, dataTile.IsAverage, false, dataTile.Digits) });
+                Frame.Navigate(typeof(ChartPage), new ChartParameter() { ChartType = dataTile.ChartType, ChartIndicators = dataTile.ChartIndicators });
         }
 
-        private void FilterControl_FilterChanged(object sender, EventArgs e)
+        private async void FilterControl_FilterChanged(object sender, EventArgs e)
         {
-            ViewModel.UpdateDataTiles();
+            await ViewModel.UpdateDataTilesAsync();
         }
     }
 }

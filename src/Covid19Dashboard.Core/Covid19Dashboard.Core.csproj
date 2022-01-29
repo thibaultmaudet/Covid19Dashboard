@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Covid19Dashboard.Core</RootNamespace>
+	<LangVersion>latest</LangVersion>
   </PropertyGroup>
 
    <ItemGroup>

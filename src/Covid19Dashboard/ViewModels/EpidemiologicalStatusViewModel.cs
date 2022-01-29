@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+
 using Covid19Dashboard.Core;
-using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Core.Services;
 using Covid19Dashboard.Helpers;
 using Covid19Dashboard.Models;
+
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+
 using Windows.Storage;
 using Windows.UI.Core;
 
@@ -15,9 +19,9 @@ namespace Covid19Dashboard.ViewModels
     {
         private static Data Data => Data.Instance;
 
-        private List<DataTile> dataTiles;
+        private ObservableCollection<DataTile> dataTiles;
 
-        public List<DataTile> DataTiles
+        public ObservableCollection<DataTile> DataTiles
         {
             get { return dataTiles; }
             set { SetProperty(ref dataTiles, value); }
@@ -25,33 +29,36 @@ namespace Covid19Dashboard.ViewModels
 
         public EpidemiologicalStatusViewModel()
         {
-            if (Data.EpidemicIndicators == null)
+            _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                if (Data.EpidemicIndicators == null)
                 {
                     Data.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.National);
 
-                    UpdateDataTiles();
-                });
-            }
-            else
-                UpdateDataTiles();
-
+                    await UpdateDataTilesAsync();
+                }
+                else
+                    await UpdateDataTilesAsync();
+            });
         }
 
-        public void UpdateDataTiles()
+        public async Task UpdateDataTilesAsync()
         {
-            EpidemicDataHelper.IndicatorType = typeof(EpidemicIndicator);
-
-            DataTiles = new List<DataTile>
+            DataTiles = new()
             {
-                TileHelper.SetDataTile("DailyConfirmedNewCases", ChartType.Bar, false, true, true, 0),
-                TileHelper.SetDataTile("PositiveCases", ChartType.Bar, false, false, true, 0),
-                TileHelper.SetDataTile("PositiveCases", ChartType.Area, true, false, true, 0),
-                TileHelper.SetDataTile("IncidenceRate", ChartType.Area, false, false, true, 2),
-                TileHelper.SetDataTile("PositivityRate", ChartType.Area, false, false, true, 2),
-                TileHelper.SetDataTile("ReproductionRate", ChartType.Area, false, false, true, 2)
+                TileHelper.SetDataTile("DailyConfirmedNewCases", ChartType.BarAndLine, false, true, true, true, 0, typeof(EpidemicIndicator)),
+                TileHelper.SetDataTile("PositiveCases", ChartType.BarAndLine, false, false, true, true, 0, typeof(EpidemicIndicator)),
+                TileHelper.SetDataTile("IncidenceRate", ChartType.Area, false, false, false, true, 2, typeof(EpidemicIndicator)),
+                TileHelper.SetDataTile("PositivityRate", ChartType.Area, false, false, false, true, 2, typeof(EpidemicIndicator)),
+                TileHelper.SetDataTile("ReproductionRate", ChartType.Area, false, false, false, true, 2, typeof(EpidemicIndicator))
             };
+
+            List<Task> tasks = new();
+
+            foreach (DataTile dataTile in DataTiles)
+                tasks.Add(Task.Factory.StartNew(() => dataTile.ChartIndicators = TileHelper.GetChartIndicators(dataTile)));
+
+            await Task.WhenAll(tasks);
         }
     }
 }

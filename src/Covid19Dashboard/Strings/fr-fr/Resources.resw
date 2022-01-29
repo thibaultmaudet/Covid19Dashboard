@@ -390,4 +390,97 @@
   <data name="Filter_Reset.Content" xml:space="preserve">
     <value>Réinitialiser</value>
   </data>
+  <data name="DailyConfirmedNewCases" xml:space="preserve">
+    <value>Cas quotidiens</value>
+  </data>
+  <data name="SlidingAverage" xml:space="preserve">
+    <value>Moyenne glissante sur sept jours</value>
+  </data>
+  <data name="PositiveCases" xml:space="preserve">
+    <value>Personnes déclarées positives</value>
+  </data>
+  <data name="PositiveCasesAverage" xml:space="preserve">
+    <value>Moyenne glissante sur 7 jours</value>
+  </data>
+  <data name="CompleteVaccinationsCoverage" xml:space="preserve">
+    <value>Vaccination complète</value>
+  </data>
+  <data name="DeceasedPersons" xml:space="preserve">
+    <value>Nombre de personnes décédés</value>
+  </data>
+  <data name="FirstBoosterDosesCoverage" xml:space="preserve">
+    <value>Rappel administré</value>
+  </data>
+  <data name="FirstDosesCoverage" xml:space="preserve">
+    <value>Au moins une dose</value>
+  </data>
+  <data name="HospitalizedPatients" xml:space="preserve">
+    <value>Nombre de patients hospitalisés</value>
+  </data>
+  <data name="IncidenceRate" xml:space="preserve">
+    <value>Nombre de cas pour 100 000 habitants</value>
+  </data>
+  <data name="IntensiveCarePatients" xml:space="preserve">
+    <value>Nombre de personnes en soins critiques</value>
+  </data>
+  <data name="NewCompleteVaccinations" xml:space="preserve">
+    <value>Nouvelles personnes complètement vaccinées</value>
+  </data>
+  <data name="NewCompleteVaccinationsAverage" xml:space="preserve">
+    <value>Nombre moyen de nouvelles personnes vacciées</value>
+  </data>
+  <data name="NewDeceasedPersons" xml:space="preserve">
+    <value>Nouveaux décès quotidien</value>
+  </data>
+  <data name="NewDeceasedPersonsAverage" xml:space="preserve">
+    <value>Nombre moyen de nouveaux décès</value>
+  </data>
+  <data name="NewFirstBoosterDoses" xml:space="preserve">
+    <value>Nouvelles doses de rappel administrées</value>
+  </data>
+  <data name="NewFirstBoosterDosesAverage" xml:space="preserve">
+    <value>Nouveaux rappels administrés en moyenne</value>
+  </data>
+  <data name="NewFirstDoses" xml:space="preserve">
+    <value>Nouvelles premières doses injectées</value>
+  </data>
+  <data name="NewFirstDosesAverage" xml:space="preserve">
+    <value>Nombre moyen de premières doses injectées</value>
+  </data>
+  <data name="NewHospitalization" xml:space="preserve">
+    <value>Nouvelles hospitalisations quotidienne</value>
+  </data>
+  <data name="NewHospitalizationAverage" xml:space="preserve">
+    <value>Nombre moyen de nouvelles hospitalisations</value>
+  </data>
+  <data name="NewIntensiveCarePatients" xml:space="preserve">
+    <value>Nouvelles entrées en réanimation quotidienne</value>
+  </data>
+  <data name="NewIntensiveCarePatientsAverage" xml:space="preserve">
+    <value>Moyenne des nouvelles entrées en réanimation</value>
+  </data>
+  <data name="NewReturnHome" xml:space="preserve">
+    <value>Nouveaux retour à domicile quotidien</value>
+  </data>
+  <data name="NewReturnHomeAverage" xml:space="preserve">
+    <value>Nombre moyen de retour à domicile</value>
+  </data>
+  <data name="OccupationRate" xml:space="preserve">
+    <value>Taux d'occupation</value>
+  </data>
+  <data name="PositivityRate" xml:space="preserve">
+    <value>Taux de tests positifs</value>
+  </data>
+  <data name="ReproductionRate" xml:space="preserve">
+    <value>Taux de reproduction effectif</value>
+  </data>
+  <data name="TotalCompleteVaccinations" xml:space="preserve">
+    <value>Vaccination complète</value>
+  </data>
+  <data name="TotalFirstBoosterDoses" xml:space="preserve">
+    <value>Rappel administré</value>
+  </data>
+  <data name="TotalFirstDoses" xml:space="preserve">
+    <value>Au moins une dose</value>
+  </data>
 </root>

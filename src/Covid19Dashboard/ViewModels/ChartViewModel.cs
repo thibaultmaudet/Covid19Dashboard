@@ -29,11 +29,11 @@ namespace Covid19Dashboard.ViewModels
             set { SetProperty(ref series, value); }
         }
 
-        public IEnumerable<ICartesianAxis> XAxes { get; set; } 
+        public IEnumerable<ICartesianAxis> XAxes { get; set; }
 
         public ChartViewModel()
         {
-            XAxes = new Axis[] { new Axis { Labeler = value => new DateTime((long)value).ToShortDateString(), UnitWidth = TimeSpan.FromDays(1).Ticks, MinStep = TimeSpan.FromDays(7).Ticks } }; 
+            XAxes = new Axis[] { new Axis { Labeler = value => new DateTime((long)value).ToShortDateString(), UnitWidth = TimeSpan.FromDays(1).Ticks, MinStep = TimeSpan.FromDays(7).Ticks } };
         }
     }
 }
