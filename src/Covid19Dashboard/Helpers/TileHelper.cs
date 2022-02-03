@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 using Covid19Dashboard.Core;
 using Covid19Dashboard.Core.Helpers;
@@ -11,19 +9,16 @@ namespace Covid19Dashboard.Helpers
 {
     public class TileHelper
     {
-        public static DataTile SetDataTile(string property, ChartType chartType, bool isAverage, bool isNationalIndicator, bool withAverage, bool withEvolution, int digits, Type indicatorType)
+        public static DataTile SetDataTile(string property, bool isAverage, bool isNationalIndicator, bool withEvolution, int digits, Type indicatorType)
         {
             DataTile dataTile = new()
             {
-                ChartType = chartType,
+                ChartIndicators = new(),
                 Data = EpidemicDataHelper.GetValue(property, isAverage, isNationalIndicator, digits, indicatorType),
-                Digits = digits,
                 IndicatorType = indicatorType,
                 IsAverage = isAverage,
-                IsNationalIndicator = isNationalIndicator,
                 LastUpdate = EpidemicDataHelper.GetLastUpdate(property, isNationalIndicator, indicatorType),
-                Property = property,
-                WithAverage = withAverage
+                Property = property
             };
 
             if (withEvolution)
@@ -32,13 +27,20 @@ namespace Covid19Dashboard.Helpers
             return dataTile;
         }
 
-        public static List<ObservableCollection<ChartIndicator>> GetChartIndicators(DataTile dataTile)
+        public static ChartIndicators GetChartIndicators(string property, ChartType chartType, bool isAverage, int digits, Type indicatorType)
         {
-            List<ObservableCollection<ChartIndicator>> chartIndicators = new();
-            chartIndicators.Add(EpidemicDataHelper.GetValuesForChart(!dataTile.IsAverage ? dataTile.Property.GetLocalized() : (dataTile.Property + "Average").GetLocalized(), dataTile.Property, dataTile.IsAverage, dataTile.IsNationalIndicator, dataTile.Digits, dataTile.IndicatorType));
+            return GetChartIndicators(property, chartType, isAverage, false, false, digits, indicatorType);
+        }
 
-            if (dataTile.WithAverage)
-                chartIndicators.Add(EpidemicDataHelper.GetValuesForChart("SlidingAverage".GetLocalized(), dataTile.Property, true, dataTile.IsNationalIndicator, dataTile.Digits, dataTile.IndicatorType));
+        public static ChartIndicators GetChartIndicators(string property, ChartType chartType, bool isAverage, bool withAverage, int digits, Type indicatorType)
+        {
+            return GetChartIndicators(property, chartType, isAverage, withAverage, false, digits, indicatorType);
+        }
+
+        public static ChartIndicators GetChartIndicators(string property, ChartType chartType, bool isAverage, bool withAverage, bool isNationalIndicator, int digits, Type indicatorType)
+        {
+            ChartIndicators chartIndicators = new() { Name = !withAverage ? (!isAverage ? property.GetLocalized() : (property + "Average").GetLocalized()) : "SlidingAverage".GetLocalized(), ChartType = chartType };
+            chartIndicators.Add(EpidemicDataHelper.GetValuesForChart(property, withAverage ? true : isAverage, isNationalIndicator, digits, indicatorType));
 
             return chartIndicators;
         }

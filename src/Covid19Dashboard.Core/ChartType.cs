@@ -4,6 +4,6 @@
     {
         Area,
         Bar,
-        BarAndLine
+        Line
     }
 }

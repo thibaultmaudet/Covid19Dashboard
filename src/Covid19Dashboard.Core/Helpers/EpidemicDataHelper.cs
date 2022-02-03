@@ -109,7 +109,7 @@ namespace Covid19Dashboard.Core.Helpers
             return (T)Convert.ChangeType(default, typeof(T));
         }
 
-        public static ObservableCollection<ChartIndicator> GetValuesForChart(string name, string property, bool isAverage, bool isNationalIndicator, int digits, Type indicatorType)
+        public static ObservableCollection<ChartIndicator> GetValuesForChart(string property, bool isAverage, bool isNationalIndicator, int digits, Type indicatorType)
         {
             if (!IsInitializedList(indicatorType))
                 return default;
@@ -128,7 +128,7 @@ namespace Covid19Dashboard.Core.Helpers
                 indicators = Data.VaccinationIndicators.Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(departmentExpression, parameterExpression).Compile()).Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(departmentExpression, parameterExpression).Compile()).Where(Expression.Lambda<Func<VaccinationIndicator, bool>>(Expression.NotEqual(Expression.Property(parameterExpression, property), Expression.Constant(null, typeof(int?))), parameterExpression).Compile());
 
             foreach (Indicator epidemicIndicator in indicators.Take(70).Reverse())
-                chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Name = name, Value = GetValue<float>(property, isAverage, isNationalIndicator, digits, epidemicIndicator.Date, indicatorType) });
+                chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = GetValue<float>(property, isAverage, isNationalIndicator, digits, epidemicIndicator.Date, indicatorType) });
 
             return chartIndicators;
         }

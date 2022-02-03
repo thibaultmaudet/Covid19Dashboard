@@ -483,4 +483,10 @@
   <data name="TotalFirstDoses" xml:space="preserve">
     <value>Au moins une dose</value>
   </data>
+  <data name="DataRecovery.Text" xml:space="preserve">
+    <value>Récupération et traitement des données en cours...</value>
+  </data>
+  <data name="NoTiles.Text" xml:space="preserve">
+    <value>Aucune donnée de disponible pour cet indicateur.</value>
+  </data>
 </root>

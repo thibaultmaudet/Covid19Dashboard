@@ -7,7 +7,8 @@
     xmlns:controls="using:Covid19Dashboard.Controls"
     xmlns:models="using:Covid19Dashboard.Models"
     Style="{StaticResource PageStyle}"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
     <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />

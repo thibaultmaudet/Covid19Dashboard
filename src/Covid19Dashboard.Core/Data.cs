@@ -1,17 +1,20 @@
-﻿using Covid19Dashboard.Core.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+
+using Covid19Dashboard.Core.Models;
 
 namespace Covid19Dashboard.Core
 {
     public class Data : INotifyPropertyChanged
     {
         private static volatile Data instance;
-        private static readonly object syncRoot = new object();
+        private static readonly object syncRoot = new();
 
         private ObservableCollection<KeyValuePair<string, string>> departments;
+
+        private bool isLoading;
 
         private string selectedDepartment;
 
@@ -25,6 +28,12 @@ namespace Covid19Dashboard.Core
 
                 return instance;
             }
+        }
+
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
         }
 
         public List<EpidemicIndicator> EpidemicIndicators { get; set; }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
-using Covid19Dashboard.Core;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Helpers;
 
@@ -14,17 +12,9 @@ namespace Covid19Dashboard.Models
 
         public bool IsAverage { get; set; }
 
-        public bool IsNationalIndicator { get; set; }
-
-        public bool WithAverage { get; set; }
-
-        public ChartType ChartType { get; set; }
-
         public double Evolution { get; set; }
 
-        public int Digits { get; set; }
-
-        public List<ObservableCollection<ChartIndicator>> ChartIndicators { get; set; }
+        public List<ChartIndicators> ChartIndicators { get; set; }
 
         public string Data { get; set; }
 

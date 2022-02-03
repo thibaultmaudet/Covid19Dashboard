@@ -149,6 +149,7 @@
       <DependentUpon>TileControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\NumberToVisibilityConverter.cs" />
     <Compile Include="Helpers\EnumToVisibilityConverter.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\NumberToColorConverter.cs" />

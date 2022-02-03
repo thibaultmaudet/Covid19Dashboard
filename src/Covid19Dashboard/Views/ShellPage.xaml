@@ -4,12 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:behaviors="using:Covid19Dashboard.Behaviors"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:helpers="using:Covid19Dashboard.Helpers"
     xmlns:views="using:Covid19Dashboard.Views"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:media="using:Windows.UI.Xaml.Media"
     mc:Ignorable="d"
     winui:BackdropMaterial.ApplyToRootOrPageBackground="True">
 
@@ -45,6 +46,15 @@
         </i:Interaction.Behaviors>
         <Grid>
             <Frame x:Name="shellFrame" />
+            <toolkit:Loading IsLoading="{x:Bind Data.IsLoading, Mode=OneWay}">
+                <toolkit:Loading.Background>
+                    <media:AcrylicBrush TintColor="{StaticResource SystemColorBackgroundColor}" TintOpacity="0.4"/>
+                </toolkit:Loading.Background>
+                <StackPanel Orientation="Horizontal">
+                    <ProgressRing IsActive="True" />
+                    <TextBlock x:Uid="DataRecovery" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </toolkit:Loading>
         </Grid>
     </winui:NavigationView>
 </Page>

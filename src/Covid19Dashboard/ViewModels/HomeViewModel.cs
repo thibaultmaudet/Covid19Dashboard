@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Covid19Dashboard.Core;
@@ -11,7 +13,6 @@ using Covid19Dashboard.Models;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 using Windows.Storage;
-using Windows.UI.Core;
 
 namespace Covid19Dashboard.ViewModels
 {
@@ -19,23 +20,23 @@ namespace Covid19Dashboard.ViewModels
     {
         private static Data Data => Data.Instance;
 
-        private List<DataTile> epidemiologyDataTiles;
-        private List<DataTile> hospitalDataTiles;
-        private List<DataTile> vaccinationDataTiles;
+        private ObservableCollection<DataTile> epidemiologyDataTiles;
+        private ObservableCollection<DataTile> hospitalDataTiles;
+        private ObservableCollection<DataTile> vaccinationDataTiles;
 
-        public List<DataTile> EpidemiologyDataTiles
+        public ObservableCollection<DataTile> EpidemiologyDataTiles
         {
             get { return epidemiologyDataTiles; }
             set { SetProperty(ref epidemiologyDataTiles, value); }
         }
 
-        public List<DataTile> HospitalDataTiles
+        public ObservableCollection<DataTile> HospitalDataTiles
         {
             get { return hospitalDataTiles; }
             set { SetProperty(ref hospitalDataTiles, value); }
         }
 
-        public List<DataTile> VaccinationDataTiles
+        public ObservableCollection<DataTile> VaccinationDataTiles
         {
             get { return vaccinationDataTiles; }
             set { SetProperty(ref vaccinationDataTiles, value); }
@@ -43,66 +44,138 @@ namespace Covid19Dashboard.ViewModels
 
         public HomeViewModel()
         {
-            _ = Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-            {
-                if (Data.EpidemicIndicators == null)
-                {
-                    Data.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.National);
-                    Data.EpidemicIndicators.AddRange(await EpidemicDataService.GetEpedimicIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.Department));
 
-                    Data.Departments = EpidemicDataHelper.GetDepartments();
-
-                    Data.VaccinationIndicators = await EpidemicDataService.GetVaccinationIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.National);
-                    Data.VaccinationIndicators.AddRange(await EpidemicDataService.GetVaccinationIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.Department));
-
-                    await UpdateDataTilesAsync();
-                }
-                else
-                    await UpdateDataTilesAsync();
-            });
         }
 
         public async Task UpdateDataTilesAsync()
         {
-            EpidemiologyDataTiles = new List<DataTile>
-            {
-                TileHelper.SetDataTile("DailyConfirmedNewCases", ChartType.BarAndLine, false, true, true, true, 0, typeof(EpidemicIndicator)),
-                TileHelper.SetDataTile("IncidenceRate", ChartType.Area, false, false, false, true, 2, typeof(EpidemicIndicator)),
-                TileHelper.SetDataTile("PositivityRate", ChartType.Area, false, false, false, true, 2, typeof(EpidemicIndicator)),
-                TileHelper.SetDataTile("ReproductionRate", ChartType.Area, false, false, false, true, 2, typeof(EpidemicIndicator))
-            };
+            Data.IsLoading = true;
 
-            HospitalDataTiles = new List<DataTile>
+            if (Data.EpidemicIndicators == null)
             {
-                TileHelper.SetDataTile("HospitalizedPatients", ChartType.Area, false, true, false, false, 0, typeof(EpidemicIndicator)),
-                TileHelper.SetDataTile("IntensiveCarePatients", ChartType.Area, false, false, false, false, 0, typeof(EpidemicIndicator)),
-                TileHelper.SetDataTile("DeceasedPersons", ChartType.Area, false, true, false, false, 0, typeof(EpidemicIndicator)),
-                TileHelper.SetDataTile("NewHospitalization", ChartType.Area, true, false, true, true, 0, typeof(EpidemicIndicator)),
-                TileHelper.SetDataTile("NewIntensiveCarePatients", ChartType.Area, true, false, true, true, 0, typeof(EpidemicIndicator)),
-                TileHelper.SetDataTile("NewDeceasedPersons", ChartType.Area, true, false, true, true, 0, typeof(EpidemicIndicator))
-            };
+                Data.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.National);
+                Data.EpidemicIndicators.AddRange(await EpidemicDataService.GetEpedimicIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.Department));
 
-            VaccinationDataTiles = new List<DataTile>
+                Data.Departments = EpidemicDataHelper.GetDepartments();
+            }
+
+            if (Data.VaccinationIndicators == null)
             {
-                TileHelper.SetDataTile("FirstDosesCoverage", ChartType.Area, false, false, false, true, 2, typeof(VaccinationIndicator)),
-                TileHelper.SetDataTile("CompleteVaccinationsCoverage", ChartType.Area, false, false, false, true, 2, typeof(VaccinationIndicator)),
-                TileHelper.SetDataTile("FirstBoosterDosesCoverage", ChartType.Area, false, false, false, true, 2, typeof(VaccinationIndicator))
-            };
+                Data.VaccinationIndicators = await EpidemicDataService.GetVaccinationIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.National);
+                Data.VaccinationIndicators.AddRange(await EpidemicDataService.GetVaccinationIndicatorsAsync(ApplicationData.Current.TemporaryFolder.Path, Area.Department));
+            }
+
+            EpidemiologyDataTiles = new();
+            HospitalDataTiles = new();
+            VaccinationDataTiles = new();
 
             List<Task> tasks = new();
 
-            foreach (DataTile dataTile in EpidemiologyDataTiles)
-                tasks.Add(Task.Factory.StartNew(() => dataTile.ChartIndicators = TileHelper.GetChartIndicators(dataTile)));
+            TaskScheduler uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
+            // Epidemilogy indicators
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("DailyConfirmedNewCases", false, true, true, 0, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("DailyConfirmedNewCases", ChartType.Bar, false, false, true, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("DailyConfirmedNewCases", ChartType.Line, true, true, true, 0, typeof(EpidemicIndicator)));
 
-            foreach (DataTile dataTile in HospitalDataTiles)
-                tasks.Add(Task.Factory.StartNew(() => dataTile.ChartIndicators = TileHelper.GetChartIndicators(dataTile)));
+                EpidemiologyDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("IncidenceRate", false, false, true, 2, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("IncidenceRate", ChartType.Area, false, 2, typeof(EpidemicIndicator)));
 
+                EpidemiologyDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("PositivityRate", false, false, true, 2, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("PositivityRate", ChartType.Area, false, 2, typeof(EpidemicIndicator)));
 
-            foreach (DataTile dataTile in VaccinationDataTiles)
-                tasks.Add(Task.Factory.StartNew(() => dataTile.ChartIndicators = TileHelper.GetChartIndicators(dataTile)));
+                EpidemiologyDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("ReproductionRate", false, false, true, 2, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("ReproductionRate", ChartType.Area, false, 2, typeof(EpidemicIndicator)));
+
+                EpidemiologyDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+
+            // Hospitalization indicators
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("HospitalizedPatients", false, true, false, 0, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("HospitalizedPatients", ChartType.Area, false, false, true, 0, typeof(EpidemicIndicator)));
+
+                HospitalDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("IntensiveCarePatients", false, false, false, 0, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("IntensiveCarePatients", ChartType.Area, false, 0, typeof(EpidemicIndicator)));
+
+                HospitalDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("DeceasedPersons", false, true, false, 0, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("DeceasedPersons", ChartType.Area, false, 0, typeof(EpidemicIndicator)));
+
+                HospitalDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("NewHospitalization", true, false, true, 0, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("NewHospitalization", ChartType.Bar, false, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("NewHospitalization", ChartType.Line, true, true, 0, typeof(EpidemicIndicator)));
+
+                HospitalDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("NewIntensiveCarePatients", true, false, true, 0, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("NewIntensiveCarePatients", ChartType.Bar, false, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("NewIntensiveCarePatients", ChartType.Line, true, true, 0, typeof(EpidemicIndicator)));
+
+                HospitalDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("NewDeceasedPersons", true, false, true, 0, typeof(EpidemicIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("NewDeceasedPersons", ChartType.Area, true, 0, typeof(EpidemicIndicator)));
+
+                HospitalDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+
+            // Vaccincation indicators
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("FirstDosesCoverage", false, false, true, 2, typeof(VaccinationIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstDosesCoverage", ChartType.Area, false, 2, typeof(VaccinationIndicator)));
+
+                VaccinationDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("CompleteVaccinationsCoverage", false, false, true, 2, typeof(VaccinationIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("CompleteVaccinationsCoverage", ChartType.Area, false, 2, typeof(VaccinationIndicator)));
+
+                VaccinationDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
+            tasks.Add(Task.Factory.StartNew(() =>
+            {
+                DataTile dataTile = TileHelper.SetDataTile("FirstBoosterDosesCoverage", false, false, true, 2, typeof(VaccinationIndicator));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstBoosterDosesCoverage", ChartType.Area, false, 2, typeof(VaccinationIndicator)));
+
+                VaccinationDataTiles.Add(dataTile);
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
 
             await Task.WhenAll(tasks);
+
+            Data.IsLoading = false;
         }
     }
 }
