@@ -489,4 +489,22 @@
   <data name="NoTiles.Text" xml:space="preserve">
     <value>Aucune donnée de disponible pour cet indicateur.</value>
   </data>
+  <data name="EvolutionTracking.ListHeader" xml:space="preserve">
+    <value>Suivi de l'évolution de l'épidémie</value>
+    <comment>Title for Evolution Tracking Page</comment>
+  </data>
+  <data name="EvolutionTracking_NoSelection.Text" xml:space="preserve">
+    <value>Selectionnez un indicateur dans la liste.</value>
+    <comment>No selection text for Evolution Tracking</comment>
+  </data>
+  <data name="Shell_EvolutionTracking.Content" xml:space="preserve">
+    <value>Suivi de l'évolution de l'épidémie</value>
+    <comment>Navigation view item name for Evolution Tracking</comment>
+  </data>
+  <data name="EvolutionTracking_EvolutionPrefix" xml:space="preserve">
+    <value>Evolution des </value>
+  </data>
+  <data name="EvolutionTracking_EvolutionSuffix" xml:space="preserve">
+    <value> (en %)</value>
+  </data>
 </root>

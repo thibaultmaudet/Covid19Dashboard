@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Covid19Dashboard.Core;
+using Covid19Dashboard.Core.Models;
 
 using LiveChartsCore;
 using LiveChartsCore.Kernel.Sketches;
@@ -17,6 +18,8 @@ namespace Covid19Dashboard.ViewModels
 
         private ISeries[] series;
 
+        private List<ChartIndicators> chartIndicators;
+
         public ChartType ChartType
         {
             get { return chartType; }
@@ -27,6 +30,12 @@ namespace Covid19Dashboard.ViewModels
         {
             get { return series; }
             set { SetProperty(ref series, value); }
+        }
+
+        public List<ChartIndicators> ChartIndicators
+        {
+            get { return chartIndicators; }
+            set { SetProperty(ref chartIndicators, value); }
         }
 
         public IEnumerable<ICartesianAxis> XAxes { get; set; }

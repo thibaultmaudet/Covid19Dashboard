@@ -142,6 +142,9 @@
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
     <Compile Include="Behaviors\NavigationViewHeaderMode.cs" />
+    <Compile Include="Controls\ChartControl.xaml.cs">
+      <DependentUpon>ChartControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FilterControl.xaml.cs">
       <DependentUpon>FilterControl.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,7 @@
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\EpidemiologicalStatusViewModel.cs" />
+    <Compile Include="ViewModels\EvolutionTrackingViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\HospitalStatusViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -169,6 +173,12 @@
     <Compile Include="ViewModels\VaccinationTrackingViewModel.cs" />
     <Compile Include="Views\EpidemiologicalStatusPage.xaml.cs">
       <DependentUpon>EpidemiologicalStatusPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EvolutionTrackingDetailControl.xaml.cs">
+      <DependentUpon>EvolutionTrackingDetailControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EvolutionTrackingPage.xaml.cs">
+      <DependentUpon>EvolutionTrackingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -196,6 +206,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ChartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\FilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +239,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EpidemiologicalStatusPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EvolutionTrackingDetailControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EvolutionTrackingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

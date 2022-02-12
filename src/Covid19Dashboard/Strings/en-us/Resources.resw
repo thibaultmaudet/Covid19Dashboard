@@ -177,4 +177,24 @@
     <value>Vaccination tracking</value>
     <comment>Navigation view item name for VaccinationTracking</comment>
   </data>
+  <data name="EvolutionTracking_NoSelection.Text" xml:space="preserve">
+    <value>Select an item from the list.</value>
+    <comment>No selection text for EvolutionTracking</comment>
+  </data>
+  <data name="EvolutionTracking.ListHeader" xml:space="preserve">
+    <value>EvolutionTracking</value>
+    <comment>Title for EvolutionTrackingPage</comment>
+  </data>
+  <data name="Shell_EvolutionTracking.Content" xml:space="preserve">
+    <value>Epidemic evolution tracking</value>
+    <comment>Navigation view item name for EvolutionTracking</comment>
+  </data>
+  <data name="ListDetails_NoSelection.Text" xml:space="preserve">
+    <value>Select an item from the list.</value>
+    <comment>No selection text for ListDetails</comment>
+  </data>
+  <data name="ListDetails.ListHeader" xml:space="preserve">
+    <value>Epidemic evolution tracking</value>
+    <comment>Title for ListDetailsPage</comment>
+  </data>
 </root>

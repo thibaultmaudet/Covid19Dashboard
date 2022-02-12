@@ -8,7 +8,7 @@ namespace Covid19Dashboard.Core.Models
 
         public string Name { get; set; }
 
-        public void Add(ObservableCollection<ChartIndicator> chartIndicators)
+        public void AddRange(ObservableCollection<ChartIndicator> chartIndicators)
         {
             foreach (ChartIndicator chartIndicator in chartIndicators)
                 Add(chartIndicator);
