@@ -62,7 +62,8 @@ namespace Covid19Dashboard.ViewModels
             tasks.Add(Task.Factory.StartNew(() =>
             {
                 DataTile dataTile = TileHelper.SetDataTile("HospitalizedPatients", false, false, true, 0, typeof(EpidemicIndicator));
-                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("HospitalizedPatients", ChartType.Area, false, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("HospitalizedPatients", ChartType.Line, false, false, true, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("IntensiveCarePatients", ChartType.Line, false, false, true, 0, typeof(EpidemicIndicator)));
 
                 DataTiles.Add(dataTile);
             }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
@@ -84,7 +85,8 @@ namespace Covid19Dashboard.ViewModels
             tasks.Add(Task.Factory.StartNew(() =>
             {
                 DataTile dataTile = TileHelper.SetDataTile("IntensiveCarePatients", false, false, true, 0, typeof(EpidemicIndicator));
-                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("IntensiveCarePatients", ChartType.Area, false, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("HospitalizedPatients", ChartType.Line, false, false, true, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("IntensiveCarePatients", ChartType.Line, false, false, true, 0, typeof(EpidemicIndicator)));
 
                 DataTiles.Add(dataTile);
             }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));

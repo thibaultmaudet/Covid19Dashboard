@@ -108,14 +108,16 @@ namespace Covid19Dashboard.ViewModels
             tasks.Add(Task.Factory.StartNew(() =>
             {
                 DataTile dataTile = TileHelper.SetDataTile("HospitalizedPatients", false, true, false, 0, typeof(EpidemicIndicator));
-                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("HospitalizedPatients", ChartType.Area, false, false, true, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("HospitalizedPatients", ChartType.Line, false, false, true, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("IntensiveCarePatients", ChartType.Line, false, false, true, 0, typeof(EpidemicIndicator)));
 
                 HospitalDataTiles.Add(dataTile);
             }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
             tasks.Add(Task.Factory.StartNew(() =>
             {
                 DataTile dataTile = TileHelper.SetDataTile("IntensiveCarePatients", false, false, false, 0, typeof(EpidemicIndicator));
-                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("IntensiveCarePatients", ChartType.Area, false, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("HospitalizedPatients", ChartType.Line, false, false, true, 0, typeof(EpidemicIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("IntensiveCarePatients", ChartType.Line, false, false, true, 0, typeof(EpidemicIndicator)));
 
                 HospitalDataTiles.Add(dataTile);
             }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
@@ -154,21 +156,27 @@ namespace Covid19Dashboard.ViewModels
             tasks.Add(Task.Factory.StartNew(() =>
             {
                 DataTile dataTile = TileHelper.SetDataTile("FirstDosesCoverage", false, false, true, 2, typeof(VaccinationIndicator));
-                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstDosesCoverage", ChartType.Area, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstDosesCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("CompleteVaccinationsCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstBoosterDosesCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
 
                 VaccinationDataTiles.Add(dataTile);
             }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
             tasks.Add(Task.Factory.StartNew(() =>
             {
                 DataTile dataTile = TileHelper.SetDataTile("CompleteVaccinationsCoverage", false, false, true, 2, typeof(VaccinationIndicator));
-                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("CompleteVaccinationsCoverage", ChartType.Area, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstDosesCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("CompleteVaccinationsCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstBoosterDosesCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
 
                 VaccinationDataTiles.Add(dataTile);
             }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
             tasks.Add(Task.Factory.StartNew(() =>
             {
                 DataTile dataTile = TileHelper.SetDataTile("FirstBoosterDosesCoverage", false, false, true, 2, typeof(VaccinationIndicator));
-                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstBoosterDosesCoverage", ChartType.Area, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstDosesCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("CompleteVaccinationsCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
+                dataTile.ChartIndicators.Add(TileHelper.GetChartIndicators("FirstBoosterDosesCoverage", ChartType.Line, false, 2, typeof(VaccinationIndicator)));
 
                 VaccinationDataTiles.Add(dataTile);
             }, CancellationToken.None, TaskCreationOptions.None, uiScheduler));
