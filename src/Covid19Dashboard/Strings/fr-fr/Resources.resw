@@ -129,40 +129,32 @@
     <value>Accueil</value>
     <comment>Applciation home page</comment>
   </data>
-  <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>Choose Theme</value>
+  <data name="Settings_General_Theme.Header" xml:space="preserve">
+    <value>Thème de l'application</value>
     <comment>Choose theme text for Settings</comment>
   </data>
-  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>Dark</value>
+  <data name="Settings_General_Theme_Dark.Content" xml:space="preserve">
+    <value>Sombre</value>
     <comment>Dark theme text for Settings</comment>
   </data>
-  <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>Windows default</value>
+  <data name="Settings_General_Theme_Default.Content" xml:space="preserve">
+    <value>Valeur par défaut de Windows</value>
     <comment>Windows default theme text for Settings</comment>
   </data>
-  <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>Light</value>
+  <data name="Settings_General_Theme_Light.Content" xml:space="preserve">
+    <value>Clair</value>
     <comment>Light theme text for Settings</comment>
   </data>
-  <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+  <data name="Settings_General_About.Header" xml:space="preserve">
+    <value>A propos de</value>
     <comment>About this application title for Settings</comment>
   </data>
-  <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Settings page placeholder text.  Your app description goes here.</value>
+  <data name="Settings_General.ModuleDescription" xml:space="preserve">
+    <value>Covid-19 Dashboard est une application regroupant différents indicateurs permettant de suivre l'évolution de l'épidémie de Covid-19 en France.</value>
     <comment>About this application description for Settings</comment>
   </data>
-  <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>Privacy Statement</value>
-    <comment>Privacy Statement link content for Settings</comment>
-  </data>
-  <data name="Settings_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://YourPrivacyUrlGoesHere/</value>
-    <comment>Here is your Privacy Statement url for Settings</comment>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>Personalization</value>
+  <data name="Settings_General_Personalization.Header" xml:space="preserve">
+    <value>Apparence</value>
     <comment>Personalization text for Settings</comment>
   </data>
   <data name="IncidenceRateTitle" xml:space="preserve">
@@ -506,5 +498,17 @@
   </data>
   <data name="EvolutionTracking_EvolutionSuffix" xml:space="preserve">
     <value> (en %)</value>
+  </data>
+  <data name="Settings_General_Theme_Windows.Content" xml:space="preserve">
+    <value>Paramètres de couleur de Windows</value>
+  </data>
+  <data name="Settings_General.ModuleTitle" xml:space="preserve">
+    <value>Général</value>
+  </data>
+  <data name="Settings_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Settings_General_Repository.Text" xml:space="preserve">
+    <value>Dépôt GitHub</value>
   </data>
 </root>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 using Covid19Dashboard.Helpers;
 using Covid19Dashboard.Services;
@@ -13,9 +11,9 @@ using Windows.UI.Xaml;
 
 namespace Covid19Dashboard.ViewModels
 {
-    // TODO WTS: Add other settings as necessary. For help see https://github.com/Microsoft/WindowsTemplateStudio/blob/release/docs/UWP/pages/settings.md
     public class SettingsViewModel : ObservableObject
     {
+
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
 
         public ElementTheme ElementTheme
@@ -25,13 +23,26 @@ namespace Covid19Dashboard.ViewModels
             set { SetProperty(ref _elementTheme, value); }
         }
 
-        private string _versionDescription;
-
-        public string VersionDescription
+        public int ThemeIndex
         {
-            get { return _versionDescription; }
+            get
+            {
+                if (ElementTheme == ElementTheme.Dark) return 0;
+                if (ElementTheme == ElementTheme.Light) return 1;
+                if (ElementTheme == ElementTheme.Default) return 2;
 
-            set { SetProperty(ref _versionDescription, value); }
+                return 2;
+            }
+        }
+
+        public string Version
+        {
+            get
+            {
+                PackageVersion version = Package.Current.Id.Version;
+
+                return string.Format("{0} {1}.{2}.{3}.{4}", "Settings_Version".GetLocalized(), version.Major, version.Minor, version.Build, version.Revision);
+            }
         }
 
         private ICommand _switchThemeCommand;
@@ -56,22 +67,6 @@ namespace Covid19Dashboard.ViewModels
 
         public SettingsViewModel()
         {
-        }
-
-        public async Task InitializeAsync()
-        {
-            VersionDescription = GetVersionDescription();
-            await Task.CompletedTask;
-        }
-
-        private string GetVersionDescription()
-        {
-            var appName = "AppDisplayName".GetLocalized();
-            var package = Package.Current;
-            var packageId = package.Id;
-            var version = packageId.Version;
-
-            return $"{appName} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
     }
 }

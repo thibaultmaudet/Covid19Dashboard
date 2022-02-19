@@ -1,13 +1,11 @@
-﻿using System;
-
+﻿
 using Covid19Dashboard.ViewModels;
 
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace Covid19Dashboard.Views
 {
-    // TODO WTS: Change the URL for your privacy policy in the Resource File, currently set to https://YourPrivacyUrlGoesHere
     public sealed partial class SettingsPage : Page
     {
         public SettingsViewModel ViewModel { get; } = new SettingsViewModel();
@@ -17,9 +15,10 @@ namespace Covid19Dashboard.Views
             InitializeComponent();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            await ViewModel.InitializeAsync();
+            if (((sender as ComboBox).SelectedItem as ComboBoxItem).Tag != null)
+                ViewModel.SwitchThemeCommand.Execute((ElementTheme)((sender as ComboBox).SelectedItem as ComboBoxItem).Tag);
         }
     }
 }
