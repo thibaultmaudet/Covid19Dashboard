@@ -8,19 +8,15 @@ namespace Covid19Dashboard.Models
 {
     public class DataTile
     {
-        public bool DisplayEvolution { get { return !(Evolution == default); } }
-
         public bool IsAverage { get; set; }
 
-        public double Evolution { get; set; }
+        public double Evolution { get; set; } = int.MaxValue;
 
         public List<ChartIndicators> ChartIndicators { get; set; }
 
         public string Data { get; set; }
 
-        public string Description { get { return (Property + (IsAverage ? "Average" : "") + "Description").GetLocalized(); } }
-
-        public string FullDescription { get { return Data + " " + Description; } }
+        public string Description { get { return string.Format("{0} {1}", Data, (Property + (IsAverage ? "Average" : "") + "Description").GetLocalized()); } }
 
         public string LastUpdate { get; set; }
 

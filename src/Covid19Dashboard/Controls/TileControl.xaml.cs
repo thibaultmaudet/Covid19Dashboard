@@ -1,5 +1,9 @@
-﻿using Covid19Dashboard.Models;
-using System;
+﻿using System;
+
+using Covid19Dashboard.Helpers;
+using Covid19Dashboard.Models;
+using Covid19Dashboard.Services;
+
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -15,16 +19,18 @@ namespace Covid19Dashboard.Controls
             set { SetValue(DataTileProperty, value); }
         }
 
-        public event EventHandler SeeMoreDetailsClick;
-
         public TileControl()
         {
             InitializeComponent();
         }
 
-        private void SeeMoreDetailsHyperLinkButton_Click(object sender, RoutedEventArgs e)
+        private void HyperLinkButton_Click(object sender, RoutedEventArgs e)
         {
-            SeeMoreDetailsClick?.Invoke(sender, new EventArgs());
+            HyperlinkButton hyperlink = sender as HyperlinkButton;
+            Type pageType = hyperlink?.GetValue(NavHelper.NavigateToChartProperty) as Type;
+
+            if (pageType != null)
+                NavigationService.Navigate(pageType, DataTile.ChartIndicators);
         }
     }
 }

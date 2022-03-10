@@ -7,13 +7,13 @@ namespace Covid19Dashboard.Helpers
 {
     public class NumberToVisibilityConverter : IValueConverter
     {
-        public int MaxNumberHidden { get; set; }
+        public int MaxNumberHidden { get; set; } = int.MaxValue;
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            bool.TryParse(parameter.ToString(), out bool inverted);
+            bool converted = double.TryParse(value.ToString(), out double number);
 
-            return !inverted && (int)value > MaxNumberHidden ? Visibility.Collapsed : Visibility.Visible;
+            return converted ? number != int.MaxValue && MaxNumberHidden == int.MaxValue || (MaxNumberHidden != int.MaxValue && number <= MaxNumberHidden) ? Visibility.Visible : Visibility.Collapsed : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

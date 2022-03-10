@@ -28,59 +28,53 @@
         <ScrollViewer HorizontalScrollMode="Auto" Grid.Row="1" Grid.Column="1">
             <StackPanel Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                 <TextBlock x:Uid="Home_EpidemiologyDataTitle" Style="{StaticResource SubtitleTextBlockStyle}" Margin="20,10,0,5"/>
-                <VariableSizedWrapGrid Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0">
-                    <GridView ItemsSource="{x:Bind ViewModel.EpidemiologyDataTiles, Mode=OneWay}">
-                        <GridView.ItemContainerStyle>
-                            <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                                <Style.Setters>
-                                    <Setter Property="Margin" Value="5" />
-                                </Style.Setters>
-                            </Style>
-                        </GridView.ItemContainerStyle>
-                        <GridView.ItemTemplate>
-                            <DataTemplate x:DataType="models:DataTile">
-                                <controls:TileControl DataTile="{x:Bind}" SeeMoreDetailsClick="TileControl_SeeMoreDetailsClick" />
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
-                </VariableSizedWrapGrid>
-                <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.EpidemiologyDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=false, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
+                <GridView ItemsSource="{x:Bind ViewModel.EpidemiologyDataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0">
+                    <GridView.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+                            <Style.Setters>
+                                <Setter Property="Margin" Value="5" />
+                            </Style.Setters>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:DataTile">
+                            <controls:TileControl DataTile="{x:Bind}" />
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+                <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.EpidemiologyDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
                 <TextBlock x:Uid="Home_HospitalDataTitle" Style="{StaticResource SubtitleTextBlockStyle}" Margin="20,5,0,5"/>
-                <VariableSizedWrapGrid Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0">
-                    <GridView ItemsSource="{x:Bind ViewModel.HospitalDataTiles, Mode=OneWay}">
-                        <GridView.ItemContainerStyle>
-                            <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                                <Style.Setters>
-                                    <Setter Property="Margin" Value="5" />
-                                </Style.Setters>
-                            </Style>
-                        </GridView.ItemContainerStyle>
-                        <GridView.ItemTemplate>
-                            <DataTemplate x:DataType="models:DataTile">
-                                <controls:TileControl DataTile="{x:Bind}" SeeMoreDetailsClick="TileControl_SeeMoreDetailsClick" />
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
-                </VariableSizedWrapGrid>
-                <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.HospitalDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=false, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
+                <GridView ItemsSource="{x:Bind ViewModel.HospitalDataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0">
+                    <GridView.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+                            <Style.Setters>
+                                <Setter Property="Margin" Value="5" />
+                            </Style.Setters>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:DataTile">
+                            <controls:TileControl DataTile="{x:Bind}" />
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+                <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.HospitalDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
                 <TextBlock x:Uid="Home_VaccinationTrackingTitle" Style="{StaticResource SubtitleTextBlockStyle}" Margin="20,5,0,5"/>
-                <VariableSizedWrapGrid Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0">
-                    <GridView ItemsSource="{x:Bind ViewModel.VaccinationDataTiles, Mode=OneWay}">
-                        <GridView.ItemContainerStyle>
-                            <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                                <Style.Setters>
-                                    <Setter Property="Margin" Value="5" />
-                                </Style.Setters>
-                            </Style>
-                        </GridView.ItemContainerStyle>
-                        <GridView.ItemTemplate>
-                            <DataTemplate x:DataType="models:DataTile">
-                                <controls:TileControl DataTile="{x:Bind}" SeeMoreDetailsClick="TileControl_SeeMoreDetailsClick" />
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
-                </VariableSizedWrapGrid>
-                <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.VaccinationDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=false, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
+                <GridView ItemsSource="{x:Bind ViewModel.VaccinationDataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0">
+                    <GridView.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+                            <Style.Setters>
+                                <Setter Property="Margin" Value="5" />
+                            </Style.Setters>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:DataTile">
+                            <controls:TileControl DataTile="{x:Bind}" />
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+                <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.VaccinationDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

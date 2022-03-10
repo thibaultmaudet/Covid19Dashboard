@@ -16,22 +16,20 @@
         </Grid.ColumnDefinitions>
         <controls:FilterControl Grid.RowSpan="2" FilterChanged="FilterControl_FilterChanged" />
         <ScrollViewer HorizontalScrollMode="Auto" Grid.Column="1">
-            <VariableSizedWrapGrid Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0">
-                <GridView ItemsSource="{x:Bind ViewModel.DataTiles, Mode=OneWay}">
-                    <GridView.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                            <Style.Setters>
-                                <Setter Property="Margin" Value="5" />
-                            </Style.Setters>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:DataTile">
-                            <controls:TileControl DataTile="{x:Bind}" SeeMoreDetailsClick="TileControl_SeeMoreDetailsClick" />
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </VariableSizedWrapGrid>
+            <GridView ItemsSource="{x:Bind ViewModel.DataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0">
+                <GridView.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+                        <Style.Setters>
+                            <Setter Property="Margin" Value="5" />
+                        </Style.Setters>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:DataTile">
+                        <controls:TileControl DataTile="{x:Bind}" />
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
         </ScrollViewer>
     </Grid>
 </Page>

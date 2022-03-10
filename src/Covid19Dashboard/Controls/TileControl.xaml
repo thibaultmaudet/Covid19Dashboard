@@ -7,44 +7,42 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
     xmlns:helpers="using:Covid19Dashboard.Helpers"
+    xmlns:views="using:Covid19Dashboard.Views"
     mc:Ignorable="d"
     d:DesignHeight="230"
     d:DesignWidth="310">
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
         <helpers:NumberToColorConverter x:Key="NumberToColorConverter" />
+        <helpers:NumberToVisibilityConverter x:Key="NumberToVisibilityConverter" />
+        <helpers:TrimConverter x:Key="TitleTrimConverter" Text="{Binding ElementName=TitleTextBlock, Path=Text}" />
+        <helpers:TrimConverter x:Key="DescriptionTrimConverter" Text="{Binding ElementName=DescriptionTextBlock, Path=Text}" />
     </UserControl.Resources>
-    <Grid>
-        <Button Height="250" Width="330">
-            <Button.Content>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="15" />
-                        <ColumnDefinition Width="280" />
-                        <ColumnDefinition Width="15" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1">
-                        <Run x:Uid="Tile_LastUpdate" />
-                        <Run Text="{x:Bind DataTile.LastUpdate, Mode=OneWay}" />
-                    </TextBlock>
-                    <TextBlock Text="{x:Bind DataTile.Title, Mode=OneWay}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-                    <TextBlock Text="{x:Bind DataTile.FullDescription, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
-                    <Border Background="{x:Bind DataTile.Evolution, Converter={StaticResource NumberToColorConverter}, ConverterParameter=background, Mode=OneWay}" Grid.Row="3" CornerRadius="3" Grid.Column="1" Width="140" HorizontalAlignment="Center" Margin="0,5,0,0" Visibility="{x:Bind DataTile.DisplayEvolution, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
-                        <TextBlock TextAlignment="Center" Foreground="{x:Bind DataTile.Evolution, Converter={StaticResource NumberToColorConverter}, ConverterParameter=foreground, Mode=OneWay}" FontWeight="Bold" FontSize="14">
-                            <Run Text="{x:Bind DataTile.Evolution, Mode=OneWay}"  />
-                            <Run x:Uid="Tile_EvolutionPeriod" />
-                        </TextBlock>
-                    </Border>
-                    <HyperlinkButton x:Uid="Tile_SeeMoreDetails" VerticalContentAlignment="Bottom" Tag="{x:Bind DataTile, Mode=OneWay}" Click="SeeMoreDetailsHyperLinkButton_Click" VerticalAlignment="Bottom" Grid.Row="4" Grid.Column="1" />
-                </Grid>
-            </Button.Content>
-        </Button>
+    <Grid CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource CardBackgroundBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="{ThemeResource CardBorderThickness}" Padding="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="15" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1">
+            <Run x:Uid="Tile_LastUpdate" />
+            <Run Text="{x:Bind DataTile.LastUpdate, Mode=OneWay}" />
+        </TextBlock>
+        <TextBlock x:Name="TitleTextBlock" Text="{x:Bind DataTile.Title, Mode=OneWay}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" TextTrimming="WordEllipsis" ToolTipService.ToolTip="{x:Bind TitleTextBlock.IsTextTrimmed, Converter={StaticResource TitleTrimConverter}, Mode=OneWay}" />
+        <TextBlock x:Name="DescriptionTextBlock" Text="{x:Bind DataTile.Description, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" TextTrimming="WordEllipsis" ToolTipService.ToolTip="{x:Bind DescriptionTextBlock.IsTextTrimmed, Converter={StaticResource DescriptionTrimConverter}, Mode=OneWay}" />
+        <Border Background="{x:Bind DataTile.Evolution, Converter={StaticResource NumberToColorConverter}, ConverterParameter=background, Mode=OneWay}" Grid.Row="3" CornerRadius="3" Grid.Column="1" Width="140" HorizontalAlignment="Center" Margin="0,5,0,0" Visibility="{x:Bind DataTile.Evolution, Converter={StaticResource NumberToVisibilityConverter}, Mode=OneWay}">
+            <TextBlock TextAlignment="Center" Foreground="{x:Bind DataTile.Evolution, Converter={StaticResource NumberToColorConverter}, ConverterParameter=foreground, Mode=OneWay}" FontWeight="Bold" FontSize="14">
+                <Run Text="{x:Bind DataTile.Evolution, Mode=OneWay}"  />
+                <Run x:Uid="Tile_EvolutionPeriod" />
+            </TextBlock>
+        </Border>
+        <HyperlinkButton x:Uid="Tile_SeeMoreDetails" VerticalContentAlignment="Bottom" Tag="{x:Bind DataTile, Mode=OneWay}" Click="HyperLinkButton_Click" VerticalAlignment="Bottom" Grid.Row="4" Grid.Column="1" helpers:NavHelper.NavigateToChart="views:ChartPage" />
     </Grid>
 </UserControl>

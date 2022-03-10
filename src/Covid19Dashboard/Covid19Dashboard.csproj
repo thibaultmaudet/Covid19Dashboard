@@ -164,6 +164,7 @@
     <Compile Include="Helpers\NumberToColorConverter.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\TileHelper.cs" />
+    <Compile Include="Helpers\TrimConverter.cs" />
     <Compile Include="Models\DataTile.cs" />
     <Compile Include="Models\PageLink.cs" />
     <Compile Include="Services\ActivationService.cs" />
