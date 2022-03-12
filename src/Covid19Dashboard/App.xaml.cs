@@ -7,6 +7,7 @@ using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Xaml;
 
 namespace Covid19Dashboard
@@ -33,6 +34,8 @@ namespace Covid19Dashboard
         {
             if (!args.PrelaunchActivated)
             {
+                await ApplicationData.Current.TemporaryFolder.DeleteAsync(StorageDeleteOption.PermanentDelete);
+
                 await ActivationService.ActivateAsync(args);
             }
 
