@@ -337,9 +337,6 @@
   <data name="FirstDosesCoverageTitle" xml:space="preserve">
     <value>Part de la population partiellement vaccinée</value>
   </data>
-  <data name="Home_VaccinationTracking_Information.Message" xml:space="preserve">
-    <value>Les indicateurs sur le suivi de la vaccination porte sur la population agée de 12 ans et plus.</value>
-  </data>
   <data name="NewFirstBoosterDosesAverageDescription" xml:space="preserve">
     <value>nouvelles doses de rappel injectées en moyenne sur les sept derniers jours</value>
   </data>
@@ -369,9 +366,6 @@
   </data>
   <data name="TotalFirstDosesDescription" xml:space="preserve">
     <value>personnes partiellement vaccinées</value>
-  </data>
-  <data name="VaccinationTracking_Information.Message" xml:space="preserve">
-    <value>Les indicateurs suivant portent sur la population des 12 ans et plus.</value>
   </data>
   <data name="Filter_Departments.Header" xml:space="preserve">
     <value>Filter par département :</value>

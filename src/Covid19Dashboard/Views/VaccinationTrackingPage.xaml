@@ -12,33 +12,24 @@
     Loaded="Page_Loaded">
 
     <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <controls:FilterControl Grid.RowSpan="2" FilterChanged="FilterControl_FilterChanged" />
-        <winui:InfoBar x:Uid="VaccinationTracking_Information" IsClosable="False" IsOpen="True" Severity="Informational" Grid.Column="1" />
-        <ScrollViewer HorizontalScrollMode="Auto" Grid.Row="1" Grid.Column="1">
-            <VariableSizedWrapGrid Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" >
-                <GridView ItemsSource="{x:Bind ViewModel.DataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0">
-                    <GridView.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                            <Style.Setters>
-                                <Setter Property="Margin" Value="5" />
-                            </Style.Setters>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:DataTile">
-                            <controls:TileControl DataTile="{x:Bind}" />
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </VariableSizedWrapGrid>
-        </ScrollViewer>
+        <GridView ItemsSource="{x:Bind ViewModel.DataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0" Grid.Column="1">
+            <GridView.ItemContainerStyle>
+                <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+                    <Style.Setters>
+                        <Setter Property="Margin" Value="5" />
+                    </Style.Setters>
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="models:DataTile">
+                    <controls:TileControl DataTile="{x:Bind}" />
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>
