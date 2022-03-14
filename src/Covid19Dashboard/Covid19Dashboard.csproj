@@ -137,7 +137,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Strings\en-us\Resources.resw" />
+    <PRIResource Include="Strings\en-us\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
@@ -324,7 +326,9 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="Covid19Dashboard_TemporaryKey.pfx" />
-    <PRIResource Include="Strings\fr-fr\Resources.resw" />
+    <PRIResource Include="Strings\fr-fr\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

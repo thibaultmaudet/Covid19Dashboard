@@ -170,7 +170,7 @@
     <value>Voir plus de détails</value>
   </data>
   <data name="NewHospitalizationTitle" xml:space="preserve">
-    <value>Nouvelles hopitalisations</value>
+    <value>Nouvelles hospitalisations</value>
   </data>
   <data name="NewHospitalizationDescription" xml:space="preserve">
     <value>nouvelles personnes hospitalisées au cours des dernières 24 heures</value>
@@ -242,7 +242,7 @@
     <value>nouveaux patients décédés sur les sept derniers jours</value>
   </data>
   <data name="NewDeceasedPersonsAverageTitle" xml:space="preserve">
-    <value>Nombre moyen de nouveux décès quotidien</value>
+    <value>Nombre moyen de nouveaux décès quotidien</value>
   </data>
   <data name="NewDeceasedPersonsDescription" xml:space="preserve">
     <value>nouveaux patients décédés au cours des dernières 24 heures</value>
@@ -266,7 +266,7 @@
     <value>nouvelles personnes hospitalisées au cours des dernières 24 heures</value>
   </data>
   <data name="NewIntensiveCarePatientsTitle" xml:space="preserve">
-    <value>Nouvelles adminissions en réanimation</value>
+    <value>Nouvelles admissions en réanimation</value>
   </data>
   <data name="NewReturnHomeAverageDescription" xml:space="preserve">
     <value>nouveaux retours à domicile en moyenne sur les sept derniers jours</value>
@@ -286,14 +286,11 @@
   <data name="OccupationRateTitle" xml:space="preserve">
     <value>Taux d'occupation</value>
   </data>
-  <data name="Shell_VaccinationStatus.Content" xml:space="preserve">
-    <value>Suvi de la vacinnation</value>
-  </data>
   <data name="Home_VaccinationTrackingTitle.Text" xml:space="preserve">
     <value>Suivi de la vaccination</value>
   </data>
   <data name="NewCompleteVaccinationsAverageDescription" xml:space="preserve">
-    <value>nouvelles personnes complètement vaccinées en moyenne sur les sept dernier jours</value>
+    <value>nouvelles personnes complètement vaccinées en moyenne sur les sept derniers jours</value>
   </data>
   <data name="NewCompleteVaccinationsAverageTitle" xml:space="preserve">
     <value>Nombre moyen de nouvelles personnes complètement vaccinées</value>
@@ -305,16 +302,16 @@
     <value>Nouvelles personnes complètement vaccinées</value>
   </data>
   <data name="NewFirstDosesAverageDescription" xml:space="preserve">
-    <value>nouvelles premières doses injectées en moyenne sur les sept derniers jours</value>
+    <value>nouvelles premières doses administrées en moyenne sur les sept derniers jours</value>
   </data>
   <data name="NewFirstDosesAverageTitle" xml:space="preserve">
-    <value>Nombre moyen de premières doses injectées quotidiennement</value>
+    <value>Nombre moyen de premières doses administrées quotidiennement</value>
   </data>
   <data name="NewFirstDosesDescription" xml:space="preserve">
-    <value>nouvelles premières doses injectées au cours des dernières 24 heures</value>
+    <value>nouvelles premières doses administrées au cours des dernières 24 heures</value>
   </data>
   <data name="NewFirstDosesTitle" xml:space="preserve">
-    <value>Nouvelles premières doses injectées</value>
+    <value>Nouvelles premières doses administrées</value>
   </data>
   <data name="Shell_VaccinationTracking.Content" xml:space="preserve">
     <value>Suivi de la vaccination</value>
@@ -332,22 +329,22 @@
     <value>Part de la population ayant reçu une dose de rappel</value>
   </data>
   <data name="FirstDosesCoverageDescription" xml:space="preserve">
-    <value>% de la population ayant reçu au moins une dose de vacin</value>
+    <value>% de la population ayant reçu au moins une dose de vaccin</value>
   </data>
   <data name="FirstDosesCoverageTitle" xml:space="preserve">
     <value>Part de la population partiellement vaccinée</value>
   </data>
   <data name="NewFirstBoosterDosesAverageDescription" xml:space="preserve">
-    <value>nouvelles doses de rappel injectées en moyenne sur les sept derniers jours</value>
+    <value>nouvelles doses de rappel administrées en moyenne sur les sept derniers jours</value>
   </data>
   <data name="NewFirstBoosterDosesAverageTitle" xml:space="preserve">
-    <value>Nombre moyen de doses de rappel injectées quotidiennement</value>
+    <value>Nombre moyen de doses de rappel administrées quotidiennement</value>
   </data>
   <data name="NewFirstBoosterDosesDescription" xml:space="preserve">
-    <value>nouvelles doses de rappel injectées au cours des dernières 24 heures</value>
+    <value>nouvelles doses de rappel administrées au cours des dernières 24 heures</value>
   </data>
   <data name="NewFirstBoosterDosesTitle" xml:space="preserve">
-    <value>Nouvelles doses de rappel injectées</value>
+    <value>Nouvelles doses de rappel administrées</value>
   </data>
   <data name="TotalCompleteVaccinationsDescription" xml:space="preserve">
     <value>personnes complétement vaccinées</value>
@@ -413,10 +410,10 @@
     <value>Nouvelles personnes complètement vaccinées</value>
   </data>
   <data name="NewCompleteVaccinationsAverage" xml:space="preserve">
-    <value>Nombre moyen de nouvelles personnes vacciées</value>
+    <value>Nombre moyen de nouvelles personnes vaccinées</value>
   </data>
   <data name="NewDeceasedPersons" xml:space="preserve">
-    <value>Nouveaux décès quotidien</value>
+    <value>Nouveaux décès quotidiens</value>
   </data>
   <data name="NewDeceasedPersonsAverage" xml:space="preserve">
     <value>Nombre moyen de nouveaux décès</value>
@@ -428,13 +425,13 @@
     <value>Nouveaux rappels administrés en moyenne</value>
   </data>
   <data name="NewFirstDoses" xml:space="preserve">
-    <value>Nouvelles premières doses injectées</value>
+    <value>Nouvelles premières doses administrées</value>
   </data>
   <data name="NewFirstDosesAverage" xml:space="preserve">
-    <value>Nombre moyen de premières doses injectées</value>
+    <value>Nombre moyen de premières doses administrées</value>
   </data>
   <data name="NewHospitalization" xml:space="preserve">
-    <value>Nouvelles hospitalisations quotidienne</value>
+    <value>Nouvelles hospitalisations quotidiennes</value>
   </data>
   <data name="NewHospitalizationAverage" xml:space="preserve">
     <value>Nombre moyen de nouvelles hospitalisations</value>
@@ -446,10 +443,10 @@
     <value>Moyenne des nouvelles entrées en réanimation</value>
   </data>
   <data name="NewReturnHome" xml:space="preserve">
-    <value>Nouveaux retour à domicile quotidien</value>
+    <value>Nouveaux retours à domicile quotidien</value>
   </data>
   <data name="NewReturnHomeAverage" xml:space="preserve">
-    <value>Nombre moyen de retour à domicile</value>
+    <value>Nombre moyen de retours à domicile</value>
   </data>
   <data name="OccupationRate" xml:space="preserve">
     <value>Taux d'occupation</value>
@@ -461,7 +458,7 @@
     <value>Taux de reproduction effectif</value>
   </data>
   <data name="TotalCompleteVaccinations" xml:space="preserve">
-    <value>Vaccination complète</value>
+    <value>Vaccinations complètes</value>
   </data>
   <data name="TotalFirstBoosterDoses" xml:space="preserve">
     <value>Rappel administré</value>

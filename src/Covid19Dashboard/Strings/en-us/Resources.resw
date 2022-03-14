@@ -145,7 +145,7 @@
     <value>Light</value>
     <comment>Light theme text for Settings</comment>
   </data>
-  <data name="Settings_About.Header" xml:space="preserve">
+  <data name="Settings_General_About.Header" xml:space="preserve">
     <value>About this application</value>
     <comment>About this application title for Settings</comment>
   </data>
@@ -153,7 +153,7 @@
     <value>Covid-19 Dashboard is an application to monitor the evolution of the Covid-19 epidemic in France.</value>
     <comment>About this application description for Settings</comment>
   </data>
-  <data name="Settings_Personalization.Header" xml:space="preserve">
+  <data name="Settings_General_Personalization.Header" xml:space="preserve">
     <value>Personalization</value>
     <comment>Personalization text for Settings</comment>
   </data>
@@ -174,20 +174,12 @@
     <comment>No selection text for EvolutionTracking</comment>
   </data>
   <data name="EvolutionTracking.ListHeader" xml:space="preserve">
-    <value>EvolutionTracking</value>
+    <value>Monitoring the evolution of the epidemic</value>
     <comment>Title for EvolutionTrackingPage</comment>
   </data>
   <data name="Shell_EvolutionTracking.Content" xml:space="preserve">
     <value>Epidemic evolution tracking</value>
     <comment>Navigation view item name for EvolutionTracking</comment>
-  </data>
-  <data name="ListDetails_NoSelection.Text" xml:space="preserve">
-    <value>Select an item from the list.</value>
-    <comment>No selection text for ListDetails</comment>
-  </data>
-  <data name="ListDetails.ListHeader" xml:space="preserve">
-    <value>Epidemic evolution tracking</value>
-    <comment>Title for ListDetailsPage</comment>
   </data>
   <data name="Settings_General.ModuleTitle" xml:space="preserve">
     <value>General</value>
@@ -197,5 +189,320 @@
   </data>
   <data name="Settings_General_Repository.Text" xml:space="preserve">
     <value>Github Repository</value>
+  </data>
+  <data name="CompleteVaccinationsCoverage" xml:space="preserve">
+    <value>Complete vaccination</value>
+  </data>
+  <data name="CompleteVaccinationsCoverageDescription" xml:space="preserve">
+    <value>% of population fully vaccinated</value>
+  </data>
+  <data name="CompleteVaccinationsCoverageTitle" xml:space="preserve">
+    <value>Share of the population fully vaccinated</value>
+  </data>
+  <data name="DailyConfirmedNewCases" xml:space="preserve">
+    <value>Daily cases</value>
+  </data>
+  <data name="DailyConfirmedNewCasesDescription" xml:space="preserve">
+    <value>new daily cases</value>
+  </data>
+  <data name="DailyConfirmedNewCasesTitle" xml:space="preserve">
+    <value>Number of new confirmed cases</value>
+  </data>
+  <data name="DataRecovery.Text" xml:space="preserve">
+    <value>Data recovering and processing...</value>
+  </data>
+  <data name="DeceasedPersons" xml:space="preserve">
+    <value>Number of deceased people</value>
+  </data>
+  <data name="DeceasedPersonsDescription" xml:space="preserve">
+    <value>people who died from Covid-19 since the beginning of the epidemic</value>
+  </data>
+  <data name="DeceasedPersonsTitle" xml:space="preserve">
+    <value>Death</value>
+  </data>
+  <data name="EvolutionTracking_EvolutionPrefix" xml:space="preserve">
+    <value>Evolution of</value>
+  </data>
+  <data name="EvolutionTracking_EvolutionSuffix" xml:space="preserve">
+    <value> (in %)</value>
+  </data>
+  <data name="Filter_Departments.Header" xml:space="preserve">
+    <value>Filter by department :</value>
+  </data>
+  <data name="Filter_RefineIndicators.Text" xml:space="preserve">
+    <value>Refine indicators</value>
+  </data>
+  <data name="Filter_Reset.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="FirstBoosterDosesCoverage" xml:space="preserve">
+    <value>Booster given</value>
+  </data>
+  <data name="FirstBoosterDosesCoverageDescription" xml:space="preserve">
+    <value>% of population that received a booster dose</value>
+  </data>
+  <data name="FirstBoosterDosesCoverageTitle" xml:space="preserve">
+    <value>Share of the population that received a booster dose</value>
+  </data>
+  <data name="FirstDosesCoverage" xml:space="preserve">
+    <value>At least one dose</value>
+  </data>
+  <data name="FirstDosesCoverageDescription" xml:space="preserve">
+    <value>% of population vaccinated with at least one dose</value>
+  </data>
+  <data name="FirstDosesCoverageTitle" xml:space="preserve">
+    <value>Share of the population partially vaccinated</value>
+  </data>
+  <data name="Home_EpidemiologyDataTitle.Text" xml:space="preserve">
+    <value>Epidemiological data</value>
+  </data>
+  <data name="Home_HospitalDataTitle.Text" xml:space="preserve">
+    <value>Hospital data</value>
+  </data>
+  <data name="Home_VaccinationTrackingTitle.Text" xml:space="preserve">
+    <value>Vaccination follow-up</value>
+  </data>
+  <data name="HospitalizedPatients" xml:space="preserve">
+    <value>Number of patients hospitalized</value>
+  </data>
+  <data name="HospitalizedPatientsDescription" xml:space="preserve">
+    <value>people hospitalized for Covid-19</value>
+  </data>
+  <data name="HospitalizedPatientsTitle" xml:space="preserve">
+    <value>Number of patients hospitalized</value>
+  </data>
+  <data name="IncidenceRate" xml:space="preserve">
+    <value>Number of cases per 100,000 population</value>
+  </data>
+  <data name="IncidenceRateDescription" xml:space="preserve">
+    <value>number of cases per week per 100,000 population</value>
+  </data>
+  <data name="IncidenceRateTitle" xml:space="preserve">
+    <value>Incidence rate</value>
+  </data>
+  <data name="IntensiveCarePatients" xml:space="preserve">
+    <value>Number of people in critical care</value>
+  </data>
+  <data name="IntensiveCarePatientsDescription" xml:space="preserve">
+    <value>people admitted to intensive care for Covid-19</value>
+  </data>
+  <data name="IntensiveCarePatientsTitle" xml:space="preserve">
+    <value>Intensive care patients</value>
+  </data>
+  <data name="NewCompleteVaccinations" xml:space="preserve">
+    <value>New people fully vaccinated</value>
+  </data>
+  <data name="NewCompleteVaccinationsAverage" xml:space="preserve">
+    <value>Average number of new people vaccinated</value>
+  </data>
+  <data name="NewCompleteVaccinationsAverageDescription" xml:space="preserve">
+    <value>new people fully vaccinated on average in the last seven days</value>
+  </data>
+  <data name="NewCompleteVaccinationsAverageTitle" xml:space="preserve">
+    <value>Average number of new people fully vaccinated</value>
+  </data>
+  <data name="NewCompleteVaccinationsDescription" xml:space="preserve">
+    <value>new people fully vaccinated in the last 24 hours</value>
+  </data>
+  <data name="NewCompleteVaccinationsTitle" xml:space="preserve">
+    <value>New people fully vaccinated</value>
+  </data>
+  <data name="NewDeceasedPersons" xml:space="preserve">
+    <value>New daily deaths</value>
+  </data>
+  <data name="NewDeceasedPersonsAverage" xml:space="preserve">
+    <value>Average number of new deaths</value>
+  </data>
+  <data name="NewDeceasedPersonsAverageDescription" xml:space="preserve">
+    <value>new patients who died in the last seven days</value>
+  </data>
+  <data name="NewDeceasedPersonsAverageTitle" xml:space="preserve">
+    <value>Average number of new deaths per day</value>
+  </data>
+  <data name="NewDeceasedPersonsDescription" xml:space="preserve">
+    <value>new patients who died in the last 24 hours</value>
+  </data>
+  <data name="NewDeceasedPersonsTitle" xml:space="preserve">
+    <value>New deaths</value>
+  </data>
+  <data name="NewFirstBoosterDoses" xml:space="preserve">
+    <value>New booster doses administered</value>
+  </data>
+  <data name="NewFirstBoosterDosesAverage" xml:space="preserve">
+    <value>Average number of new booster doses administered</value>
+  </data>
+  <data name="NewFirstBoosterDosesAverageDescription" xml:space="preserve">
+    <value>new booster doses administred on average over the last seven days</value>
+  </data>
+  <data name="NewFirstBoosterDosesAverageTitle" xml:space="preserve">
+    <value>Average number of booster doses administred daily</value>
+  </data>
+  <data name="NewFirstBoosterDosesDescription" xml:space="preserve">
+    <value>new booster doses administred in the last 24 hours</value>
+  </data>
+  <data name="NewFirstBoosterDosesTitle" xml:space="preserve">
+    <value>New booster doses administered</value>
+  </data>
+  <data name="NewFirstDoses" xml:space="preserve">
+    <value>New first doses administered</value>
+  </data>
+  <data name="NewFirstDosesAverage" xml:space="preserve">
+    <value>Average number of first doses administered</value>
+  </data>
+  <data name="NewFirstDosesAverageDescription" xml:space="preserve">
+    <value>new first doses administered on average over the last seven days</value>
+  </data>
+  <data name="NewFirstDosesAverageTitle" xml:space="preserve">
+    <value>Average number of first doses administered daily</value>
+  </data>
+  <data name="NewFirstDosesDescription" xml:space="preserve">
+    <value>new first doses given within the last 24 hours</value>
+  </data>
+  <data name="NewFirstDosesTitle" xml:space="preserve">
+    <value>New first doses administered</value>
+  </data>
+  <data name="NewHospitalization" xml:space="preserve">
+    <value>New daily hospitalizations</value>
+  </data>
+  <data name="NewHospitalizationAverage" xml:space="preserve">
+    <value>Average number of new hospitalizations</value>
+  </data>
+  <data name="NewHospitalizationAverageDescription" xml:space="preserve">
+    <value>new people hospitalized on average over the last seven days</value>
+  </data>
+  <data name="NewHospitalizationAverageTitle" xml:space="preserve">
+    <value>Average number of new hospitalizations per day</value>
+  </data>
+  <data name="NewHospitalizationDescription" xml:space="preserve">
+    <value>new people hospitalized in the last 24 hours</value>
+  </data>
+  <data name="NewHospitalizationTitle" xml:space="preserve">
+    <value>New hospitalizations</value>
+  </data>
+  <data name="NewIntensiveCarePatients" xml:space="preserve">
+    <value>New entries in daily resuscitation</value>
+  </data>
+  <data name="NewIntensiveCarePatientsAverage" xml:space="preserve">
+    <value>Average number of new admissions to the intensive care unit</value>
+  </data>
+  <data name="NewIntensiveCarePatientsAverageDescription" xml:space="preserve">
+    <value>new admissions to intensive care in the last seven days</value>
+  </data>
+  <data name="NewIntensiveCarePatientsAverageTitle" xml:space="preserve">
+    <value>Average number of new entries per day</value>
+  </data>
+  <data name="NewIntensiveCarePatientsDescription" xml:space="preserve">
+    <value>new people hospitalized in the last 24 hours</value>
+  </data>
+  <data name="NewIntensiveCarePatientsTitle" xml:space="preserve">
+    <value>New admissions in intensive care</value>
+  </data>
+  <data name="NewReturnHome" xml:space="preserve">
+    <value>New daily homecomings</value>
+  </data>
+  <data name="NewReturnHomeAverage" xml:space="preserve">
+    <value>Average number of returns home</value>
+  </data>
+  <data name="NewReturnHomeAverageDescription" xml:space="preserve">
+    <value>new returns home on average over the last seven days</value>
+  </data>
+  <data name="NewReturnHomeAverageTitle" xml:space="preserve">
+    <value>Average number of daily trips home</value>
+  </data>
+  <data name="NewReturnHomeDescription" xml:space="preserve">
+    <value>new returns home in the last 24 hours</value>
+  </data>
+  <data name="NewReturnHomeTitle" xml:space="preserve">
+    <value>Returning home</value>
+  </data>
+  <data name="NoTiles.Text" xml:space="preserve">
+    <value>No data available for this indicator.</value>
+  </data>
+  <data name="OccupationRate" xml:space="preserve">
+    <value>Occupation rate</value>
+  </data>
+  <data name="OccupationRateDescription" xml:space="preserve">
+    <value>% of critical care beds occupied by Covid19 patients vs. number of beds at end of 2018</value>
+  </data>
+  <data name="OccupationRateTitle" xml:space="preserve">
+    <value>Occupation rate</value>
+  </data>
+  <data name="PositiveCases" xml:space="preserve">
+    <value>People who tested positive</value>
+  </data>
+  <data name="PositiveCasesAverage" xml:space="preserve">
+    <value>7-day rolling average</value>
+  </data>
+  <data name="PositiveCasesAverageDescription" xml:space="preserve">
+    <value>cases reported positive on average over the last seven days</value>
+  </data>
+  <data name="PositiveCasesAverageTitle" xml:space="preserve">
+    <value>Average number of new confirmed cases per day</value>
+  </data>
+  <data name="PositiveCasesDescription" xml:space="preserve">
+    <value>positive cases collected</value>
+  </data>
+  <data name="PositiveCasesTitle" xml:space="preserve">
+    <value>Number of people who tested positive</value>
+  </data>
+  <data name="PositivityRate" xml:space="preserve">
+    <value>Rate of positive tests</value>
+  </data>
+  <data name="PositivityRateDescription" xml:space="preserve">
+    <value>% of positive tests out of all tests performed</value>
+  </data>
+  <data name="PositivityRateTitle" xml:space="preserve">
+    <value>Positivity rate</value>
+  </data>
+  <data name="ReproductionRate" xml:space="preserve">
+    <value>Effective reproduction rate</value>
+  </data>
+  <data name="ReproductionRateDescription" xml:space="preserve">
+    <value>people infected by a patient</value>
+  </data>
+  <data name="ReproductionRateTitle" xml:space="preserve">
+    <value>Effective reproduction rate</value>
+  </data>
+  <data name="Settings_General_Theme_Windows.Content" xml:space="preserve">
+    <value>Windows Color Settings</value>
+  </data>
+  <data name="SlidingAverage" xml:space="preserve">
+    <value>Seven-day rolling average</value>
+  </data>
+  <data name="Tile_EvolutionPeriod.Text" xml:space="preserve">
+    <value>% in 7 days</value>
+  </data>
+  <data name="Tile_LastUpdate.Text" xml:space="preserve">
+    <value>Last update:</value>
+  </data>
+  <data name="Tile_SeeMoreDetails.Content" xml:space="preserve">
+    <value>View more details</value>
+  </data>
+  <data name="TotalCompleteVaccinations" xml:space="preserve">
+    <value>Complete vaccinations</value>
+  </data>
+  <data name="TotalCompleteVaccinationsDescription" xml:space="preserve">
+    <value>fully vaccinated people</value>
+  </data>
+  <data name="TotalCompleteVaccinationsTitle" xml:space="preserve">
+    <value>Number of people fully vaccinated</value>
+  </data>
+  <data name="TotalFirstBoosterDoses" xml:space="preserve">
+    <value>Booster administred</value>
+  </data>
+  <data name="TotalFirstBoosterDosesDescription" xml:space="preserve">
+    <value>people who received a booster dose</value>
+  </data>
+  <data name="TotalFirstBoosterDosesTitle" xml:space="preserve">
+    <value>Number of people who received a booster dose</value>
+  </data>
+  <data name="TotalFirstDoses" xml:space="preserve">
+    <value>At least one dose</value>
+  </data>
+  <data name="TotalFirstDosesDescription" xml:space="preserve">
+    <value>partially vaccinated people</value>
+  </data>
+  <data name="TotalFirstDosesTitle" xml:space="preserve">
+    <value>Number of people partially vaccinated</value>
   </data>
 </root>
