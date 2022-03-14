@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Globalization;
+
+using Newtonsoft.Json;
 
 namespace Covid19Dashboard.Core.Models
 {
@@ -11,7 +13,7 @@ namespace Covid19Dashboard.Core.Models
         private float? reproductionRate;
         
         [JsonProperty("date")]
-        public new DateTime Date 
+        public new DateTime Date
         {
             get { return base.Date; }
             set { base.Date = value; }
@@ -33,13 +35,13 @@ namespace Covid19Dashboard.Core.Models
         public int? NewDeceasedPersons { get; set; }
 
         [JsonProperty("incid_hosp")]
-        public int? NewHospitalization { get; set; } 
+        public int? NewHospitalization { get; set; }
 
         [JsonProperty("incid_rea")]
-        public int? NewIntensiveCarePatients { get; set; } 
+        public int? NewIntensiveCarePatients { get; set; }
 
         [JsonProperty("incid_rad")]
-        public int? NewReturnHome{ get; set; } 
+        public int? NewReturnHome { get; set; }
 
         [JsonProperty("pos")]
         public int? PositiveCases { get; set; }
@@ -48,11 +50,11 @@ namespace Covid19Dashboard.Core.Models
         public float? IncidenceRate
         {
             get { return incidenceRate; }
-            set 
+            set
             {
                 if (!string.IsNullOrEmpty(value.ToString()))
                 {
-                    float.TryParse(value.ToString().Replace('.', ','), out float result);
+                    float.TryParse(value.ToString(), NumberStyles.AllowDecimalPoint, null, out float result);
                     incidenceRate = result;
                 }
                 else
@@ -68,7 +70,7 @@ namespace Covid19Dashboard.Core.Models
             {
                 if (!string.IsNullOrEmpty(value.ToString()))
                 {
-                    float.TryParse(value.ToString().Replace('.', ','), out float result);
+                    float.TryParse(value.ToString(), NumberStyles.AllowDecimalPoint, null, out float result);
                     occupationRate = result * 100;
                 }
                 else
@@ -84,7 +86,7 @@ namespace Covid19Dashboard.Core.Models
             {
                 if (!string.IsNullOrEmpty(value.ToString()))
                 {
-                    float.TryParse(value.ToString().Replace('.', ','), out float result);
+                    float.TryParse(value.ToString(), NumberStyles.AllowDecimalPoint, null, out float result);
                     positivityRate = result;
                 }
                 else
@@ -100,7 +102,7 @@ namespace Covid19Dashboard.Core.Models
             {
                 if (!string.IsNullOrEmpty(value.ToString()))
                 {
-                    float.TryParse(value.ToString().Replace('.', ','), out float result);
+                    float.TryParse(value.ToString(), NumberStyles.AllowDecimalPoint, null, out float result);
                     reproductionRate = result;
                 }
                 else
