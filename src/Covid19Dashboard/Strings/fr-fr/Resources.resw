@@ -121,6 +121,10 @@
     <value>Covid-19 Dashboard</value>
     <comment>Application display name</comment>
   </data>
+  <data name="AppName.Text" xml:space="preserve">
+    <value>Covid-19 Dashboard</value>
+    <comment>Application display name</comment>
+  </data>
   <data name="AppDescription" xml:space="preserve">
     <value>Covid-19 Dashboard</value>
     <comment>Application description</comment>
