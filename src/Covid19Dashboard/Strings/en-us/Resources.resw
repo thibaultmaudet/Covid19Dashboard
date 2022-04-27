@@ -253,13 +253,13 @@
   <data name="FirstDosesCoverageTitle" xml:space="preserve">
     <value>Share of the population partially vaccinated</value>
   </data>
-  <data name="Home_EpidemiologyDataTitle.Text" xml:space="preserve">
+  <data name="Home_EpidemiologyDataTitle" xml:space="preserve">
     <value>Epidemiological data</value>
   </data>
-  <data name="Home_HospitalDataTitle.Text" xml:space="preserve">
+  <data name="Home_HospitalDataTitle" xml:space="preserve">
     <value>Hospital data</value>
   </data>
-  <data name="Home_VaccinationTrackingTitle.Text" xml:space="preserve">
+  <data name="Home_VaccinationTrackingTitle" xml:space="preserve">
     <value>Vaccination follow-up</value>
   </data>
   <data name="HospitalizedPatients" xml:space="preserve">

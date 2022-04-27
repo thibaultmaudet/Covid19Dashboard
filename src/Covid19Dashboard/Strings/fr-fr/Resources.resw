@@ -185,10 +185,10 @@
   <data name="ReproductionRateDescription" xml:space="preserve">
     <value>personnes contaminées par un malade</value>
   </data>
-  <data name="Home_EpidemiologyDataTitle.Text" xml:space="preserve">
+  <data name="Home_EpidemiologyDataTitle" xml:space="preserve">
     <value>Données épidémiologiques</value>
   </data>
-  <data name="Home_HospitalDataTitle.Text" xml:space="preserve">
+  <data name="Home_HospitalDataTitle" xml:space="preserve">
     <value>Données hospitalières</value>
   </data>
   <data name="DailyConfirmedNewCasesDescription" xml:space="preserve">
@@ -290,7 +290,7 @@
   <data name="OccupationRateTitle" xml:space="preserve">
     <value>Taux d'occupation</value>
   </data>
-  <data name="Home_VaccinationTrackingTitle.Text" xml:space="preserve">
+  <data name="Home_VaccinationTrackingTitle" xml:space="preserve">
     <value>Suivi de la vaccination</value>
   </data>
   <data name="NewCompleteVaccinationsAverageDescription" xml:space="preserve">

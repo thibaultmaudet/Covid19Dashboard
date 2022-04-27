@@ -3,14 +3,33 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 using Covid19Dashboard.Core.Models;
+using Covid19Dashboard.Core.Services;
 
 namespace Covid19Dashboard.Core.Helpers
 {
     public class EpidemicDataHelper
     {
         private static Data Data => Data.Instance;
+
+        public static async Task DownloadEpidemicIndicatorsFiles(string folderPath)
+        {
+            if (Data.EpidemicIndicators == null)
+            {
+                Data.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicatorsAsync(folderPath, Area.National);
+                Data.EpidemicIndicators.AddRange(await EpidemicDataService.GetEpedimicIndicatorsAsync(folderPath, Area.Department));
+
+                Data.Departments = EpidemicDataHelper.GetDepartments();
+            }
+
+            if (Data.VaccinationIndicators == null)
+            {
+                Data.VaccinationIndicators = await EpidemicDataService.GetVaccinationIndicatorsAsync(folderPath, Area.National);
+                Data.VaccinationIndicators.AddRange(await EpidemicDataService.GetVaccinationIndicatorsAsync(folderPath, Area.Department));
+            }
+        }
 
         public static double GetEvolution(string property, bool isAverage, bool isNationalIndicator, Type indicatorType)
         {

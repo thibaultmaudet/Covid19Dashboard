@@ -15,9 +15,9 @@ namespace Covid19Dashboard.Views
             Loaded += EvolutionTrackingPage_Loaded;
         }
 
-        private async void EvolutionTrackingPage_Loaded(object sender, RoutedEventArgs e)
+        private void EvolutionTrackingPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await ViewModel.LoadDataAsync(ListDetailsViewControl.ViewState);
+            ViewModel.LoadData(ListDetailsViewControl.ViewState);
         }
     }
 }

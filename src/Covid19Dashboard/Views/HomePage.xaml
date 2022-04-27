@@ -6,13 +6,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Covid19Dashboard.Controls"
     xmlns:models="using:Covid19Dashboard.Models"
-    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:helper="using:Covid19Dashboard.Helpers"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d"
     Loaded="Page_Loaded">
     <Page.Resources>
         <helper:NumberToVisibilityConverter x:Key="NumberToVisibilityConverter" MaxNumberHidden="0" />
+        <DataTemplate x:Key="GridViewHeader" x:DataType="models:DataTiles">
+            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{Binding}" Margin="20,10,0,5" />
+        </DataTemplate>
+        <DataTemplate x:Key="ItemTemplate" x:DataType="models:DataTile">
+            <controls:TileControl DataTile="{x:Bind}" />
+        </DataTemplate>
+        <Style x:Key="ItemContainerStyle" BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+            <Style.Setters>
+                <Setter Property="Margin" Value="5" />
+            </Style.Setters>
+        </Style>
     </Page.Resources>
     <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
         <Grid.ColumnDefinitions>
@@ -20,56 +30,13 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <controls:FilterControl Grid.RowSpan="2" FilterChanged="FilterControl_FilterChanged" />
-        <winui:InfoBar x:Uid="Home_VaccinationTracking_Information" IsClosable="False" IsOpen="True" Severity="Informational" Grid.Column="1"/>
         <ScrollViewer HorizontalScrollMode="Auto" Grid.Column="1">
             <StackPanel Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                <TextBlock x:Uid="Home_EpidemiologyDataTitle" Style="{StaticResource SubtitleTextBlockStyle}" Margin="20,10,0,5"/>
-                <GridView ItemsSource="{x:Bind ViewModel.EpidemiologyDataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0">
-                    <GridView.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                            <Style.Setters>
-                                <Setter Property="Margin" Value="5" />
-                            </Style.Setters>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:DataTile">
-                            <controls:TileControl DataTile="{x:Bind}" />
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                <GridView ItemsSource="{x:Bind ViewModel.EpidemiologyDataTiles.GetHomeDataTiles(), Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0" HeaderTemplate="{StaticResource GridViewHeader}" Header="{x:Bind ViewModel.EpidemiologyDataTiles.CategoryTitle, Mode=OneWay}" ItemTemplate="{StaticResource ItemTemplate}" ItemContainerStyle="{StaticResource ItemContainerStyle}" />
                 <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.EpidemiologyDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
-                <TextBlock x:Uid="Home_HospitalDataTitle" Style="{StaticResource SubtitleTextBlockStyle}" Margin="20,5,0,5"/>
-                <GridView ItemsSource="{x:Bind ViewModel.HospitalDataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0">
-                    <GridView.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                            <Style.Setters>
-                                <Setter Property="Margin" Value="5" />
-                            </Style.Setters>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:DataTile">
-                            <controls:TileControl DataTile="{x:Bind}" />
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                <GridView ItemsSource="{x:Bind ViewModel.HospitalDataTiles.GetHomeDataTiles(), Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0" HeaderTemplate="{StaticResource GridViewHeader}" Header="{x:Bind ViewModel.HospitalDataTiles.CategoryTitle, Mode=OneWay}" ItemTemplate="{StaticResource ItemTemplate}" ItemContainerStyle="{StaticResource ItemContainerStyle}" />
                 <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.HospitalDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
-                <TextBlock x:Uid="Home_VaccinationTrackingTitle" Style="{StaticResource SubtitleTextBlockStyle}" Margin="20,5,0,5"/>
-                <GridView ItemsSource="{x:Bind ViewModel.VaccinationDataTiles, Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0">
-                    <GridView.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
-                            <Style.Setters>
-                                <Setter Property="Margin" Value="5" />
-                            </Style.Setters>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:DataTile">
-                            <controls:TileControl DataTile="{x:Bind}" />
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                <GridView ItemsSource="{x:Bind ViewModel.VaccinationDataTiles.GetHomeDataTiles(), Mode=OneWay}" SelectionMode="None" Margin="10,5,0,0" HeaderTemplate="{StaticResource GridViewHeader}" Header="{x:Bind ViewModel.VaccinationDataTiles.CategoryTitle, Mode=OneWay}" ItemTemplate="{StaticResource ItemTemplate}" ItemContainerStyle="{StaticResource ItemContainerStyle}" />
                 <TextBlock x:Uid="NoTiles" Visibility="{x:Bind ViewModel.VaccinationDataTiles.Count, Converter={StaticResource NumberToVisibilityConverter}, Mode=OneWay}" Margin="20,0,0,10" Style="{StaticResource BaseTextBlockStyle}" FontSize="15" />
             </StackPanel>
         </ScrollViewer>

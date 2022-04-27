@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
+using Covid19Dashboard.Core;
 using Covid19Dashboard.Core.Models;
+using Covid19Dashboard.Models;
 using Covid19Dashboard.Services;
 
 using LiveChartsCore;
@@ -14,12 +17,16 @@ namespace Covid19Dashboard
 {
     public sealed partial class App : Application
     {
+        private Data Data => Data.Instance;
+
         private Lazy<ActivationService> _activationService;
 
         private ActivationService ActivationService
         {
             get { return _activationService.Value; }
         }
+
+        public static ObservableCollection<DataTiles> DataTiles { get; set; }
 
         public App()
         {

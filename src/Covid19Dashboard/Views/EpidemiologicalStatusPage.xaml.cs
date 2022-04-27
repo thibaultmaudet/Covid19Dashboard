@@ -17,12 +17,12 @@ namespace Covid19Dashboard.Views
 
         private async void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await ViewModel.UpdateDataTilesAsync();
+            await ViewModel.UpdateDataTilesAsync(false);
         }
 
         private async void FilterControl_FilterChanged(object sender, EventArgs e)
         {
-            await ViewModel.UpdateDataTilesAsync();
+            await ViewModel.UpdateDataTilesAsync(true);
         }
     }
 }
