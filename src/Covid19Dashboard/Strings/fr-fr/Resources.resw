@@ -506,4 +506,43 @@
   <data name="Settings_General_Repository.Text" xml:space="preserve">
     <value>Dépôt GitHub</value>
   </data>
+	<data name="NewSecondBoosterDoses" xml:space="preserve">
+    <value>Nouvelles deuxièmes doses de rappel administrées</value>
+  </data>
+	<data name="NewSecondBoosterDosesAverage" xml:space="preserve">
+    <value>Nouveaux deuxièmes rappels administrés en moyenne</value>
+  </data>
+	<data name="NewSecondBoosterDosesAverageDescription" xml:space="preserve">
+    <value>nouvelles deuxièmes doses de rappel administrées en moyenne sur les sept derniers jours</value>
+  </data>
+	<data name="NewSecondBoosterDosesAverageTitle" xml:space="preserve">
+    <value>Nombre moyen de deuxièmes doses de rappel administrées quotidiennement</value>
+  </data>
+	<data name="NewSecondBoosterDosesDescription" xml:space="preserve">
+    <value>nouvelles deuxièmes doses de rappel administrées au cours des dernières 24 heures</value>
+  </data>
+	<data name="NewSecondBoosterDosesTitle" xml:space="preserve">
+    <value>Nouvelles deuxièmes doses de rappel administrées</value>
+  </data>
+	<data name="SecondBoosterDosesCoverage" xml:space="preserve">
+    <value>Deuxième rappel administré</value>
+  </data>
+	<data name="SecondBoosterDosesCoverageDescription" xml:space="preserve">
+    <value>% de la population ayant reçu une deuxième dose de rappel</value>
+  </data>
+	<data name="SecondBoosterDosesCoverageTitle" xml:space="preserve">
+    <value>Part de la population ayant reçu une deuxième dose de rappel</value>
+  </data>
+	<data name="Tile_Chart.Content" xml:space="preserve">
+    <value>Graphique</value>
+  </data>
+	<data name="TotalSecondBoosterDoses" xml:space="preserve">
+    <value>Deuxième rappel administré</value>
+  </data>
+	<data name="TotalSecondBoosterDosesDescription" xml:space="preserve">
+    <value>personnes ayant reçu une deuxième dose de rappel</value>
+  </data>
+	<data name="TotalSecondBoosterDosesTitle" xml:space="preserve">
+    <value>Nombre de personnes ayant reçu une deuxième dose de rappel</value>
+  </data>
 </root>

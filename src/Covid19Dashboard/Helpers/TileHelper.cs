@@ -11,8 +11,6 @@ namespace Covid19Dashboard.Helpers
 {
     public class TileHelper
     {
-        private static Data Data { get => Data.Instance; }
-
         public static ObservableCollection<DataTiles> GetDataTiles()
         {
             DataTiles epidemilogicalDataTiles = new() { CategoryTitle = "Home_EpidemiologyDataTitle".GetLocalized(), IsHomeTiles = true, Page = Page.Epidemiologic };
@@ -270,7 +268,8 @@ namespace Covid19Dashboard.Helpers
             {
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstDoses" },
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalCompleteVaccinations" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstBoosterDoses" }
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstBoosterDoses" },
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalSecondBoosterDoses" }
             };
 
             dataTiles.Add(SetDataTile("TotalFirstDoses", false, true, typeof(VaccinationIndicator), dataIndicators));
@@ -294,10 +293,11 @@ namespace Covid19Dashboard.Helpers
             {
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstDoses" },
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalCompleteVaccinations" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstBoosterDoses" }
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstBoosterDoses" },
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalSecondBoosterDoses" }
             };
 
-            dataTiles.Add(SetDataTile("TotalCompleteVaccinations", true, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("TotalCompleteVaccinations", false, true, typeof(VaccinationIndicator), dataIndicators));
 
             dataIndicators = new()
             {
@@ -318,37 +318,76 @@ namespace Covid19Dashboard.Helpers
             {
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstDoses" },
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalCompleteVaccinations" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstBoosterDoses" }
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstBoosterDoses" },
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalSecondBoosterDoses" }
             };
 
-            dataTiles.Add(SetDataTile("TotalFirstBoosterDoses", true, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("TotalFirstBoosterDoses", false, true, typeof(VaccinationIndicator), dataIndicators));
 
             dataIndicators = new()
             {
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "FirstDosesCoverage" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "CompleteVaccinationsCoverage" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "FirstBoosterDosesCoverage" }
+                new() { ChartType = ChartType.Bar, IndicatorType = typeof(VaccinationIndicator), Property = "NewSecondBoosterDoses" },
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewSecondBoosterDoses", WithAverage = true }
+            };
+
+            dataTiles.Add(SetDataTile("NewSecondBoosterDoses", false, false, typeof(VaccinationIndicator), dataIndicators));
+
+            dataIndicators = new()
+            {
+                new() { ChartType = ChartType.Area, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewSecondBoosterDoses" }
+            };
+
+            dataTiles.Add(SetDataTile("NewSecondBoosterDoses", true, true, typeof(VaccinationIndicator), dataIndicators));
+
+            dataIndicators = new()
+            {
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstDoses" },
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalCompleteVaccinations" },
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalFirstBoosterDoses" },
+                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalSecondBoosterDoses" }
+            };
+
+            dataTiles.Add(SetDataTile("TotalSecondBoosterDoses", false, true, typeof(VaccinationIndicator), dataIndicators));
+
+            dataIndicators = new()
+            {
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "FirstDosesCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "CompleteVaccinationsCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "FirstBoosterDosesCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "SecondBoosterDosesCoverage" }
             };
 
             dataTiles.Add(SetDataTile("FirstDosesCoverage", false, true, 2, typeof(VaccinationIndicator), dataIndicators, true));
 
             dataIndicators = new()
             {
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "FirstDosesCoverage" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "CompleteVaccinationsCoverage" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "FirstBoosterDosesCoverage" }
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "FirstDosesCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "CompleteVaccinationsCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "FirstBoosterDosesCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "SecondBoosterDosesCoverage" }
             };
 
             dataTiles.Add(SetDataTile("CompleteVaccinationsCoverage", false, true, 2, typeof(VaccinationIndicator), dataIndicators, true));
 
             dataIndicators = new()
             {
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "FirstDosesCoverage" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "CompleteVaccinationsCoverage" },
-                new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "FirstBoosterDosesCoverage" }
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "FirstDosesCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "CompleteVaccinationsCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "FirstBoosterDosesCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "SecondBoosterDosesCoverage" }
             };
 
             dataTiles.Add(SetDataTile("FirstBoosterDosesCoverage", false, true, 2, typeof(VaccinationIndicator), dataIndicators, true));
+
+            dataIndicators = new()
+            {
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "FirstDosesCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "CompleteVaccinationsCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "FirstBoosterDosesCoverage" },
+                new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "SecondBoosterDosesCoverage" }
+            };
+
+            dataTiles.Add(SetDataTile("SecondBoosterDosesCoverage", false, true, 2, typeof(VaccinationIndicator), dataIndicators, true));
 
             return dataTiles;
         }
