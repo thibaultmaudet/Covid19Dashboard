@@ -20,15 +20,19 @@ namespace Covid19Dashboard.Core.Helpers
             if (Data.EpidemicIndicators == null)
             {
                 Data.EpidemicIndicators = await EpidemicDataService.GetEpedimicIndicatorsAsync(folderPath, Area.National);
-                Data.EpidemicIndicators.AddRange(await EpidemicDataService.GetEpedimicIndicatorsAsync(folderPath, Area.Department));
 
-                Data.Departments = EpidemicDataHelper.GetDepartments();
+                Data.Departments = await EpidemicDataService.GetDepartments(folderPath);
             }
 
             if (Data.VaccinationIndicators == null)
-            {
                 Data.VaccinationIndicators = await EpidemicDataService.GetVaccinationIndicatorsAsync(folderPath, Area.National);
+
+            if (!string.IsNullOrEmpty(Data.SelectedDepartment) && !Data.IsDepartementIndicatorsDownloaded)
+            {
+                Data.EpidemicIndicators.AddRange(await EpidemicDataService.GetEpedimicIndicatorsAsync(folderPath, Area.Department));
                 Data.VaccinationIndicators.AddRange(await EpidemicDataService.GetVaccinationIndicatorsAsync(folderPath, Area.Department));
+
+                Data.IsDepartementIndicatorsDownloaded = true;
             }
         }
 
@@ -203,18 +207,6 @@ namespace Covid19Dashboard.Core.Helpers
                 chartIndicators.Add(new ChartIndicator() { Date = epidemicIndicator.Date, Value = GetValue<float>(property, isAverage, isNationalIndicator, digits, epidemicIndicator.Date, indicatorType) });
 
             return chartIndicators;
-        }
-
-        public static ObservableCollection<KeyValuePair<string, string>> GetDepartments()
-        {
-            if (!IsInitializedList(typeof(EpidemicIndicator)))
-                return default;
-
-            ObservableCollection<KeyValuePair<string, string>> departments = new();
-
-            Data.EpidemicIndicators.Where(x => x.Date == Data.EpidemicIndicators.First().Date && x.Department != null).ToList().ForEach(x => departments.Add(new KeyValuePair<string, string>(x.Department, x.DepartmentLabel)));
-
-            return departments;
         }
 
         private static bool IsInitializedList(Type indicatorType)

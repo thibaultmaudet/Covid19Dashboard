@@ -12,7 +12,7 @@ namespace Covid19Dashboard.Core
         private static volatile Data instance;
         private static readonly object syncRoot = new();
 
-        private ObservableCollection<KeyValuePair<string, string>> departments;
+        private List<Department> departments;
 
         private bool isLoading;
 
@@ -30,6 +30,8 @@ namespace Covid19Dashboard.Core
             }
         }
 
+        public bool IsDepartementIndicatorsDownloaded { get; set; }
+
         public bool IsLoading
         {
             get { return isLoading; }
@@ -40,7 +42,7 @@ namespace Covid19Dashboard.Core
 
         public List<VaccinationIndicator> VaccinationIndicators { get; set; }
 
-        public ObservableCollection<KeyValuePair<string, string>> Departments
+        public List<Department> Departments
         {
             get { return departments; }
             set { SetProperty(ref departments, value); }

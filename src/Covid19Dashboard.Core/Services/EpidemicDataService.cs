@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
+using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Helpers;
 
@@ -39,6 +40,16 @@ namespace Covid19Dashboard.Core.Services
                 webClient.DownloadFile("https://www.data.gouv.fr/fr/datasets/r/64605b19-b3bd-4c26-9f30-e0c3915290d3", filePath);
 
             return (await CsvHelper.ToObject<List<VaccinationIndicator>>(filePath, ';')).OrderByDescending(x => x.Date).ToList();
+        }
+
+        public static async Task<List<Department>> GetDepartments(string filePath)
+        {
+            filePath = Path.Combine(filePath, Guid.NewGuid() + ".json");
+
+            WebClient webClient = new();
+            webClient.DownloadFile("https://www.data.gouv.fr/fr/datasets/r/7b4bc207-4e66-49d2-b1a5-26653e369b66", filePath);
+
+            return await Json.ToObjectAsync<List<Department>>(File.ReadAllText(filePath));
         }
     }
 }

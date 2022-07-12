@@ -11,7 +11,7 @@
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Margin="10,10,0,0" Orientation="Vertical" Spacing="10">
             <TextBlock x:Uid="Filter_RefineIndicators" Style="{StaticResource BodyTextStyle}" FontWeight="Bold" TextAlignment="Center" />
-            <ComboBox x:Uid="Filter_Departments" IsEditable="True" Width="230" Header="Filtrer par département : " ItemsSource="{x:Bind Data.Departments, Mode=OneWay}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{x:Bind Data.SelectedDepartment, Mode=TwoWay}" SelectionChanged="FiltersComboBox_SelectionChanged" />
+            <ComboBox x:Uid="Filter_Departments" IsEditable="True" Width="230" Header="Filtrer par département : " ItemsSource="{x:Bind Data.Departments, Mode=OneWay}" DisplayMemberPath="Label" SelectedValuePath="Number" SelectedValue="{x:Bind Data.SelectedDepartment, Mode=TwoWay}" SelectionChanged="FiltersComboBox_SelectionChanged" />
             <Button x:Uid="Filter_Reset" Content="Réinitialiser" VerticalAlignment="Bottom" Width="230" Click="ResetFiltersButton_Click" />
         </StackPanel>
     </Grid>
