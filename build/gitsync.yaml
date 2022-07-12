@@ -1,5 +1,11 @@
 trigger:
 - master
+- development
+- preprod
+- hotfix
+- feature/*
+- dev/*
+- design/*
 
 pool:
   vmImage: windows-latest
@@ -9,4 +15,3 @@ steps:
     git push --prune https://$(githubpersonaltoken)@github.com/thibaultmaudet/Covid19Dashboard.git \
         +refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
   displayName: 'Copy to Github'
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
