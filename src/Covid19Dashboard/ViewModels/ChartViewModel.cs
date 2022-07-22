@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Covid19Dashboard.Core;
+using Covid19Dashboard.Core.Enums;
 using Covid19Dashboard.Core.Models;
 
 using LiveChartsCore;

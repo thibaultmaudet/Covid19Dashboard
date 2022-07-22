@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Covid19Dashboard.Core;
+using Covid19Dashboard.Core.Enums;
 
 namespace Covid19Dashboard.Models
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Covid19Dashboard.Core
+namespace Covid19Dashboard.Core.Enums
 {
     public enum Area
     {

@@ -39,5 +39,18 @@ namespace Covid19Dashboard.Helpers
 
         public static readonly DependencyProperty NavigateToChartProperty =
             DependencyProperty.RegisterAttached("NavigateToChart", typeof(Type), typeof(NavHelper), new PropertyMetadata(null));
+
+        public static Type GetNavigateToMoreDetail(HyperlinkButton item)
+        {
+            return (Type)item.GetValue(NavigateToMoreDetailProperty);
+        }
+
+        public static void SetNavigateToMoreDetail(HyperlinkButton item, Type value)
+        {
+            item.SetValue(NavigateToMoreDetailProperty, value);
+        }
+
+        public static readonly DependencyProperty NavigateToMoreDetailProperty =
+            DependencyProperty.RegisterAttached("NavigateToChart", typeof(Type), typeof(NavHelper), new PropertyMetadata(null));
     }
 }
