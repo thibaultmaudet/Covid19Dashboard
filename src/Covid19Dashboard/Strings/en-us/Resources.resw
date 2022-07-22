@@ -545,4 +545,46 @@
   <data name="TotalSecondBoosterDosesTitle" xml:space="preserve">
     <value>Number of people who received a second booster dose</value>
   </data>
+  <data name="Tile_Chart.Content" xml:space="preserve">
+    <value>Display chart</value>
+  </data>
+  <data name="Details_AgeLabel.Header" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="Details_CompleteVaccinationsCoverage.Header" xml:space="preserve">
+    <value>Complete vaccinations (in %)</value>
+  </data>
+  <data name="Details_FirstBoosterDosesCoverage.Header" xml:space="preserve">
+    <value>First booster doses coverage (in %)</value>
+  </data>
+  <data name="Details_FirstDosesCoverage.Header" xml:space="preserve">
+    <value>At least one dose (en %)</value>
+  </data>
+  <data name="Details_NewCompleteVaccinations.Header" xml:space="preserve">
+    <value>New complete vaccinations</value>
+  </data>
+  <data name="Details_NewFirstBoosterDoses.Header" xml:space="preserve">
+    <value>New first booster doses administered</value>
+  </data>
+  <data name="Details_NewFirstDoses.Header" xml:space="preserve">
+    <value>New doses administered</value>
+  </data>
+  <data name="Details_NewSecondBoosterDoses.Header" xml:space="preserve">
+    <value>New second booster doses administered</value>
+  </data>
+  <data name="Details_SecondBoosterDosesCoverage.Header" xml:space="preserve">
+    <value>Second booster doses administered (in %)</value>
+  </data>
+  <data name="Details_TotalCompleteVaccinations.Header" xml:space="preserve">
+    <value>Complete vaccinations</value>
+  </data>
+  <data name="Details_TotalFirstBoosterDoses.Header" xml:space="preserve">
+    <value>Booster administred</value>
+  </data>
+  <data name="Details_TotalFirstDoses.Header" xml:space="preserve">
+    <value>At least one dose</value>
+  </data>
+  <data name="Details_TotalSecondBoosterDoses.Header" xml:space="preserve">
+    <value>Second booster administred</value>
+  </data>
 </root>

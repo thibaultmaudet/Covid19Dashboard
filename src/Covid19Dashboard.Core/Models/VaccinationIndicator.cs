@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Covid19Dashboard.Core.Helpers;
+
+using Newtonsoft.Json;
 
 namespace Covid19Dashboard.Core.Models
 {
@@ -45,8 +47,9 @@ namespace Covid19Dashboard.Core.Models
         [JsonProperty("couv_dose1_e")]
         public float? FirstDosesCoverage { get; set; }
 
-
         [JsonProperty("couv_2_rappel_e")]
         public float? SecondBoosterDosesCoverage { get; set; }
+
+        public string AgeLabel { get { return AgeClassConverter.GetAgeLabelForVaccinationIndicator(AgeClass); } }
     }
 }

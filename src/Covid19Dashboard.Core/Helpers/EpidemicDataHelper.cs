@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-
+using Covid19Dashboard.Core.Enums;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Core.Services;
 
@@ -182,6 +182,11 @@ namespace Covid19Dashboard.Core.Helpers
             }
 
             return (T)Convert.ChangeType(default, typeof(T));
+        }
+
+        public static IEnumerable<object> GetValuesByAge<T>(IEnumerable<T> indicators, DateTime? date)
+        {
+            return (IEnumerable<object>)indicators.Where(x => (x as Indicator).Date == date && (x as Indicator).AgeClass != null && (x as Indicator).Department == Data.SelectedDepartment);
         }
 
         public static ObservableCollection<ChartIndicator> GetValuesForChart(string property, bool isAverage, bool isNationalIndicator, int digits, Type indicatorType)

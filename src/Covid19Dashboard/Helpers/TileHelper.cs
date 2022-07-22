@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-using Covid19Dashboard.Core;
+using Covid19Dashboard.Core.Enums;
 using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Models;
+using Covid19Dashboard.Views;
 
 namespace Covid19Dashboard.Helpers
 {
@@ -58,12 +59,27 @@ namespace Covid19Dashboard.Helpers
             return SetDataTile(property, isAverage, false, withEvolution, digits, indicatorType, dataIndicators, isHomeTile);
         }
 
+        public static DataTile SetDataTile(string property, bool isAverage, bool withEvolution, Type indicatorType, Type moreDetailsPage, List<DataIndicator> dataIndicators)
+        {
+            return SetDataTile(property, isAverage, false, withEvolution, 0, indicatorType, moreDetailsPage, dataIndicators, false);
+        }
+
+        public static DataTile SetDataTile(string property, bool isAverage, bool withEvolution, int digits, Type indicatorType, Type moreDetailsPage, List<DataIndicator> dataIndicators, bool isHomeTile)
+        {
+            return SetDataTile(property, isAverage, false, withEvolution, digits, indicatorType, moreDetailsPage, dataIndicators, isHomeTile);
+        }
+
         public static DataTile SetDataTile(string property, bool isAverage, bool isNationalIndicator, bool withEvolution, int digits, Type indicatorType, List<DataIndicator> dataIndicators)
         {
             return SetDataTile(property, isAverage, isNationalIndicator, withEvolution, digits, indicatorType, dataIndicators, false);
         }
 
         public static DataTile SetDataTile(string property, bool isAverage, bool isNationalIndicator, bool withEvolution, int digits, Type indicatorType, List<DataIndicator> dataIndicators, bool isHomeTile)
+        {
+            return SetDataTile(property, isAverage, isNationalIndicator, withEvolution, digits, indicatorType, null, dataIndicators, isHomeTile);
+        }
+
+        public static DataTile SetDataTile(string property, bool isAverage, bool isNationalIndicator, bool withEvolution, int digits, Type indicatorType, Type moreDetailPage, List<DataIndicator> dataIndicators, bool isHomeTile)
         {
             DataTile dataTile = new(dataIndicators, dataIndicators[0].IsEvolutionIndicator)
             {
@@ -72,6 +88,7 @@ namespace Covid19Dashboard.Helpers
                 IsAverage = isAverage,
                 IsHomeTile = isHomeTile,
                 LastUpdate = EpidemicDataHelper.GetLastUpdate(property, isNationalIndicator, indicatorType),
+                MoreDetailPage = moreDetailPage,
                 Property = property
             };
 
@@ -255,14 +272,14 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewFirstDoses", WithAverage = true }
             };
 
-            dataTiles.Add(SetDataTile("NewFirstDoses", false, false, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("NewFirstDoses", false, false, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
                 new() { ChartType = ChartType.Area, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewFirstDoses" }
             };
 
-            dataTiles.Add(SetDataTile("NewFirstDoses", true, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("NewFirstDoses", true, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
@@ -272,7 +289,7 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalSecondBoosterDoses" }
             };
 
-            dataTiles.Add(SetDataTile("TotalFirstDoses", false, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("TotalFirstDoses", false, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
@@ -280,14 +297,14 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewCompleteVaccinations", WithAverage = true }
             };
 
-            dataTiles.Add(SetDataTile("NewCompleteVaccinations", false, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("NewCompleteVaccinations", false, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
                 new() { ChartType = ChartType.Area, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewCompleteVaccinations" }
             };
 
-            dataTiles.Add(SetDataTile("NewCompleteVaccinations", true, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("NewCompleteVaccinations", true, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
@@ -297,7 +314,7 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalSecondBoosterDoses" }
             };
 
-            dataTiles.Add(SetDataTile("TotalCompleteVaccinations", false, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("TotalCompleteVaccinations", false, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
@@ -305,14 +322,14 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewFirstBoosterDoses", WithAverage = true }
             };
 
-            dataTiles.Add(SetDataTile("NewFirstBoosterDoses", false, false, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("NewFirstBoosterDoses", false, false, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
                 new() { ChartType = ChartType.Area, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewFirstBoosterDoses" }
             };
 
-            dataTiles.Add(SetDataTile("NewFirstBoosterDoses", true, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("NewFirstBoosterDoses", true, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
@@ -322,7 +339,7 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalSecondBoosterDoses" }
             };
 
-            dataTiles.Add(SetDataTile("TotalFirstBoosterDoses", false, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("TotalFirstBoosterDoses", false, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
@@ -330,14 +347,14 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewSecondBoosterDoses", WithAverage = true }
             };
 
-            dataTiles.Add(SetDataTile("NewSecondBoosterDoses", false, false, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("NewSecondBoosterDoses", false, false, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
                 new() { ChartType = ChartType.Area, IndicatorType = typeof(VaccinationIndicator), IsAverage = true, Property = "NewSecondBoosterDoses" }
             };
 
-            dataTiles.Add(SetDataTile("NewSecondBoosterDoses", true, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("NewSecondBoosterDoses", true, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
@@ -347,7 +364,7 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, IndicatorType = typeof(VaccinationIndicator), Property = "TotalSecondBoosterDoses" }
             };
 
-            dataTiles.Add(SetDataTile("TotalSecondBoosterDoses", false, true, typeof(VaccinationIndicator), dataIndicators));
+            dataTiles.Add(SetDataTile("TotalSecondBoosterDoses", false, true, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators));
 
             dataIndicators = new()
             {
@@ -357,7 +374,7 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "SecondBoosterDosesCoverage" }
             };
 
-            dataTiles.Add(SetDataTile("FirstDosesCoverage", false, true, 2, typeof(VaccinationIndicator), dataIndicators, true));
+            dataTiles.Add(SetDataTile("FirstDosesCoverage", false, true, 2, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators, true));
 
             dataIndicators = new()
             {
@@ -367,7 +384,7 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "SecondBoosterDosesCoverage" }
             };
 
-            dataTiles.Add(SetDataTile("CompleteVaccinationsCoverage", false, true, 2, typeof(VaccinationIndicator), dataIndicators, true));
+            dataTiles.Add(SetDataTile("CompleteVaccinationsCoverage", false, true, 2, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators, true));
 
             dataIndicators = new()
             {
@@ -377,7 +394,7 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "SecondBoosterDosesCoverage" }
             };
 
-            dataTiles.Add(SetDataTile("FirstBoosterDosesCoverage", false, true, 2, typeof(VaccinationIndicator), dataIndicators, true));
+            dataTiles.Add(SetDataTile("FirstBoosterDosesCoverage", false, true, 2, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators, true));
 
             dataIndicators = new()
             {
@@ -387,7 +404,7 @@ namespace Covid19Dashboard.Helpers
                 new() { ChartType = ChartType.Line, Digits = 2, IndicatorType = typeof(VaccinationIndicator), Property = "SecondBoosterDosesCoverage" }
             };
 
-            dataTiles.Add(SetDataTile("SecondBoosterDosesCoverage", false, true, 2, typeof(VaccinationIndicator), dataIndicators, true));
+            dataTiles.Add(SetDataTile("SecondBoosterDosesCoverage", false, true, 2, typeof(VaccinationIndicator), typeof(VaccinationDetailsPage), dataIndicators, true));
 
             return dataTiles;
         }
