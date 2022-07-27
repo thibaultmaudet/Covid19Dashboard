@@ -24,13 +24,21 @@ namespace Covid19Dashboard.Controls
             InitializeComponent();
         }
 
-        private void HyperLinkButton_Click(object sender, RoutedEventArgs e)
+        private void ChartHyperLinkButton_Click(object sender, RoutedEventArgs e)
         {
             HyperlinkButton hyperlink = sender as HyperlinkButton;
             Type pageType = hyperlink?.GetValue(NavHelper.NavigateToChartProperty) as Type;
 
             if (pageType != null)
                 NavigationService.Navigate(pageType, DataTile.ChartIndicators);
+        }
+
+        private void MoreDetailsHyperLinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Type pageType = DataTile.MoreDetailPage;
+
+            if (pageType != null)
+                NavigationService.Navigate(pageType, DataTile.LastUpdate);
         }
     }
 }

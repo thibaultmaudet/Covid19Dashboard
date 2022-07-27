@@ -6,12 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Covid19Dashboard.Models"
     xmlns:controls="using:Covid19Dashboard.Controls"
-    xmlns:helper="using:Covid19Dashboard.Helpers"
+    xmlns:converters="using:Covid19Dashboard.Helpers.Converters"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d"
     Loaded="Page_Loaded">
     <Page.Resources>
-        <helper:NumberToVisibilityConverter x:Key="NumberToVisibilityConverter" MaxNumberHidden="0" />
+        <converters:NumberToVisibilityConverter x:Key="NumberToVisibilityConverter" MaxNumberHidden="0" />
         <DataTemplate x:Key="GridViewHeader" x:DataType="models:DataTiles">
             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{Binding}" Margin="20,10,0,5" />
         </DataTemplate>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Covid19Dashboard.Core;
+using Covid19Dashboard.Core.Enums;
 using Covid19Dashboard.Core.Models;
 
 using LiveChartsCore;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
+using Covid19Dashboard.Core.Enums;
 using Covid19Dashboard.Core.Helpers;
 using Covid19Dashboard.Core.Models;
 using Covid19Dashboard.Helpers;

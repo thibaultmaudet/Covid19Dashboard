@@ -506,43 +506,82 @@
   <data name="Settings_General_Repository.Text" xml:space="preserve">
     <value>Dépôt GitHub</value>
   </data>
-	<data name="NewSecondBoosterDoses" xml:space="preserve">
+  <data name="Details_AgeLabel.Header" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="Details_CompleteVaccinationsCoverage.Header" xml:space="preserve">
+    <value>Vaccination complète (en %)</value>
+  </data>
+  <data name="Details_FirstBoosterDosesCoverage.Header" xml:space="preserve">
+    <value>Premier rappel administré (en %)</value>
+  </data>
+  <data name="Details_FirstDosesCoverage.Header" xml:space="preserve">
+    <value>Au moins une dose (en %)</value>
+  </data>
+  <data name="Details_NewCompleteVaccinations.Header" xml:space="preserve">
+    <value>Nouvelles personnes complètement vaccinées</value>
+  </data>
+  <data name="Details_NewFirstBoosterDoses.Header" xml:space="preserve">
+    <value>Nouvelles doses de rappel administrées</value>
+  </data>
+  <data name="Details_NewFirstDoses.Header" xml:space="preserve">
+    <value>Nouvelles premières doses administrées</value>
+  </data>
+  <data name="Details_NewSecondBoosterDoses.Header" xml:space="preserve">
     <value>Nouvelles deuxièmes doses de rappel administrées</value>
   </data>
-	<data name="NewSecondBoosterDosesAverage" xml:space="preserve">
+  <data name="Details_SecondBoosterDosesCoverage.Header" xml:space="preserve">
+    <value>Deuxième rappel administré (en %)</value>
+  </data>
+  <data name="Details_TotalCompleteVaccinations.Header" xml:space="preserve">
+    <value>Vaccinations complètes</value>
+  </data>
+  <data name="Details_TotalFirstBoosterDoses.Header" xml:space="preserve">
+    <value>Premier rappel administré</value>
+  </data>
+  <data name="Details_TotalFirstDoses.Header" xml:space="preserve">
+    <value>Au moins une dose</value>
+  </data>
+  <data name="Details_TotalSecondBoosterDoses.Header" xml:space="preserve">
+    <value>Deuxième rappel administré</value>
+  </data>
+  <data name="NewSecondBoosterDoses" xml:space="preserve">
+    <value>Nouvelles deuxièmes doses de rappel administrées</value>
+  </data>
+  <data name="NewSecondBoosterDosesAverage" xml:space="preserve">
     <value>Nouveaux deuxièmes rappels administrés en moyenne</value>
   </data>
-	<data name="NewSecondBoosterDosesAverageDescription" xml:space="preserve">
+  <data name="NewSecondBoosterDosesAverageDescription" xml:space="preserve">
     <value>nouvelles deuxièmes doses de rappel administrées en moyenne sur les sept derniers jours</value>
   </data>
-	<data name="NewSecondBoosterDosesAverageTitle" xml:space="preserve">
+  <data name="NewSecondBoosterDosesAverageTitle" xml:space="preserve">
     <value>Nombre moyen de deuxièmes doses de rappel administrées quotidiennement</value>
   </data>
-	<data name="NewSecondBoosterDosesDescription" xml:space="preserve">
+  <data name="NewSecondBoosterDosesDescription" xml:space="preserve">
     <value>nouvelles deuxièmes doses de rappel administrées au cours des dernières 24 heures</value>
   </data>
-	<data name="NewSecondBoosterDosesTitle" xml:space="preserve">
+  <data name="NewSecondBoosterDosesTitle" xml:space="preserve">
     <value>Nouvelles deuxièmes doses de rappel administrées</value>
   </data>
-	<data name="SecondBoosterDosesCoverage" xml:space="preserve">
+  <data name="SecondBoosterDosesCoverage" xml:space="preserve">
     <value>Deuxième rappel administré</value>
   </data>
-	<data name="SecondBoosterDosesCoverageDescription" xml:space="preserve">
+  <data name="SecondBoosterDosesCoverageDescription" xml:space="preserve">
     <value>% de la population ayant reçu une deuxième dose de rappel</value>
   </data>
-	<data name="SecondBoosterDosesCoverageTitle" xml:space="preserve">
+  <data name="SecondBoosterDosesCoverageTitle" xml:space="preserve">
     <value>Part de la population ayant reçu une deuxième dose de rappel</value>
   </data>
-	<data name="Tile_Chart.Content" xml:space="preserve">
-    <value>Graphique</value>
+  <data name="Tile_Chart.Content" xml:space="preserve">
+    <value>Afficher le graphique</value>
   </data>
-	<data name="TotalSecondBoosterDoses" xml:space="preserve">
+  <data name="TotalSecondBoosterDoses" xml:space="preserve">
     <value>Deuxième rappel administré</value>
   </data>
-	<data name="TotalSecondBoosterDosesDescription" xml:space="preserve">
+  <data name="TotalSecondBoosterDosesDescription" xml:space="preserve">
     <value>personnes ayant reçu une deuxième dose de rappel</value>
   </data>
-	<data name="TotalSecondBoosterDosesTitle" xml:space="preserve">
+  <data name="TotalSecondBoosterDosesTitle" xml:space="preserve">
     <value>Nombre de personnes ayant reçu une deuxième dose de rappel</value>
   </data>
 </root>

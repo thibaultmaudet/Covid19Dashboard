@@ -129,6 +129,9 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
       <Version>7.1.2</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <Version>7.1.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.7.0</Version>
     </PackageReference>
@@ -159,15 +162,16 @@
     <Compile Include="Controls\TileControl.xaml.cs">
       <DependentUpon>TileControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\EnumToBooleanConverter.cs" />
-    <Compile Include="Helpers\NumberToVisibilityConverter.cs" />
-    <Compile Include="Helpers\EnumToVisibilityConverter.cs" />
+    <Compile Include="Helpers\Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Helpers\Converters\NumberToVisibilityConverter.cs" />
+    <Compile Include="Helpers\Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
-    <Compile Include="Helpers\NumberToColorConverter.cs" />
+    <Compile Include="Helpers\Converters\NumberToColorConverter.cs" />
     <Compile Include="Helpers\PageEnum.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\TileHelper.cs" />
-    <Compile Include="Helpers\TrimConverter.cs" />
+    <Compile Include="Helpers\Converters\TrimConverter.cs" />
     <Compile Include="Models\DataTiles.cs" />
     <Compile Include="Models\DataIndicator.cs" />
     <Compile Include="Models\DataTile.cs" />
@@ -183,6 +187,7 @@
     <Compile Include="ViewModels\HospitalStatusViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\VaccinationDetailsViewModel.cs" />
     <Compile Include="ViewModels\VaccinationTrackingViewModel.cs" />
     <Compile Include="Views\EpidemiologicalStatusPage.xaml.cs">
       <DependentUpon>EpidemiologicalStatusPage.xaml</DependentUpon>
@@ -207,6 +212,9 @@
     </Compile>
     <Compile Include="Views\ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VaccinationDetailsPage.xaml.cs">
+      <DependentUpon>VaccinationDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VaccinationTrackingPage.xaml.cs">
       <DependentUpon>VaccinationTrackingPage.xaml</DependentUpon>
@@ -300,6 +308,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ShellPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\VaccinationDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

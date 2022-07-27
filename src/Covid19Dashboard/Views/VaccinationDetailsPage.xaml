@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="Covid19Dashboard.Views.VaccinationDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    xmlns:controls1="using:Covid19Dashboard.Controls"
+    mc:Ignorable="d">
+    <Grid Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <controls1:FilterControl FilterChanged="FilterControl_FilterChanged" />
+            <controls:DataGrid x:Name="VaccinationDetailsDataGrid" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}" IsReadOnly="True" CanUserResizeColumns="True" CanUserSortColumns="True" Grid.Column="1" Sorting="DataGrid_Sorting">
+                <controls:DataGrid.Columns>
+                    <controls:DataGridTextColumn x:Uid="Details_AgeLabel" Binding="{Binding AgeLabel}" Tag="AgeLabel" SortDirection="Ascending" CanUserSort="True" />
+                    <controls:DataGridTextColumn x:Uid="Details_NewFirstDoses" Binding="{Binding NewFirstDoses}" Tag="NewFirstDoses"/>
+                    <controls:DataGridTextColumn x:Uid="Details_NewCompleteVaccinations" Binding="{Binding NewCompleteVaccinations}" Tag="NewCompleteVaccinations" />
+                    <controls:DataGridTextColumn x:Uid="Details_NewFirstBoosterDoses" Binding="{Binding NewFirstBoosterDoses}" Tag="NewFirstBoosterDoses" />
+                    <controls:DataGridTextColumn x:Uid="Details_NewSecondBoosterDoses" Binding="{Binding NewSecondBoosterDoses}" Tag="NewSecondBoosterDoses" />
+                    <controls:DataGridTextColumn x:Uid="Details_TotalFirstDoses" Binding="{Binding TotalFirstDoses}" Tag="TotalFirstDoses" />
+                    <controls:DataGridTextColumn x:Uid="Details_TotalCompleteVaccinations" Binding="{Binding TotalCompleteVaccinations}" Tag="TotalCompleteVaccinations" />
+                    <controls:DataGridTextColumn x:Uid="Details_TotalFirstBoosterDoses" Binding="{Binding TotalFirstBoosterDoses}" Tag="TotalFirstBoosterDoses" />
+                    <controls:DataGridTextColumn x:Uid="Details_TotalSecondBoosterDoses" Binding="{Binding TotalSecondBoosterDoses}" Tag="TotalSecondBoosterDoses" />
+                    <controls:DataGridTextColumn x:Uid="Details_FirstDosesCoverage" Binding="{Binding FirstDosesCoverage}" Tag="FirstDosesCoverage" />
+                    <controls:DataGridTextColumn x:Uid="Details_CompleteVaccinationsCoverage" Binding="{Binding CompleteVaccinationsCoverage}" Tag="CompleteVaccinationsCoverage" />
+                    <controls:DataGridTextColumn x:Uid="Details_FirstBoosterDosesCoverage" Binding="{Binding FirstBoosterDosesCoverage}" Tag="FirstBoosterDosesCoverage" />
+                    <controls:DataGridTextColumn x:Uid="Details_SecondBoosterDosesCoverage" Binding="{Binding SecondBoosterDosesCoverage}" Tag="SecondBoosterDosesCoverage" />
+                </controls:DataGrid.Columns>
+            </controls:DataGrid>
+        </Grid>
+    </Grid>
+</Page>

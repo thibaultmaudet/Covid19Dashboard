@@ -30,6 +30,8 @@ namespace Covid19Dashboard.Models
 
         public Type IndicatorType { get; set; }
 
+        public Type MoreDetailPage { get; set; }
+
         public DataTile()
         {
 

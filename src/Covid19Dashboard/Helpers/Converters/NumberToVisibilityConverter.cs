@@ -3,7 +3,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace Covid19Dashboard.Helpers
+namespace Covid19Dashboard.Helpers.Converters
 {
     public class NumberToVisibilityConverter : IValueConverter
     {

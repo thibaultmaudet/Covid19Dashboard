@@ -1,9 +1,10 @@
 ﻿using System;
+
 using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace Covid19Dashboard.Helpers
+namespace Covid19Dashboard.Helpers.Converters
 {
     public class NumberToColorConverter : IValueConverter
     {
@@ -13,7 +14,7 @@ namespace Covid19Dashboard.Helpers
 
             if ((parameter as string) == "background")
                 return new SolidColorBrush(number > 0 ? Color.FromArgb(255, 255, 244, 243) : Color.FromArgb(100, 217, 255, 235));
-            
+
             if ((parameter as string) == "foreground")
                 return new SolidColorBrush(number > 0 ? Colors.Red : Colors.DarkGreen);
 
