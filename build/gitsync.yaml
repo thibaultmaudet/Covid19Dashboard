@@ -15,3 +15,13 @@ steps:
     git push --prune https://$(githubpersonaltoken)@github.com/thibaultmaudet/Covid19Dashboard.git \
         +refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
   displayName: 'Copy to Github'
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'SonarQube'
+    scannerMode: 'MSBuild'
+    projectKey: 'Covid19_Dashboard'
+    projectName: 'Covid19 Dashboard'
+- task: SonarQubeAnalyze@5
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'
