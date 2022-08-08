@@ -2,9 +2,8 @@ jobs:
 - job: ${{ parameters.name }}
   pool:
     vmImage: windows-latest
-
-steps:
-- bash: |
-    git push --prune https://$(githubpersonaltoken)@github.com/thibaultmaudet/Covid19Dashboard.git \
-        +refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
-  displayName: 'Copy to Github'
+  steps:
+  - bash: |
+      git push --prune https://$(githubpersonaltoken)@github.com/thibaultmaudet/Covid19Dashboard.git \
+          +refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
+    displayName: 'Copy to Github'
