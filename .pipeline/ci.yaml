@@ -1,0 +1,17 @@
+trigger:
+- master
+- development
+- preprod
+- hotfix
+- feature/*
+- dev/*
+- design/*
+
+jobs:
+  - template: ./gitsync.yaml 
+  - template: ./build/build-ci.yml
+    parameters:
+      platform: x64
+  - template: ./build/build-ci.yml
+    parameters:
+      platform: arm64

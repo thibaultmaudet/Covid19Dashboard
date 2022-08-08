@@ -1,0 +1,41 @@
+steps:
+  - checkout: self
+    fetchDepth: 1
+    submodules: true
+    clean: true
+
+  - task: NuGetToolInstaller@1
+    displayName: Ensure NuGet Installer
+
+  - task: VisualStudioTestPlatformInstaller@1
+    displayName: Ensure VSTest Platform
+
+  - task: NuGetCommand@2
+    displayName: Restore NuGet packages for '$(solution)'
+    inputs:
+      command: restore
+      feedsToUse: config
+      configPath: NuGet.config
+      restoreSolution: '$(solution)'
+      restoreDirectory: '$(Build.SourcesDirectory)\packages'
+
+  - task: VSBuild@1
+    displayName: 'Build PowerToys.sln'
+    inputs:
+      solution: '**\PowerToys.sln'
+      platform: '$(BuildPlatform)'
+      configuration: '$(BuildConfiguration)'
+      msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+      maximumCpuCount: true
+
+  - task: VSTest@2
+    displayName: 'Tests'
+    condition: ne(variables['BuildPlatform'], 'arm64') # No arm64 agents to run the tests.
+    inputs:
+      platform: '$(BuildPlatform)'
+      configuration: '$(BuildConfiguration)'
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*test*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
