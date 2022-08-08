@@ -1,3 +1,8 @@
+jobs:
+- job: ${{ parameters.name }}
+  pool:
+    vmImage: windows-latest
+
 steps:
 - bash: |
     git push --prune https://$(githubpersonaltoken)@github.com/thibaultmaudet/Covid19Dashboard.git \
