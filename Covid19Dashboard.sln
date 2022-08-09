@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid19Dashboard", "src\Cov
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid19Dashboard.Core", "src\Covid19Dashboard.Core\Covid19Dashboard.Core.csproj", "{7BCD6122-5D69-4FFC-84DF-168DDD694D9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid19Dashboard.Tests", "src\Covid19Dashboard.Tests.MSTest\Covid19Dashboard.Tests.csproj", "{262E7677-0BC5-48A3-A749-8BE78B695434}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid19Dashboard.Tests", "src\Covid19Dashboard.Tests\Covid19Dashboard.Tests.csproj", "{262E7677-0BC5-48A3-A749-8BE78B695434}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

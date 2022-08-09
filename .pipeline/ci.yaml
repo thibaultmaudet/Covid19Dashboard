@@ -12,7 +12,7 @@ name: 0.0.$(Date:yyMM).$(Date:dd)$(Rev:rr)
 jobs:
   - template: ./gitsync.yaml
     parameters:
-      token: $($(githubpersonaltoken))
+      token: $(githubpersonaltoken)
   - template: ./build/build-ci.yml
     parameters:
       platform: x64
