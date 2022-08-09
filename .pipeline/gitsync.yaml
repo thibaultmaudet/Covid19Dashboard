@@ -1,3 +1,6 @@
+parameters:
+  token: ''
+
 jobs:
 - job: ${{ parameters.name }}
   displayName: Copy to GitHub
@@ -5,6 +8,6 @@ jobs:
     vmImage: windows-latest
   steps:
   - bash: |
-      git push --prune https://$($(githubpersonaltoken))@github.com/thibaultmaudet/Covid19Dashboard.git \
+      git push --prune https://${{ parameter.token }}@github.com/thibaultmaudet/Covid19Dashboard.git \
           +refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
     displayName: 'Copy to Github'

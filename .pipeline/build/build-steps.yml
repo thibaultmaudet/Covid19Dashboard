@@ -13,7 +13,7 @@ steps:
   - task: NuGetCommand@2
     displayName: Restore NuGet packages for Covid19Dashboard.sln
     inputs:
-      restoreSolution: '$(solution)'
+      restoreSolution: Covid19Dashboard.sln
 
   - task: VSBuild@1
     displayName: 'Build Covid19Dashboard.sln'
