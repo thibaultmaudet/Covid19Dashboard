@@ -11,7 +11,7 @@ steps:
     displayName: Ensure VSTest Platform
 
   - task: NuGetCommand@2
-    displayName: Restore NuGet packages for '$(solution)'
+    displayName: Restore NuGet packages for Covid19Dashboard.sln
     inputs:
       command: restore
       feedsToUse: config
@@ -20,9 +20,9 @@ steps:
       restoreDirectory: '$(Build.SourcesDirectory)\packages'
 
   - task: VSBuild@1
-    displayName: 'Build PowerToys.sln'
+    displayName: 'Build Covid19Dashboard.sln'
     inputs:
-      solution: '**\PowerToys.sln'
+      solution: '**\Covid19Dashboard.sln'
       platform: '$(BuildPlatform)'
       configuration: '$(BuildConfiguration)'
       msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
@@ -37,5 +37,6 @@ steps:
       testSelector: 'testAssemblies'
       testAssemblyVer2: |
         **\*test*.dll
+        **\*test*.build.appxrecipe
         !**\*TestAdapter.dll
         !**\obj\**

@@ -1,5 +1,6 @@
 jobs:
 - job: ${{ parameters.name }}
+  displayName: Copy to GitHub
   pool:
     vmImage: windows-latest
   steps:
