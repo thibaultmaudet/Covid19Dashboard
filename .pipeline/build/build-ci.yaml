@@ -14,6 +14,6 @@ jobs:
   strategy:
     maxParallel: 10
   steps:
-  - template: build-steps.yml
+  - template: build-steps.yaml
     parameters:
       additionalBuildArguments: ${{ parameters.additionalBuildArguments }}

@@ -13,9 +13,6 @@ jobs:
   - template: ./gitsync.yaml
     parameters:
       token: $(githubpersonaltoken)
-  - template: ./build/build-ci.yml
+  - template: ./build/build-ci.yaml
     parameters:
       platform: x64
-  - template: ./build/build-ci.yml
-    parameters:
-      platform: arm64
