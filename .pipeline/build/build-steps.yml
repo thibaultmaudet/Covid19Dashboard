@@ -21,7 +21,7 @@ steps:
       solution: '**\Covid19Dashboard.sln'
       platform: '$(BuildPlatform)'
       configuration: '$(BuildConfiguration)'
-      msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+      msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:AppxPackageSigningEnabled=false'
       maximumCpuCount: true
 
   - task: VSTest@2
