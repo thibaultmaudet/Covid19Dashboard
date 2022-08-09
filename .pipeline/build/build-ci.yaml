@@ -15,5 +15,3 @@ jobs:
     maxParallel: 10
   steps:
   - template: build-steps.yaml
-    parameters:
-      additionalBuildArguments: ${{ parameters.additionalBuildArguments }}
