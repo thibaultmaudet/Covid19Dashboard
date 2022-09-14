@@ -216,7 +216,7 @@ namespace Covid19Dashboard.Core.Helpers
 
         private static bool IsInitializedList(Type indicatorType)
         {
-            return !(indicatorType == typeof(EpidemicIndicator) && (Data.EpidemicIndicators == null || Data.EpidemicIndicators.Count == 0)) || (indicatorType == typeof(VaccinationIndicator) && (Data.VaccinationIndicators == null || Data.VaccinationIndicators.Count == 0));
+            return !((indicatorType == typeof(EpidemicIndicator) && (Data.EpidemicIndicators == null || Data.EpidemicIndicators.Count == 0)) || (indicatorType == typeof(VaccinationIndicator) && (Data.VaccinationIndicators == null || Data.VaccinationIndicators.Count == 0)));
         }
 
         private static float CalculateEvolution(float? firstValue, float? secondValue)
