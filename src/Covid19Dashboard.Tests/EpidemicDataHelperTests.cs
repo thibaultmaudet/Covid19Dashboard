@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 using Covid19Dashboard.Core;
@@ -21,8 +19,6 @@ namespace Covid19Dashboard.Tests
         [TestInitialize]
         public async Task Initialize()
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
-
             Data.EpidemicIndicators = null;
             Data.VaccinationIndicators = null;
 
@@ -134,11 +130,11 @@ namespace Covid19Dashboard.Tests
 
             Data.VaccinationIndicators = Common.VaccinationIndicators;
 
-            Assert.AreEqual("29/08/2022", EpidemicDataHelper.GetLastUpdate("DailyConfirmedNewCases", true, typeof(EpidemicIndicator)));
+            Assert.AreEqual(new DateTime(2022, 08, 29).ToShortDateString(), EpidemicDataHelper.GetLastUpdate("DailyConfirmedNewCases", true, typeof(EpidemicIndicator)));
 
-            Assert.AreEqual("26/08/2022", EpidemicDataHelper.GetLastUpdate("IncidenceRate", false, typeof(EpidemicIndicator)));
+            Assert.AreEqual(new DateTime(2022, 08, 26).ToShortDateString(), EpidemicDataHelper.GetLastUpdate("IncidenceRate", false, typeof(EpidemicIndicator)));
 
-            Assert.AreEqual("29/08/2022", EpidemicDataHelper.GetLastUpdate("NewCompleteVaccinations", true, typeof(VaccinationIndicator)));
+            Assert.AreEqual(new DateTime(2022, 08, 29).ToShortDateString(), EpidemicDataHelper.GetLastUpdate("NewCompleteVaccinations", true, typeof(VaccinationIndicator)));
         }
 
         [TestMethod]
@@ -156,7 +152,7 @@ namespace Covid19Dashboard.Tests
 
             Assert.AreEqual("3806", EpidemicDataHelper.GetValue("DailyConfirmedNewCases", false, true, 0, typeof(EpidemicIndicator)));
 
-            Assert.AreEqual("182,39", EpidemicDataHelper.GetValue("IncidenceRate", false, false, 2, typeof(EpidemicIndicator)));
+            Assert.AreEqual(float.Parse("182,39", System.Globalization.NumberStyles.AllowDecimalPoint).ToString(), EpidemicDataHelper.GetValue("IncidenceRate", false, false, 2, typeof(EpidemicIndicator)));
 
             Assert.AreEqual("714", EpidemicDataHelper.GetValue("NewCompleteVaccinations", false, false, 0, typeof(VaccinationIndicator)));
         }
