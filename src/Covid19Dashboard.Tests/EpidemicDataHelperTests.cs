@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Covid19Dashboard.Core;
@@ -19,6 +21,8 @@ namespace Covid19Dashboard.Tests
         [TestInitialize]
         public async Task Initialize()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+
             Data.EpidemicIndicators = null;
             Data.VaccinationIndicators = null;
 
