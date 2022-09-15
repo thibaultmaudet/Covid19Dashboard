@@ -17,17 +17,18 @@ namespace Covid19Dashboard.Tests
         public Data Data => Data.Instance;
 
         [TestInitialize]
-        [DeploymentItem("Assets\\4ecd4b41-333f-4bb2-ad0b-f757ba61b440.csv", "Assets")]
-        [DeploymentItem("Assets\\eaca70f4-ed27-42c8-b878-ab34c930d3df.csv", "Assets")]
         public async Task Initialize()
         {
             Data.EpidemicIndicators = null;
+            Data.VaccinationIndicators = null;
 
             Common.EpidemicIndicators = await Common.GetEpidemicIndicatorsAsync();
             Common.VaccinationIndicators = await Common.GetVaccinationIndicatorsAsync();
         }
 
         [TestMethod]
+        [DeploymentItem("Assets\\4ecd4b41-333f-4bb2-ad0b-f757ba61b440.csv", "Assets")]
+        [DeploymentItem("Assets\\eaca70f4-ed27-42c8-b878-ab34c930d3df.csv", "Assets")]
         public void GetEvolutionForSpecifiedField()
         {
             Assert.AreEqual(default, EpidemicDataHelper.GetEvolution("DailyConfirmedNewCases", false, true, typeof(EpidemicIndicator)));
@@ -51,6 +52,8 @@ namespace Covid19Dashboard.Tests
         }
 
         [TestMethod]
+        [DeploymentItem("Assets\\4ecd4b41-333f-4bb2-ad0b-f757ba61b440.csv", "Assets")]
+        [DeploymentItem("Assets\\eaca70f4-ed27-42c8-b878-ab34c930d3df.csv", "Assets")]
         public void GetEvolutionForChartForsSpecifiedField()
         {
             Assert.AreEqual(default, EpidemicDataHelper.GetEvolutionForChart("DailyConfirmedNewCases", false, true, typeof(EpidemicIndicator)));
@@ -115,6 +118,8 @@ namespace Covid19Dashboard.Tests
         }
 
         [TestMethod]
+        [DeploymentItem("Assets\\4ecd4b41-333f-4bb2-ad0b-f757ba61b440.csv", "Assets")]
+        [DeploymentItem("Assets\\eaca70f4-ed27-42c8-b878-ab34c930d3df.csv", "Assets")]
         public void GetFirstDateAvailableForSpecifiedField()
         {
             Assert.AreEqual(default, EpidemicDataHelper.GetLastUpdate("DailyConfirmedNewCases", true, typeof(EpidemicIndicator)));
@@ -133,6 +138,8 @@ namespace Covid19Dashboard.Tests
         }
 
         [TestMethod]
+        [DeploymentItem("Assets\\4ecd4b41-333f-4bb2-ad0b-f757ba61b440.csv", "Assets")]
+        [DeploymentItem("Assets\\eaca70f4-ed27-42c8-b878-ab34c930d3df.csv", "Assets")]
         public void GetFirstValueAvailableForSpecifiedField()
         {
             Assert.AreEqual(default, EpidemicDataHelper.GetValue("DailyConfirmedNewCases", false, true, 0, typeof(EpidemicIndicator)));
