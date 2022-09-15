@@ -152,9 +152,7 @@ namespace Covid19Dashboard.Tests
 
             Assert.AreEqual("3806", EpidemicDataHelper.GetValue("DailyConfirmedNewCases", false, true, 0, typeof(EpidemicIndicator)));
 
-            float.TryParse("182,39", System.Globalization.NumberStyles.AllowDecimalPoint, null, out float expected);
-
-            Assert.AreEqual(expected.ToString(), EpidemicDataHelper.GetValue("IncidenceRate", false, false, 2, typeof(EpidemicIndicator)));
+            Assert.AreEqual(182.39.ToString(), EpidemicDataHelper.GetValue("IncidenceRate", false, false, 2, typeof(EpidemicIndicator)));
 
             Assert.AreEqual("714", EpidemicDataHelper.GetValue("NewCompleteVaccinations", false, false, 0, typeof(VaccinationIndicator)));
         }
