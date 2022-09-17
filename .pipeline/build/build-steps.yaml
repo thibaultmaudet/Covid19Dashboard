@@ -38,4 +38,3 @@ steps:
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
-      codeCoverageEnabled: true
