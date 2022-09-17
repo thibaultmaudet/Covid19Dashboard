@@ -10,7 +10,7 @@ steps:
   - task: VisualStudioTestPlatformInstaller@1
     displayName: Ensure VSTest Platform
     inputs:
-      versionSelector: 'latestStable''
+      versionSelector: 'latestStable'
 
   - task: NuGetCommand@2
     displayName: Restore NuGet packages for Covid19Dashboard.sln
