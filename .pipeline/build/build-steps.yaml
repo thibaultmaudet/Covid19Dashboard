@@ -6,12 +6,11 @@ steps:
 
   - task: NuGetToolInstaller@1
     displayName: Ensure NuGet Installer
-    inputs:
-      versionSelector: 'SpecificVersion'
-      testPlatformVersion: '17.2.0'
 
   - task: VisualStudioTestPlatformInstaller@1
     displayName: Ensure VSTest Platform
+    inputs:
+      versionSelector: 'latestStable'
 
   - task: NuGetCommand@2
     displayName: Restore NuGet packages for Covid19Dashboard.sln
