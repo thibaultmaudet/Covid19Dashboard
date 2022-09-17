@@ -40,3 +40,4 @@ steps:
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
       codeCoverageEnabled: true
+      vsTestVersion: 'toolsInstaller'
