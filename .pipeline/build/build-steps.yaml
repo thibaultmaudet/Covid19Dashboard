@@ -16,7 +16,11 @@ steps:
   - task: NuGetCommand@2
     displayName: Restore NuGet packages for Covid19Dashboard.sln
     inputs:
+      command: restore
+      feedsToUse: config
+      configPath: NuGet.config
       restoreSolution: Covid19Dashboard.sln
+      restoreDirectory: '$(Build.SourcesDirectory)\packages'
 
   - task: VSBuild@1
     displayName: 'Build Covid19Dashboard.sln'
