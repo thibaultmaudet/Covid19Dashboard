@@ -7,7 +7,7 @@ steps:
   - task: NuGetToolInstaller@1
     displayName: Ensure NuGet Installer
     inputs:
-      versionSelector: latestStable
+      versionSelector: 'latestStable'
 
   - task: VisualStudioTestPlatformInstaller@1
     displayName: Ensure VSTest Platform
